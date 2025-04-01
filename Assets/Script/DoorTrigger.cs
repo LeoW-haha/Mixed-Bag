@@ -8,7 +8,7 @@ public class DoorTrigger2D : MonoBehaviour
         if (other.CompareTag("Player"))
         {
 
-            GameManager gm = FindObjectOfType<GameManager>();
+            GameManager gm = FindFirstObjectByType<GameManager>();
             if (gm != null)
             {
                 gm.AddScore();

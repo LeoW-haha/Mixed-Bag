@@ -8,18 +8,16 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        UpdateScoreUI();
+        updateScore();
     }
 
-    public void AddScore()
-    {
+    public void AddScore(){
         score++;
-        
-        UpdateScoreUI();
+
+        updateScore();
     }
 
-    void UpdateScoreUI()
-    {
+    void updateScore(){
         if (scoreText != null)
         {
             scoreText.text = "Score: " + score;
