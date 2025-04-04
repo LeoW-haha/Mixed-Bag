@@ -95,6 +95,16 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
             itemDescriptionImage.sprite = emptySprite;
         }
     }
+
+    private void EmptySlot() {
+        quantityText.enabled = false;
+        itemImage.sprite = emptySprite;
+
+        ItemDescriptionNameText.text = "";
+        ItemDescriptionText.text = "";
+        itemDescriptionImage.sprite = emptySprite;
+
+    }
     public void OnRightClick() {
 
     }
