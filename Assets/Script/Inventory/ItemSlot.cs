@@ -105,8 +105,80 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
         ItemDescriptionText.text = "";
         itemDescriptionImage.sprite = emptySprite;
 
+        this.itemName = "";
+        this.quantity = 0;
+        this.itemSprite = emptySprite;
+        this.isFull = false;
+        this.itemDescription = "";
+
     }
     public void OnRightClick() {
 
+        if (this.quantity>=1) {
+
+            //Covers moving items from the inventory to the order menu
+            if (inventoryManager.orderMenuActivated && !isOrder) {
+                int leftOverItems = inventoryManager.addOrderItem(this.itemName, 1, this.itemSprite, this.itemDescription);
+
+                if (leftOverItems == 0) {
+                    this.isFull = false;
+                    this.quantity-=1;
+                    quantityText.text = this.quantity.ToString();
+                    if (this.quantity <= 0) {
+                        EmptySlot();
+                    }
+                }
+            //vice versa
+            } else if (inventoryManager.orderMenuActivated) {
+                int leftOverItems = inventoryManager.addItem(this.itemName, 1, this.itemSprite, this.itemDescription);
+
+                if (leftOverItems == 0) {
+                    this.isFull = false;
+                    this.quantity-=1;
+                    quantityText.text = this.quantity.ToString();
+                    if (this.quantity <= 0) {
+                        EmptySlot();
+                    }
+                }
+            //covers dropping items normally
+            } else if (!isOrder) {
+                //creates clone
+                GameObject itemToDrop = new GameObject(itemName);
+                Item newItem = itemToDrop.AddComponent<Item>();
+                newItem.quantity = 1;
+                newItem.itemName = itemName;
+                newItem.sprite = itemSprite;
+                newItem.itemDescription = itemDescription;
+
+                //create and modify sr
+                SpriteRenderer sr = itemToDrop.AddComponent<SpriteRenderer>();
+                sr.sprite = itemSprite;
+                sr.sortingOrder = 2;
+
+                //Add a collider
+                itemToDrop.AddComponent<BoxCollider2D>();
+
+                //Add a rigidbody
+                Rigidbody2D rb = itemToDrop.AddComponent<Rigidbody2D>();
+                rb.gravityScale = 0;
+
+
+                //Set the location
+                itemToDrop.transform.position = GameObject.FindWithTag("Player").transform.position + new Vector3(1f,0,0);
+                itemToDrop.transform.localScale = new Vector3(0.7f,0.7f,1);
+
+                //Subtracts the item
+                this.quantity-=1;
+                    quantityText.text = this.quantity.ToString();
+                    if (this.quantity <= 0) {
+                        EmptySlot();
+                    }
+            }
+
+        }
+
     }
+
+
+
 }

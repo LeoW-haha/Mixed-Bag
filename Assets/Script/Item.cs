@@ -4,14 +4,14 @@ public class Item : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     [SerializeField]
-    private string itemName;
+    public string itemName;
     [SerializeField]
-    private int quantity;
+    public int quantity;
     [SerializeField]
-    private Sprite sprite;
+    public Sprite sprite;
     [TextArea]
     [SerializeField]
-    private string itemDescription;
+    public string itemDescription;
 
     private InventoryManager inventoryManager;
     void Start()

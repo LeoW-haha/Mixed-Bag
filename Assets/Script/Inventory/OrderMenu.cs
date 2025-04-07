@@ -13,7 +13,7 @@ public class OrderMenu : MonoBehaviour, IInteractable
     public void Interact() {
         Debug.Log("Order");
         if (!inventoryManager.menuActivated && !inventoryManager.orderMenuActivated) {
-            Time.timeScale = 1;
+            Time.timeScale = 0;
             inventoryManager.InventoryMenu.SetActive(true);
             inventoryManager.OrderMenu.SetActive(true);
             inventoryManager.menuActivated = true;
