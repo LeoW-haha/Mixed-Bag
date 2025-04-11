@@ -91,8 +91,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c141e01e4d0ac7478382e20c0b98002, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemName: 
   quantity: 0
   isFull: 0
+  isOrder: 0
   itemDescription: 
   emptySprite: {fileID: -8527568592950175283, guid: 20361b50b1e53ba4c922f9aa500c8c30, type: 3}
   maxNumber: 10
@@ -236,7 +238,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.14901961}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.48235294}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
