@@ -99,6 +99,7 @@ MonoBehaviour:
   emptySprite: {fileID: -8527568592950175283, guid: 20361b50b1e53ba4c922f9aa500c8c30, type: 3}
   maxNumber: 10
   quantityText: {fileID: 643905153314090718}
+  weight: {fileID: 0}
   itemDescriptionImage: {fileID: 0}
   ItemDescriptionNameText: {fileID: 0}
   ItemDescriptionText: {fileID: 0}

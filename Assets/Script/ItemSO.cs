@@ -5,7 +5,8 @@ public class ItemSO : ScriptableObject
 {
     public string itemName;
     public int id;
-    public int staminaAmount;
+    public float staminaAmount;
+    public float weight;
     public itemType ItemType = new itemType();
 
     public bool UseItem() {
@@ -26,6 +27,10 @@ public class ItemSO : ScriptableObject
 
     public int getItemID() {
         return this.id;
+    }
+
+    public float getWeight() {
+        return this.weight;
     }
 
     public enum itemType {

@@ -6,7 +6,9 @@ using System.Linq;
 
 public class GameManager : MonoBehaviour
 {
-    public float score = 0;         
+    public float score = 0;  
+    public float totalWeight = 0;     
+    public float maxWeight;
     public Text scoreText;
     [SerializeField] private Image[] orderIcons;
     [SerializeField] private GameObject[] Items;
@@ -92,6 +94,6 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        this.totalWeight = inventoryManager.getTotalWeight();
     }
 }

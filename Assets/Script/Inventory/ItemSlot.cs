@@ -24,6 +24,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
     private TMP_Text quantityText;
 
     //ITEM DESCRIPTION SLOT
+    public TMP_Text weight;
     public Image itemDescriptionImage;
     public TMP_Text ItemDescriptionNameText;
     public TMP_Text ItemDescriptionText;
@@ -31,10 +32,12 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
     public Image itemImage;
     public GameObject selectedShader;
     public bool thisItemSelected;
+    private GameObject canvas;
     private InventoryManager inventoryManager;
 
     private void Start() {
-        inventoryManager = GameObject.Find("InventoryCanvas").GetComponent<InventoryManager>();
+        canvas = GameObject.Find("Canvas");
+        inventoryManager = canvas.GetComponentInChildren<InventoryManager>(true);
     }
 
     public int addItem(string itemName, int quantity, Sprite itemSprite, string itemDescription) {
@@ -100,6 +103,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
         ItemDescriptionNameText.text = itemName;
         ItemDescriptionText.text = itemDescription;
         itemDescriptionImage.sprite = itemSprite;
+        weight.text = "Weight: " + inventoryManager.getWeight(itemName).ToString();
         if(itemDescriptionImage.sprite == null) {
             itemDescriptionImage.sprite = emptySprite;
         }

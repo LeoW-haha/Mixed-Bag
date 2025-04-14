@@ -14,3 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Ube Roll
   id: 5
+  staminaAmount: 0
+  weight: 3
+  ItemType: 0

@@ -15,4 +15,5 @@ MonoBehaviour:
   itemName: Coffee
   id: 6
   staminaAmount: 25
+  weight: 1
   ItemType: 1

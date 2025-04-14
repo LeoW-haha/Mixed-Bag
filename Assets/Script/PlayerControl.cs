@@ -4,8 +4,12 @@ using UnityEngine.UI;
 public class PlayerCtrl :MonoBehaviour
 {
     public float moveSpeed = 5.0f;
+    private float startMoveSpeed;
     public float runningSpeed = 7.0f;
+    public float totalWeight = 0.0f;
     private bool running;
+    private bool tired;
+    private GameManager gameManager; 
 
     private Rigidbody2D rb;
     private float speedX;
@@ -14,11 +18,22 @@ public class PlayerCtrl :MonoBehaviour
 
     void Start ()
     {
+        this.startMoveSpeed = this.moveSpeed;
         rb = GetComponent<Rigidbody2D>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     void Update ()
     {
+        this.totalWeight = gameManager.totalWeight;
+        if (this.totalWeight > gameManager.maxWeight) {
+            moveSpeed = startMoveSpeed/2;
+            tired = true;
+        } else {
+            moveSpeed = startMoveSpeed;
+            tired = false;
+        }
+
         speedX = Input.GetAxisRaw("Horizontal");
         speedY = Input.GetAxisRaw("Vertical");
 
@@ -46,7 +61,7 @@ public class PlayerCtrl :MonoBehaviour
 
     void FixedUpdate ()
     {
-        if (running && Stamina>0) {
+        if (running && Stamina>0 && !tired) {
             rb.linearVelocity = new Vector2(speedX * runningSpeed, speedY * runningSpeed);
             Stamina -= RunCost* Time.deltaTime;
         } else {

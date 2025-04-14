@@ -1,5 +1,6 @@
 using UnityEngine;
-
+using TMPro;
+using UnityEngine.UI;
 public class InventoryManager : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -10,6 +11,7 @@ public class InventoryManager : MonoBehaviour
     public ItemSlot[] itemSlot;
     public ItemSlot[] OrderItemSlot;
     public ItemSO[] itemSOs;
+    public TMP_Text totalWeightText;
     private GameManager gameManager;
 
     void Start()
@@ -17,6 +19,7 @@ public class InventoryManager : MonoBehaviour
         InventoryMenu.SetActive(false);
         OrderMenu.SetActive(false);
         menuActivated = false;
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         
     }
 
@@ -36,6 +39,23 @@ public class InventoryManager : MonoBehaviour
             }
         }
         return 0;
+    }
+
+    public float getWeight(string itemName) {
+        for (int i = 0; i < itemSOs.Length; i++) {
+            if(itemSOs[i].itemName == itemName) {
+                return itemSOs[i].weight;
+            }
+        }
+        return 0;
+    }
+
+    public float getTotalWeight() {
+        float totalWeight = 0;
+        for (int i=0; i < itemSlot.Length; i++) {
+            totalWeight += getWeight(itemSlot[i].itemName)*itemSlot[i].quantity;
+        }
+        return totalWeight;
     }
 
     public int[] getOrderItemIDs() {
@@ -83,6 +103,13 @@ public class InventoryManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        totalWeightText.text = "Total Weight: " + gameManager.totalWeight.ToString() + "/" + gameManager.maxWeight.ToString();
+        if(gameManager.totalWeight > gameManager.maxWeight) {
+            totalWeightText.color = new Color(255, 0, 0);
+        } else {
+            totalWeightText.color = new Color(255, 255, 255);
+        }
+
         if (Input.GetButtonDown("Inventory") && menuActivated) {
             Time.timeScale = 1;
             InventoryMenu.SetActive(false);
