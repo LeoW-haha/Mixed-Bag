@@ -33,11 +33,12 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
     public GameObject selectedShader;
     public bool thisItemSelected;
     private GameObject canvas;
+    private Notifier notifier;
     private InventoryManager inventoryManager;
 
     private void Start() {
-        canvas = GameObject.Find("Canvas");
-        inventoryManager = canvas.GetComponentInChildren<InventoryManager>(true);
+        inventoryManager = GameObject.Find("InventoryCanvas").GetComponent<InventoryManager>();
+        notifier = GameObject.Find("NotificationHolder").GetComponent<Notifier>();
     }
 
     public int addItem(string itemName, int quantity, Sprite itemSprite, string itemDescription) {
@@ -71,7 +72,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
 
         //Update Quantity Text
         quantityText.text = this.quantity.ToString();
-        quantityText.enabled = true;        
+        quantityText.enabled = true;     
         return 0;
     }
 
@@ -104,6 +105,9 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
         ItemDescriptionText.text = itemDescription;
         itemDescriptionImage.sprite = itemSprite;
         weight.text = "Weight: " + inventoryManager.getWeight(itemName).ToString();
+        if(inventoryManager.getWeight(itemName) == 0) {
+            weight.text = "";
+        }
         if(itemDescriptionImage.sprite == null) {
             itemDescriptionImage.sprite = emptySprite;
         }
@@ -115,6 +119,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
 
         ItemDescriptionNameText.text = "";
         ItemDescriptionText.text = "";
+        weight.text = "";
         itemDescriptionImage.sprite = emptySprite;
 
         this.itemName = "";
@@ -178,6 +183,9 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
                 //Set the location
                 itemToDrop.transform.position = GameObject.FindWithTag("Player").transform.position + new Vector3(1f,0,0);
                 itemToDrop.transform.localScale = new Vector3(0.7f,0.7f,1);
+
+                //Print out notification
+                notifier.Notify("Dropped " + itemName);
 
                 //Subtracts the item
                 this.quantity-=1;

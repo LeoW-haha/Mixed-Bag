@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     private GameObject[] orderItems;
     public int maxOrderAmount;
     private InventoryManager inventoryManager;
+    private Notifier notifier;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public int[] getOrderItemIDs() {
         int[] OrderItemIDs = new int[orderItems.Length];
@@ -47,6 +48,7 @@ public class GameManager : MonoBehaviour
     {
         inventoryManager = GameObject.Find("InventoryCanvas").GetComponent<InventoryManager>();
         orderItems = new GameObject[orderIcons.Length];
+        notifier = GameObject.Find("NotificationHolder").GetComponent<Notifier>();
         UpdateScoreUI();
         randomizeOrder();
     }
@@ -79,6 +81,7 @@ public class GameManager : MonoBehaviour
 
     public void sendOrder() {
         calculateAndGiveScore();
+        notifier.Notify("Order sent");
         randomizeOrder();
         inventoryManager.clearOrderSlots();
 
