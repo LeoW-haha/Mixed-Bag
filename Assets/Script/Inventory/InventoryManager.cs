@@ -20,10 +20,19 @@ public class InventoryManager : MonoBehaviour
         
     }
 
+    public bool useItem(string itemName) {
+        for (int i = 0; i < itemSOs.Length; i++) {
+            if(itemSOs[i].itemName == itemName) {
+                return itemSOs[i].UseItem();
+            }
+        }
+        return false;
+    }
+
     public int getItemID(string itemName) {
         for (int i = 0; i < itemSOs.Length; i++) {
             if(itemSOs[i].itemName == itemName) {
-                return itemSOs[i].id;
+                return itemSOs[i].getItemID();
             }
         }
         return 0;
