@@ -123,6 +123,7 @@ MonoBehaviour:
   itemName: Coffee
   quantity: 1
   sprite: {fileID: -2899638285309987080, guid: c933616eb7e24494990952ef95041696, type: 3}
+  restockCost: 60
   itemDescription: Coffee coffee coffee, restores stamina
 --- !u!1 &6144901855797793579
 GameObject:

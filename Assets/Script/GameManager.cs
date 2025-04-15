@@ -57,11 +57,15 @@ public class GameManager : MonoBehaviour
         score += points;
         UpdateScoreUI();
     }
+    public void minusScore(float points) {
+        score-=points;
+        UpdateScoreUI();
+    }
     void UpdateScoreUI()
     {
         if (scoreText != null)
         {
-            scoreText.text = "Score: " + score;
+            scoreText.text = "Money: $" + score;
         }
     }
     public void randomizeOrder() {
@@ -75,7 +79,7 @@ public class GameManager : MonoBehaviour
     public void calculateAndGiveScore() {
         float baseScore = (float)this.compareOrderAndSupplied();
         if (baseScore < 2) {
-            this.AddScore(1/(baseScore+1));
+            this.AddScore(100/(baseScore+1));
         }
     }
 

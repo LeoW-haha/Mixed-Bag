@@ -9,6 +9,7 @@ public class Item : MonoBehaviour
     public int quantity;
     [SerializeField]
     public Sprite sprite;
+    public float restockCost;
     [TextArea]
     [SerializeField]
     public string itemDescription;
@@ -27,7 +28,7 @@ public class Item : MonoBehaviour
 
         private void OnCollisionEnter2D(Collision2D collision) {
             if (collision.gameObject.tag == "Player") {
-                int leftOverItems = inventoryManager.addItem(itemName, quantity, sprite, itemDescription);
+                int leftOverItems = inventoryManager.addItem(itemName, quantity, sprite, itemDescription, restockCost);
                 if (leftOverItems <=0 ) {
                     Destroy(gameObject);
             } else {

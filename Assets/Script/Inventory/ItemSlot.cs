@@ -10,9 +10,11 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
 
     public string itemName;
     public int quantity;
-    private Sprite itemSprite;
+    public float restockCost;
+    public Sprite itemSprite;
     public bool isFull;
     public bool isOrder;
+    public bool isSpawn;
     public string itemDescription;
     public Sprite emptySprite;
     [SerializeField]
@@ -41,7 +43,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
         notifier = GameObject.Find("NotificationHolder").GetComponent<Notifier>();
     }
 
-    public int addItem(string itemName, int quantity, Sprite itemSprite, string itemDescription) {
+    public int addItem(string itemName, int quantity, Sprite itemSprite, string itemDescription, float restockCost) {
         //Check to see if slot full
         if (isFull) {
             return quantity;
@@ -56,6 +58,9 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
 
         //Change Description
         this.itemDescription = itemDescription;
+
+        //Change Restock Cost
+        this.restockCost = restockCost;
 
         //Change Quantity
         this.quantity += quantity;
@@ -86,9 +91,8 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
     }
 
     public void OnLeftClick() {
-        if(thisItemSelected) {
-            
-            if(inventoryManager.useItem(this.itemName)) {
+        if(thisItemSelected) {            
+            if(inventoryManager.useItem(this.itemName) && !isSpawn) {
                 this.quantity-=1;
                 this.isFull=false;
                 quantityText.text = this.quantity.ToString();
@@ -114,28 +118,29 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
     }
 
     public void EmptySlot() {
-        quantityText.enabled = false;
-        itemImage.sprite = emptySprite;
+        if(!isSpawn) {
+            quantityText.enabled = false;
+            itemImage.sprite = emptySprite;
 
-        ItemDescriptionNameText.text = "";
-        ItemDescriptionText.text = "";
-        weight.text = "";
-        itemDescriptionImage.sprite = emptySprite;
+            ItemDescriptionNameText.text = "";
+            ItemDescriptionText.text = "";
+            weight.text = "";
+            itemDescriptionImage.sprite = emptySprite;
 
-        this.itemName = "";
-        this.quantity = 0;
-        this.itemSprite = emptySprite;
-        this.isFull = false;
-        this.itemDescription = "";
-
+            this.itemName = "";
+            this.quantity = 0;
+            this.itemSprite = emptySprite;
+            this.isFull = false;
+            this.itemDescription = "";
+        }
     }
     public void OnRightClick() {
 
         if (this.quantity>=1) {
 
             //Covers moving items from the inventory to the order menu
-            if (inventoryManager.orderMenuActivated && !isOrder) {
-                int leftOverItems = inventoryManager.addOrderItem(this.itemName, 1, this.itemSprite, this.itemDescription);
+            if (inventoryManager.orderMenuActivated && !isOrder && !isSpawn) {
+                int leftOverItems = inventoryManager.addOrderItem(this.itemName, 1, this.itemSprite, this.itemDescription, this.restockCost);
 
                 if (leftOverItems == 0) {
                     this.isFull = false;
@@ -145,9 +150,21 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
                         EmptySlot();
                     }
                 }
-            //vice versa
-            } else if (inventoryManager.orderMenuActivated) {
-                int leftOverItems = inventoryManager.addItem(this.itemName, 1, this.itemSprite, this.itemDescription);
+            //then for spawn items
+            } else if (inventoryManager.ItemSpawnMenuActivated  && !isOrder && !isSpawn) {
+                int leftOverItems = inventoryManager.addSpawnItem(this.itemName, 1, this.itemSprite, this.itemDescription, this.restockCost);
+
+                if (leftOverItems == 0) {
+                    this.isFull = false;
+                    this.quantity-=1;
+                    quantityText.text = this.quantity.ToString();
+                    if (this.quantity <= 0) {
+                        EmptySlot();
+                    }
+                }
+            //vice versa                
+            } else if (inventoryManager.orderMenuActivated || isSpawn) {
+                int leftOverItems = inventoryManager.addItem(this.itemName, 1, this.itemSprite, this.itemDescription, this.restockCost);
 
                 if (leftOverItems == 0) {
                     this.isFull = false;

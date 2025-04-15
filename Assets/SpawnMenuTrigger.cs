@@ -1,27 +1,24 @@
 using UnityEngine;
 
-public class OrderMenuTrigger : MonoBehaviour, IInteractable
+public class SpawnMenuTrigger : MonoBehaviour, IInteractable
 {
     void Start()
     {
-        orderMenuID ??= GlobalHelper.GenerateUniqueID(gameObject);
         inventoryManager = GameObject.Find("InventoryCanvas").GetComponent<InventoryManager>();
     }
     public bool CanInteract() {
         return true;
     }
     public void Interact() {
-        if (!inventoryManager.menuActivated && !inventoryManager.orderMenuActivated) {
+        if (!inventoryManager.menuActivated && !inventoryManager.ItemSpawnMenuActivated) {
             Time.timeScale = 0;
             inventoryManager.InventoryMenu.SetActive(true);
-            inventoryManager.OrderMenu.SetActive(true);
+            inventoryManager.ItemSpawnMenu.SetActive(true);
             inventoryManager.menuActivated = true;
-            inventoryManager.orderMenuActivated = true;
+            inventoryManager.ItemSpawnMenuActivated = true;
         }
     }
     private InventoryManager inventoryManager;
-    public string orderMenuID {get; private set;}
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
 
 
     // Update is called once per frame
