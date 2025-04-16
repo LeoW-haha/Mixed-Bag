@@ -16,6 +16,8 @@ public class InventoryManager : MonoBehaviour
     public ItemSO[] itemSOs;
     public TMP_Text totalWeightText;
     private GameManager gameManager;
+    
+    private PlayerCtrl playerControl;
 
     void Start()
     {
@@ -26,6 +28,7 @@ public class InventoryManager : MonoBehaviour
         ItemSpawnMenuActivated = false;
         orderMenuActivated = false;
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        playerControl = GameObject.Find("Player").GetComponent<PlayerCtrl>();
         
     }
 
@@ -131,7 +134,7 @@ public class InventoryManager : MonoBehaviour
         }
 
         if (Input.GetButtonDown("Inventory") && menuActivated) {
-            Time.timeScale = 1;
+            playerControl.canMove = true;
             InventoryMenu.SetActive(false);
             menuActivated = false;
             if(orderMenuActivated) {
@@ -143,7 +146,7 @@ public class InventoryManager : MonoBehaviour
                 ItemSpawnMenuActivated = false;
             }
         } else if (Input.GetButtonDown("Inventory") && !menuActivated) {
-            Time.timeScale = 0;
+            playerControl.canMove = false;
             InventoryMenu.SetActive(true);
             menuActivated = true;
         } 

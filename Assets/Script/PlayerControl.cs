@@ -15,6 +15,7 @@ public class PlayerCtrl :MonoBehaviour
     private float speedX;
     private float speedY;
     private bool facingLeft = false;
+    public bool canMove = true;
 
     void Start ()
     {
@@ -37,17 +38,17 @@ public class PlayerCtrl :MonoBehaviour
         speedX = Input.GetAxisRaw("Horizontal");
         speedY = Input.GetAxisRaw("Vertical");
 
-        if(Input.GetKeyDown("left shift")) {
+        if(Input.GetKeyDown("left shift") && canMove) {
             running = true;
         } else if (Input.GetKeyUp("left shift")) {
             running = false;
         }
 
-        if(Input.GetAxisRaw("Horizontal") > 0 && facingLeft) {
+        if(Input.GetAxisRaw("Horizontal") > 0 && facingLeft  && canMove) {
             Flip();
             facingLeft = false;
         }
-        if(Input.GetAxisRaw("Horizontal") < 0 && !facingLeft) {
+        if(Input.GetAxisRaw("Horizontal") < 0 && !facingLeft  && canMove) {
             Flip();
             facingLeft = true;
         }
@@ -61,10 +62,10 @@ public class PlayerCtrl :MonoBehaviour
 
     void FixedUpdate ()
     {
-        if (running && Stamina>0 && !tired) {
+        if (running && Stamina>0 && !tired && canMove) {
             rb.linearVelocity = new Vector2(speedX * runningSpeed, speedY * runningSpeed);
             Stamina -= RunCost* Time.deltaTime;
-        } else {
+        } else if (canMove) {
             rb.linearVelocity = new Vector2(speedX * moveSpeed, speedY * moveSpeed);
         }
     }
