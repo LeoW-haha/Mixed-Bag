@@ -125,6 +125,7 @@ MonoBehaviour:
   sprite: {fileID: -3262404026900752489, guid: 2086d8e5dc408f44a9a4905af722f0be, type: 3}
   restockCost: 25
   itemDescription: Hotdog and Marshmallows Hotdog and Marshmallows Hotdog and Marshmallows
+  startAmount: 3
 --- !u!1 &6144901855797793579
 GameObject:
   m_ObjectHideFlags: 0

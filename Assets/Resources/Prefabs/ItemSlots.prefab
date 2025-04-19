@@ -93,10 +93,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: 
   quantity: 0
+  restockCost: 0
+  itemSprite: {fileID: 0}
   isFull: 0
   isOrder: 0
+  isSpawn: 0
   itemDescription: 
   emptySprite: {fileID: -8527568592950175283, guid: 20361b50b1e53ba4c922f9aa500c8c30, type: 3}
+  lockedSprite: {fileID: 1637954016605795844, guid: 308e75333a45cf64ea3c16f5d49ddfd5, type: 3}
   maxNumber: 10
   quantityText: {fileID: 643905153314090718}
   weight: {fileID: 0}
@@ -106,6 +110,7 @@ MonoBehaviour:
   itemImage: {fileID: 749593354508984770}
   selectedShader: {fileID: 5249858461647715064}
   thisItemSelected: 0
+  isLocked: 0
 --- !u!1 &2986100051518977030
 GameObject:
   m_ObjectHideFlags: 0

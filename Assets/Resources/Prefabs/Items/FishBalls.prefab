@@ -125,6 +125,7 @@ MonoBehaviour:
   sprite: {fileID: 5824757986180929711, guid: c0770bcbc3c1b1544a6aabcc3f931955, type: 3}
   restockCost: 25
   itemDescription: haha balls
+  startAmount: 3
 --- !u!1 &6144901855797793579
 GameObject:
   m_ObjectHideFlags: 0

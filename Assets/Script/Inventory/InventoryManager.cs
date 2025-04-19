@@ -81,9 +81,27 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
+    public bool unlockSlots(int number) {
+        int count = 0;
+        for (int i = 0; i < itemSlot.Length; i++) {
+            if (itemSlot[i].isLocked && count < number) {
+                itemSlot[i].isLocked = false;
+                itemSlot[i].itemDescriptionImage.sprite = itemSlot[i].emptySprite;
+                itemSlot[i].itemImage.sprite = itemSlot[i].emptySprite;
+                itemSlot[i].itemSprite = itemSlot[i].emptySprite;
+                count++;
+            }
+        }
+        if (count <= 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     public int addItem(string itemName, int quantity, Sprite itemSprite, string itemDescription, float restockCost) {
         for (int i = 0; i < itemSlot.Length; i++) {
-            if((itemSlot[i].isFull == false && itemSlot[i].itemName == itemName) || itemSlot[i].quantity == 0 && !itemSlot[i].isSpawn) {
+            if((itemSlot[i].isFull == false && itemSlot[i].itemName == itemName) && !itemSlot[i].isLocked || itemSlot[i].quantity == 0 && !itemSlot[i].isSpawn && !itemSlot[i].isLocked) {
                 int leftOverItems = itemSlot[i].addItem(itemName, quantity, itemSprite, itemDescription, restockCost);
 
                 if(leftOverItems > 0) {
@@ -97,7 +115,7 @@ public class InventoryManager : MonoBehaviour
 
     public int addOrderItem(string itemName, int quantity, Sprite itemSprite, string itemDescription, float restockCost) {
         for (int i = 0; i < OrderItemSlot.Length; i++) {
-            if(OrderItemSlot[i].isFull == false && OrderItemSlot[i].itemName == itemName || OrderItemSlot[i].quantity == 0 && !OrderItemSlot[i].isSpawn) {
+            if(OrderItemSlot[i].isFull == false && OrderItemSlot[i].itemName == itemName && !itemSlot[i].isLocked || OrderItemSlot[i].quantity == 0 && !OrderItemSlot[i].isSpawn && !itemSlot[i].isLocked) {
                 int leftOverItems = OrderItemSlot[i].addItem(itemName, quantity, itemSprite, itemDescription, restockCost);
                 
                 if(leftOverItems > 0) {
@@ -111,7 +129,7 @@ public class InventoryManager : MonoBehaviour
 
     public int addSpawnItem(string itemName, int quantity, Sprite itemSprite, string itemDescription, float restockCost) {
         for (int i = 0; i < SpawnItemSlot.Length; i++) {
-            if(SpawnItemSlot[i].isFull == false && SpawnItemSlot[i].itemName == itemName || SpawnItemSlot[i].quantity == 0 && !SpawnItemSlot[i].isSpawn) {
+            if(SpawnItemSlot[i].isFull == false && SpawnItemSlot[i].itemName == itemName  && !itemSlot[i].isLocked || SpawnItemSlot[i].quantity == 0 && !SpawnItemSlot[i].isSpawn && !itemSlot[i].isLocked ) {
                 int leftOverItems = SpawnItemSlot[i].addItem(itemName, quantity, itemSprite, itemDescription, restockCost);
                 
                 if(leftOverItems > 0) {
@@ -133,7 +151,7 @@ public class InventoryManager : MonoBehaviour
             totalWeightText.color = new Color(255, 255, 255);
         }
 
-        if (Input.GetButtonDown("Inventory") && menuActivated) {
+        if (Input.GetButtonDown("Inventory") && menuActivated && !gameManager.gameEnd) {
             playerControl.canMove = true;
             InventoryMenu.SetActive(false);
             menuActivated = false;
@@ -145,7 +163,7 @@ public class InventoryManager : MonoBehaviour
                 ItemSpawnMenu.SetActive(false);
                 ItemSpawnMenuActivated = false;
             }
-        } else if (Input.GetButtonDown("Inventory") && !menuActivated) {
+        } else if (Input.GetButtonDown("Inventory") && !menuActivated && !gameManager.gameEnd) {
             playerControl.canMove = false;
             InventoryMenu.SetActive(true);
             menuActivated = true;

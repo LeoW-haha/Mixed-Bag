@@ -48,8 +48,16 @@ public class GameManager : MonoBehaviour
     private bool disableButtons = false;
     public bool waitingForOrder = false;
 
+    public GameObject pauseMenu;
+    public GameObject endMenu;
+    public bool pauseOn = false;
+    public bool gameEnd = false;
+
     void Start()
     {
+        pauseMenu.SetActive(false);
+        endMenu.SetActive(false);
+        Time.timeScale = 1;
         inventoryManager = GameObject.Find("InventoryCanvas").GetComponent<InventoryManager>();
         shiftTimer = GameObject.Find("Timer").GetComponent<Timer>();
         orderTimer = GameObject.Find("OrderTimerText").GetComponent<Timer>();
@@ -80,6 +88,25 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         this.totalWeight = inventoryManager.getTotalWeight();
+        if (Input.GetButtonDown("Pause") && !pauseOn && !gameEnd) {
+            pauseMenu.SetActive(true);
+            Time.timeScale = 0.0f;
+            pauseOn = true;
+        } else if (Input.GetButtonDown("Pause") && pauseOn && !gameEnd) {
+            pauseMenu.SetActive(false);
+            if (!gameEnd) {
+                Time.timeScale = 1.0f;
+            }
+            pauseOn = false;
+        } 
+    }
+
+    public void unPause() {
+        pauseMenu.SetActive(false);
+            if (!gameEnd) {
+                Time.timeScale = 1.0f;
+            }
+        pauseOn = false;        
     }
 
     public Order[] getOrders() {
@@ -241,6 +268,9 @@ public class GameManager : MonoBehaviour
 
     public void endTimer(bool isShift, bool isOrderCome, int i) {
         if (isShift) {
+            endMenu.SetActive(true);
+            Time.timeScale = 0.0f;
+            gameEnd = true;
             return;
         }
         if (isOrderCome) {

@@ -125,6 +125,7 @@ MonoBehaviour:
   sprite: {fileID: 7782505538123138235, guid: 27e62b93b737165409d85de3359d7247, type: 3}
   restockCost: 25
   itemDescription: flan
+  startAmount: 3
 --- !u!1 &6144901855797793579
 GameObject:
   m_ObjectHideFlags: 0

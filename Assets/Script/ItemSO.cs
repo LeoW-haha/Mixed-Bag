@@ -6,6 +6,7 @@ public class ItemSO : ScriptableObject
     public string itemName;
     public int id;
     public float staminaAmount;
+    public int orderAmount;
     public float weight;
     public itemType ItemType = new itemType();
 
@@ -21,7 +22,9 @@ public class ItemSO : ScriptableObject
             Debug.Log(this.itemName);
             Debug.Log(this.id);
             return false;        
-        } 
+        } if (ItemType == itemType.slotUpgrade) {
+            return GameObject.Find("InventoryCanvas").GetComponent<InventoryManager>().unlockSlots(orderAmount);
+        }
         return false;
     }
 
@@ -35,6 +38,7 @@ public class ItemSO : ScriptableObject
 
     public enum itemType {
         orderItem,
-        staminaConsumable
+        staminaConsumable,
+        slotUpgrade
     };
 }

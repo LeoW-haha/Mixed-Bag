@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6406118935630718382}
   - component: {fileID: 6067548617311018104}
   m_Layer: 6
-  m_Name: Coffee
+  m_Name: Slot Upgrade
   m_TagString: Box
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -120,12 +120,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0e91506481c1434b891ace656d9c54d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: Coffee
+  itemName: Slot Upgrade
   quantity: 1
-  sprite: {fileID: -2899638285309987080, guid: c933616eb7e24494990952ef95041696, type: 3}
-  restockCost: 150
-  itemDescription: Coffee coffee coffee, restores stamina
-  startStocked: 0
+  sprite: {fileID: -5784643541303560050, guid: debf9869ade8808459b1f99f0e239ff8, type: 3}
+  restockCost: 500
+  itemDescription: Use it to unlock a slot
 --- !u!1 &6144901855797793579
 GameObject:
   m_ObjectHideFlags: 0
@@ -137,7 +136,7 @@ GameObject:
   - component: {fileID: 3508232090274163598}
   - component: {fileID: 5142344478124649157}
   m_Layer: 6
-  m_Name: Coffee
+  m_Name: Slot Upgrade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -202,7 +201,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: -2899638285309987080, guid: c933616eb7e24494990952ef95041696, type: 3}
+  m_Sprite: {fileID: -4898650793348130066, guid: b77c58ff3e4851b4cb7a586fc8e763f5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

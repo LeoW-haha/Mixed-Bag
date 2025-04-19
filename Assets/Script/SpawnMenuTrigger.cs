@@ -6,12 +6,13 @@ public class SpawnMenuTrigger : MonoBehaviour, IInteractable
     {
         inventoryManager = GameObject.Find("InventoryCanvas").GetComponent<InventoryManager>();
         playerControl = GameObject.Find("Player").GetComponent<PlayerCtrl>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();    
     }
     public bool CanInteract() {
         return true;
     }
     public void Interact() {
-        if (!inventoryManager.menuActivated && !inventoryManager.ItemSpawnMenuActivated) {
+        if (!inventoryManager.menuActivated && !inventoryManager.ItemSpawnMenuActivated && !gameManager.gameEnd) {
             playerControl.canMove = false;
             inventoryManager.InventoryMenu.SetActive(true);
             inventoryManager.ItemSpawnMenu.SetActive(true);
@@ -20,6 +21,7 @@ public class SpawnMenuTrigger : MonoBehaviour, IInteractable
         }
     }
     private InventoryManager inventoryManager;
+    private GameManager gameManager;
     private PlayerCtrl playerControl;
 
     // Update is called once per frame

@@ -17,6 +17,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
     public bool isSpawn;
     public string itemDescription;
     public Sprite emptySprite;
+    public Sprite lockedSprite;
     [SerializeField]
     private int maxNumber;
 
@@ -34,6 +35,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
     public Image itemImage;
     public GameObject selectedShader;
     public bool thisItemSelected;
+    public bool isLocked;
     private GameObject canvas;
     private Notifier notifier;
     private InventoryManager inventoryManager;
@@ -41,11 +43,16 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
     private void Start() {
         inventoryManager = GameObject.Find("InventoryCanvas").GetComponent<InventoryManager>();
         notifier = GameObject.Find("NotificationHolder").GetComponent<Notifier>();
+        if (isLocked) {
+            itemDescriptionImage.sprite = lockedSprite;
+            itemImage.sprite = lockedSprite;
+            this.itemSprite = lockedSprite;
+        }
     }
 
     public int addItem(string itemName, int quantity, Sprite itemSprite, string itemDescription, float restockCost) {
-        //Check to see if slot full
-        if (isFull) {
+        //Check to see if slot full or locked
+        if (isFull || isLocked) {
             return quantity;
         }
 
@@ -92,7 +99,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
 
     public void OnLeftClick() {
         if(thisItemSelected) {            
-            if(inventoryManager.useItem(this.itemName) && !isSpawn) {
+            if(inventoryManager.useItem(this.itemName) && !isSpawn && !isLocked) {
                 this.quantity-=1;
                 this.isFull=false;
                 quantityText.text = this.quantity.ToString();

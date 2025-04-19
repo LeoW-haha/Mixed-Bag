@@ -13,7 +13,7 @@ public class ItemSpawnMenu : MonoBehaviour
     {
         for (int i = 0; i<items.Length; i++) {
             Item currentItem = items[i].GetComponent<Item>();
-            itemSlot[i].addItem(currentItem.itemName, startingQuantity, currentItem.sprite, currentItem.itemDescription, currentItem.restockCost);
+            itemSlot[i].addItem(currentItem.itemName, currentItem.startAmount, currentItem.sprite, currentItem.itemDescription, currentItem.restockCost);
         }
         notifier = GameObject.Find("NotificationHolder").GetComponent<Notifier>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();

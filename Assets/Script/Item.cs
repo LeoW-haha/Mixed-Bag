@@ -13,6 +13,7 @@ public class Item : MonoBehaviour
     [TextArea]
     [SerializeField]
     public string itemDescription;
+    public int startAmount;
 
     private InventoryManager inventoryManager;
     void Start()
