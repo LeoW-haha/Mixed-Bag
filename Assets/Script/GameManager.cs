@@ -290,10 +290,12 @@ public class GameManager : MonoBehaviour
                             this.currentOrderIndex = j;
                             updateTopBar(this.selectedOrder);
                         }
+                        notifier.Notify("New order arrived");
                         looking = false;
                     }
                 }
             }
+
             return;
         }
 
