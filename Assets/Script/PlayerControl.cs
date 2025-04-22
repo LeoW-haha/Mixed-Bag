@@ -17,6 +17,13 @@ public class PlayerCtrl :MonoBehaviour
     private bool facingLeft = false;
     public bool canMove = true;
 
+    //Energy System
+    public Image StaminaBar;
+    public float Stamina, MaxStamina;
+    public float RunCost;
+    public float staminaDrain;
+    public GameObject failMenu;
+
     void Start ()
     {
         this.startMoveSpeed = this.moveSpeed;
@@ -56,7 +63,10 @@ public class PlayerCtrl :MonoBehaviour
         Stamina -= staminaDrain*Time.deltaTime;
         StaminaBar.fillAmount = Stamina/MaxStamina;
         if (Stamina <= 0) {
-            Stamina = 0;
+            failMenu.SetActive(true);
+            failMenu.GetComponent<failMenuController>().changeText("Ran out of energy");
+            Time.timeScale = 0.0f;
+            gameManager.gameEnd = true;      
         }
     }
 
@@ -87,9 +97,5 @@ public class PlayerCtrl :MonoBehaviour
             return false;
         }
     }
-    //Energy System
-    public Image StaminaBar;
-    public float Stamina, MaxStamina;
-    public float RunCost;
-    public float staminaDrain;
+
 }

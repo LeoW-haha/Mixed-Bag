@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c2e910d1a6c905747988a9d217e2603b, type: 3}
-  m_Name: FishBalls
+  m_Name: Leak Fixer
   m_EditorClassIdentifier: 
-  itemName: Fish Balls
-  id: 2
+  itemName: Leak Fixer
+  id: 5357
   staminaAmount: 0
   orderAmount: 0
-  restockAmount: 3
-  weight: 1
-  ItemType: 0
+  restockAmount: 1
+  weight: 15
+  ItemType: 3

@@ -97,15 +97,19 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
         }
     }
 
+    public void minusOneItem() {
+        this.quantity-=1;
+        this.isFull=false;
+        quantityText.text = this.quantity.ToString();
+        if (this.quantity <= 0) {
+            EmptySlot();
+        }
+    }
+
     public void OnLeftClick() {
         if(thisItemSelected) {            
             if(inventoryManager.useItem(this.itemName) && !isSpawn && !isLocked) {
-                this.quantity-=1;
-                this.isFull=false;
-                quantityText.text = this.quantity.ToString();
-                if (this.quantity <= 0) {
-                    EmptySlot();
-                }
+                minusOneItem();
             }
         }
 
@@ -142,7 +146,6 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
         }
     }
     public void OnRightClick() {
-
         if (this.quantity>=1) {
 
             //Covers moving items from the inventory to the order menu

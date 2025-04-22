@@ -47,6 +47,15 @@ public class InventoryManager : MonoBehaviour
         return false;
     }
 
+    public ItemSO getItemSO(string itemName) {
+        for (int i = 0; i < itemSOs.Length; i++) {
+            if(itemSOs[i].itemName == itemName) {
+                return itemSOs[i];
+            }
+        }   
+        return null;     
+    }
+
     public int getItemID(string itemName) {
         for (int i = 0; i < itemSOs.Length; i++) {
             if(itemSOs[i].itemName == itemName) {
@@ -105,6 +114,16 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
+    public bool findAndUseItemSlot(int id) {
+        for (int i = 0; i < itemSlot.Length; i++) {
+            if (id == this.getItemID(itemSlot[i].itemName)) {
+                itemSlot[i].minusOneItem();
+                return true;
+            }
+        }
+        return false;        
+    }
+
     public int addItem(string itemName, int quantity, Sprite itemSprite, string itemDescription, float restockCost) {
         for (int i = 0; i < itemSlot.Length; i++) {
             if((itemSlot[i].isFull == false && itemSlot[i].itemName == itemName) && !itemSlot[i].isLocked || itemSlot[i].quantity == 0 && !itemSlot[i].isSpawn && !itemSlot[i].isLocked) {
@@ -121,7 +140,7 @@ public class InventoryManager : MonoBehaviour
 
     public int addOrderItem(string itemName, int quantity, Sprite itemSprite, string itemDescription, float restockCost) {
         for (int i = 0; i < OrderItemSlot.Length; i++) {
-            if(OrderItemSlot[i].isFull == false && OrderItemSlot[i].itemName == itemName && !itemSlot[i].isLocked || OrderItemSlot[i].quantity == 0 && !OrderItemSlot[i].isSpawn && !itemSlot[i].isLocked) {
+            if(OrderItemSlot[i].isFull == false && OrderItemSlot[i].itemName == itemName && !OrderItemSlot[i].isLocked || OrderItemSlot[i].quantity == 0 && !OrderItemSlot[i].isSpawn && !OrderItemSlot[i].isLocked) {
                 int leftOverItems = OrderItemSlot[i].addItem(itemName, quantity, itemSprite, itemDescription, restockCost);
                 
                 if(leftOverItems > 0) {
@@ -135,7 +154,7 @@ public class InventoryManager : MonoBehaviour
 
     public int addSpawnItem(string itemName, int quantity, Sprite itemSprite, string itemDescription, float restockCost) {
         for (int i = 0; i < SpawnItemSlot.Length; i++) {
-            if(SpawnItemSlot[i].isFull == false && SpawnItemSlot[i].itemName == itemName  && !itemSlot[i].isLocked || SpawnItemSlot[i].quantity == 0 && !SpawnItemSlot[i].isSpawn && !itemSlot[i].isLocked ) {
+            if(SpawnItemSlot[i].isFull == false && SpawnItemSlot[i].itemName == itemName  && !SpawnItemSlot[i].isLocked || SpawnItemSlot[i].quantity == 0 && !SpawnItemSlot[i].isSpawn && !SpawnItemSlot[i].isLocked ) {
                 int leftOverItems = SpawnItemSlot[i].addItem(itemName, quantity, itemSprite, itemDescription, restockCost);
                 
                 if(leftOverItems > 0) {

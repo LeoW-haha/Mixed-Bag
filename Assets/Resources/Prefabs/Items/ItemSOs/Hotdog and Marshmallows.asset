@@ -15,5 +15,7 @@ MonoBehaviour:
   itemName: Hotdog and Marshmallows
   id: 3
   staminaAmount: 0
+  orderAmount: 0
+  restockAmount: 3
   weight: 2
   ItemType: 0

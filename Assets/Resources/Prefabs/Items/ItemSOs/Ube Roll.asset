@@ -15,5 +15,7 @@ MonoBehaviour:
   itemName: Ube Roll
   id: 5
   staminaAmount: 0
+  orderAmount: 0
+  restockAmount: 3
   weight: 3
   ItemType: 0

@@ -17,6 +17,7 @@ public class ItemSpawnMenu : MonoBehaviour
         }
         notifier = GameObject.Find("NotificationHolder").GetComponent<Notifier>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        inventoryManager = GameObject.Find("InventoryCanvas").GetComponent<InventoryManager>();
     }
 
     public ItemSlot getSelectedSlot() {
@@ -31,7 +32,7 @@ public class ItemSpawnMenu : MonoBehaviour
     public void restockItem() {
         ItemSlot selectedItemSlot = getSelectedSlot();
         if (selectedItemSlot != null && gameManager.score >= selectedItemSlot.restockCost) {
-            selectedItemSlot.addItem(selectedItemSlot.itemName, 3, selectedItemSlot.itemSprite, selectedItemSlot.itemDescription, selectedItemSlot.restockCost);  
+            selectedItemSlot.addItem(selectedItemSlot.itemName, inventoryManager.getItemSO(selectedItemSlot.itemName).restockAmount, selectedItemSlot.itemSprite, selectedItemSlot.itemDescription, selectedItemSlot.restockCost);  
             gameManager.minusScore(selectedItemSlot.restockCost);
         } else {
             notifier.Notify("Invalid order");

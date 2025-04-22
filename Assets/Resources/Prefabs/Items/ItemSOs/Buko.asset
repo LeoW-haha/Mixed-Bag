@@ -15,5 +15,7 @@ MonoBehaviour:
   itemName: Buko
   id: 1
   staminaAmount: 0
+  orderAmount: 0
+  restockAmount: 3
   weight: 1
   ItemType: 0

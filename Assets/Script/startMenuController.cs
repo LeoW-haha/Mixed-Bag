@@ -3,11 +3,20 @@ using UnityEngine.SceneManagement;
 
 public class startMenuController : MonoBehaviour
 {
+    public GameObject levelSelectMenu;
     public void OnStartClick() {
         SceneManager.LoadScene("SampleScene");
     }
     public void toMainMenu() {
         SceneManager.LoadScene("StartScene");
+    }
+
+    public void openLevelSelect() {
+        levelSelectMenu.SetActive(true);
+    }
+
+    public void loadLevel(string level) {
+        SceneManager.LoadScene(level);
     }
 
     public void restartScene() {
@@ -19,5 +28,10 @@ public class startMenuController : MonoBehaviour
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
         Application.Quit();
+    }
+    void Start() {
+        if (levelSelectMenu.activeSelf == true) {
+            levelSelectMenu.SetActive(false);
+        }
     }
 }

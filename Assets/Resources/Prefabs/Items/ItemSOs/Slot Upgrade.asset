@@ -16,5 +16,6 @@ MonoBehaviour:
   id: 101
   staminaAmount: 0
   orderAmount: 1
+  restockAmount: 1
   weight: 7
   ItemType: 2

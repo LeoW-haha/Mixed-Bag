@@ -50,8 +50,17 @@ public class GameManager : MonoBehaviour
 
     public GameObject pauseMenu;
     public GameObject endMenu;
+    public GameObject failMenu;
     public bool pauseOn = false;
     public bool gameEnd = false;
+
+    public bool isWaterLevel;
+    public GameObject[] waterPipes;
+    public float waterLevel = 0;
+    public float averageFlowRate;
+    public float maxWater;
+    public int burstChance;
+    public Image waterBar;
 
     void Start()
     {
@@ -82,6 +91,13 @@ public class GameManager : MonoBehaviour
         topText.text = "Order: 1";
         updateTopBar(this.selectedOrder);
         UpdateScoreUI();
+
+        if(isWaterLevel) {
+            for (int i = 0; i < waterPipes.Length; i++) {
+                waterPipes[i].GetComponent<WaterPipe>().flowRate = averageFlowRate;
+            }
+            InvokeRepeating("randomPipeLeak", 1.0f, 1.0f);
+        }
     }
 
     // Update is called once per frame
@@ -98,6 +114,15 @@ public class GameManager : MonoBehaviour
                 Time.timeScale = 1.0f;
             }
             pauseOn = false;
+        }
+        if(isWaterLevel) {
+            waterBar.fillAmount = waterLevel/maxWater;
+            if (waterLevel > maxWater) {
+                failMenu.SetActive(true);
+                failMenu.GetComponent<failMenuController>().changeText("Factory Flooded");
+                Time.timeScale = 0.0f;
+                gameEnd = true;               
+            }
         } 
     }
 
@@ -266,7 +291,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void endTimer(bool isShift, bool isOrderCome, int i) {
+    public void endTimer(bool isShift, bool isOrderCome, bool isOrder, int i) {
         if (isShift) {
             endMenu.SetActive(true);
             Time.timeScale = 0.0f;
@@ -299,15 +324,35 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        int orderNumber = i + 1;
-        notifier.Notify("Order Time " + orderNumber + " expired");
-        minusScore(this.orders[i].penaltyPoints);
-        randomizeOrder(this.orders[i]);
+        if (isOrder) {
+            int orderNumber = i + 1;
+            notifier.Notify("Order Time " + orderNumber + " expired");
+            minusScore(this.orders[i].penaltyPoints);
+            randomizeOrder(this.orders[i]);
 
-        if(i == this.currentOrderIndex) {
-            updateTopBar(this.selectedOrder);
+            if(i == this.currentOrderIndex) {
+                updateTopBar(this.selectedOrder);
+            }
+
+            this.orders[i].orderTime = this.orderTime;
         }
+    }
 
-        this.orders[i].orderTime = this.orderTime;
+    public bool weightedRandomBool(float i) {
+        int random = Random.Range(1,100);
+        if (random <= i) {
+            return true;
+        }
+        return false;
+    }
+
+    public void activateWaterPipe(int i) {
+        waterPipes[i].GetComponent<WaterPipe>().activateWaterPipe();
+    }
+
+    public void randomPipeLeak() {
+        if(weightedRandomBool(burstChance) ) {
+            activateWaterPipe(Random.Range(0, waterPipes.Length-1));
+        }
     }
 }

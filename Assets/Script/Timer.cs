@@ -9,6 +9,7 @@ public class Timer : MonoBehaviour
     private float remainingTime;
     public bool isShift;
     public bool isOrderCome;
+    public bool isOrder;
     private bool past10 = false;
     private bool past5 = false;
     private GameManager gameManager;
@@ -88,18 +89,18 @@ public class Timer : MonoBehaviour
     public float updateTimer(float remainingTime, int i) {
         if (remainingTime > 0) {
             remainingTime -= Time.deltaTime;
-            if (remainingTime <= 10.0f && !isOrderCome && !isShift && !past10) {
+            if (remainingTime <= 10.0f && isOrder && !past10) {
                 notifier.Notify("Warning: Order " + (i+1) + " expires in 10 seconds");
                 past10 = true;
             }
-            if (remainingTime <= 5.0f && !isOrderCome && !isShift && !past5) {
+            if (remainingTime <= 5.0f && isOrder && !past5) {
                 notifier.Notify("Warning: Order " + (i+1) + " expires in 5 seconds");
                 past5 = true;
             }
             return remainingTime;
         } else if (remainingTime != -1) {
             remainingTime = 0;
-            gameManager.endTimer(isShift, isOrderCome, i);
+            gameManager.endTimer(isShift, isOrderCome, isOrder, i);
             remainingTime = resetTime(i);
             return remainingTime;
         } else {

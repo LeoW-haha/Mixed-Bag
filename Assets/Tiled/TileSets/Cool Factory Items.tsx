@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tileset version="1.10" tiledversion="1.11.2" name="Cool Factory Items" tilewidth="32" tileheight="32" tilecount="275" columns="11">
  <image source="../Art/Factory_Items_Cool.png" width="352" height="813"/>
+ <tile id="105">
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="2" y="11" width="28" height="21"/>
+  </objectgroup>
+ </tile>
+ <tile id="116">
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="2" y="0" width="28" height="32"/>
+  </objectgroup>
+ </tile>
+ <tile id="127">
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="2" y="0" width="28" height="32"/>
+  </objectgroup>
+ </tile>
  <tile id="135">
   <objectgroup draworder="index" id="2">
    <object id="1" x="3" y="12" width="29" height="20"/>
@@ -16,6 +31,11 @@
    <object id="1" x="0" y="12" width="29" height="20"/>
   </objectgroup>
  </tile>
+ <tile id="138">
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="2" y="0" width="28" height="32"/>
+  </objectgroup>
+ </tile>
  <tile id="146">
   <objectgroup draworder="index" id="2">
    <object id="1" x="3" y="0" width="29" height="32"/>
@@ -29,7 +49,16 @@
  <tile id="148">
   <objectgroup draworder="index" id="2">
    <object id="1" x="0" y="0" width="29" height="32"/>
-   <object id="2" x="0" y="0" width="29" height="32"/>
+  </objectgroup>
+ </tile>
+ <tile id="172">
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="4" y="16" width="28" height="16"/>
+  </objectgroup>
+ </tile>
+ <tile id="173">
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="0" y="16" width="28" height="16"/>
   </objectgroup>
  </tile>
  <tile id="181">
@@ -54,10 +83,7 @@
  </tile>
  <tile id="185">
   <objectgroup draworder="index" id="2">
-   <object id="1" x="0" y="32">
-    <polygon points="0,0 32,0 32,-16.5111 -0.0222222,-16.7111"/>
-   </object>
-   <object id="2" x="0" y="16" width="32" height="16"/>
+   <object id="1" x="0" y="16" width="32" height="16"/>
   </objectgroup>
  </tile>
  <tile id="192">
@@ -103,6 +129,11 @@
  <tile id="206">
   <objectgroup draworder="index" id="2">
    <object id="1" x="0" y="0" width="32" height="16"/>
+  </objectgroup>
+ </tile>
+ <tile id="207">
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="0" y="0" width="32" height="13"/>
   </objectgroup>
  </tile>
 </tileset>
