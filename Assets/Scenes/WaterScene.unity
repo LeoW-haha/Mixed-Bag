@@ -255,7 +255,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3825605709927294011, guid: 751eb3e7ea2f2e34badf226192927e80, type: 3}
       propertyPath: RunCost
-      value: 100
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3825605709927294011, guid: 751eb3e7ea2f2e34badf226192927e80, type: 3}
       propertyPath: Stamina
@@ -15051,6 +15051,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49c2a3b87f92e35409a764f768390fcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelSelectMenu: {fileID: 0}
 --- !u!114 &1075668643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16139,10 +16140,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1280, y: 720}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -17317,7 +17318,7 @@ MonoBehaviour:
   waterLevel: 0
   averageFlowRate: 5
   maxWater: 100
-  burstChance: 1
+  burstChance: 5
   waterBar: {fileID: 1827576541}
 --- !u!4 &1400780457
 Transform:
@@ -25489,6 +25490,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49c2a3b87f92e35409a764f768390fcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelSelectMenu: {fileID: 0}
 --- !u!114 &2007317092
 MonoBehaviour:
   m_ObjectHideFlags: 0

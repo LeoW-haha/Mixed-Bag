@@ -15,6 +15,10 @@ public class startMenuController : MonoBehaviour
         levelSelectMenu.SetActive(true);
     }
 
+    public void closeLevelSelect() {
+        levelSelectMenu.SetActive(false);
+    }
+
     public void loadLevel(string level) {
         SceneManager.LoadScene(level);
     }
@@ -30,7 +34,7 @@ public class startMenuController : MonoBehaviour
         Application.Quit();
     }
     void Start() {
-        if (levelSelectMenu.activeSelf == true) {
+        if (levelSelectMenu != null) {
             levelSelectMenu.SetActive(false);
         }
     }
