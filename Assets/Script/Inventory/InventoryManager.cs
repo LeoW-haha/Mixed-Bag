@@ -21,7 +21,7 @@ public class InventoryManager : MonoBehaviour
     public string inventoryText;
     private GameManager gameManager;
     
-    private PlayerCtrl playerControl;
+    public PlayerCtrl playerControl;
 
     void Start()
     {
@@ -32,7 +32,11 @@ public class InventoryManager : MonoBehaviour
         ItemSpawnMenuActivated = false;
         orderMenuActivated = false;
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        playerControl = GameObject.Find("Player").GetComponent<PlayerCtrl>();
+        if (playerControl == null)
+        {
+            Debug.LogWarning("PlayerControl not assigned, trying to find...");
+            playerControl = GameObject.Find("Player").GetComponent<PlayerCtrl>();
+        }
         controlText = GameObject.Find("ControlText").GetComponent<Text>();
         standardText = controlText.text;
         

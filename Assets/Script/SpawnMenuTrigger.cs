@@ -5,7 +5,11 @@ public class SpawnMenuTrigger : MonoBehaviour, IInteractable
     void Start()
     {
         inventoryManager = GameObject.Find("InventoryCanvas").GetComponent<InventoryManager>();
-        playerControl = GameObject.Find("Player").GetComponent<PlayerCtrl>();
+        if (playerControl == null)
+        {
+            Debug.LogWarning("PlayerControl not assigned, trying to find...");
+            playerControl = GameObject.Find("Player").GetComponent<PlayerCtrl>();
+        }
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();    
     }
     public bool CanInteract() {
@@ -22,7 +26,7 @@ public class SpawnMenuTrigger : MonoBehaviour, IInteractable
     }
     private InventoryManager inventoryManager;
     private GameManager gameManager;
-    private PlayerCtrl playerControl;
+    public PlayerCtrl playerControl;
 
     // Update is called once per frame
     void Update()

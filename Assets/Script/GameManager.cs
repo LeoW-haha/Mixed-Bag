@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
     public int currentOrderIndex;
 
     private InventoryManager inventoryManager;
-    private PlayerCtrl playerControl;
+    public PlayerCtrl playerControl;
     private Notifier notifier;
 
     public TMP_Text topText;
@@ -63,7 +63,11 @@ public class GameManager : MonoBehaviour
         orderTimer = GameObject.Find("OrderTimerText").GetComponent<Timer>();
         arriveTimer = GameObject.Find("GameManager").GetComponent<Timer>();
         orderTimer.timers = new float[maxOrderAmount];
-        playerControl = GameObject.Find("Player").GetComponent<PlayerCtrl>();
+        if (playerControl == null)
+        {
+            Debug.LogWarning("PlayerControl not assigned, trying to find...");
+            playerControl = GameObject.Find("Player").GetComponent<PlayerCtrl>();
+        }
         for (int i = 0; i<orderTimer.timers.Length; i++) {
             orderTimer.timers[i] = -1;
         }
