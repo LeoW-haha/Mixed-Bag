@@ -53,6 +53,8 @@ public class GameManager : MonoBehaviour
     public GameObject failMenu;
     public bool pauseOn = false;
     public bool gameEnd = false;
+    public bool isTutorial;
+    private TutorialManager tutorialManager;
 
     public bool isWaterLevel;
     public GameObject[] waterPipes;
@@ -71,6 +73,9 @@ public class GameManager : MonoBehaviour
         shiftTimer = GameObject.Find("Timer").GetComponent<Timer>();
         orderTimer = GameObject.Find("OrderTimerText").GetComponent<Timer>();
         arriveTimer = GameObject.Find("GameManager").GetComponent<Timer>();
+        if (isTutorial) {
+            tutorialManager = GameObject.Find("TutorialCanvas").GetComponent<TutorialManager>();
+        }
         orderTimer.timers = new float[maxOrderAmount];
         playerControl = GameObject.Find("Player").GetComponent<PlayerCtrl>();
         for (int i = 0; i<orderTimer.timers.Length; i++) {
@@ -209,6 +214,13 @@ public class GameManager : MonoBehaviour
         if (baseScore < 2) {
             this.AddScore(100/(baseScore+1));
         }
+        if (isTutorial) {
+            if (baseScore == 0) {
+                SuccessfulOrder(true);
+            } else {
+                SuccessfulOrder(false);
+            }
+        }
     }
 
     public void sendOrder() {
@@ -268,6 +280,7 @@ public class GameManager : MonoBehaviour
             topText.text = "Order: " + (this.currentOrderIndex + 1);
             updateTopBar(this.selectedOrder);
             orderTimer.switchSelectedTimeUp();
+            UsedArrow();
         }
     }
 
@@ -288,6 +301,7 @@ public class GameManager : MonoBehaviour
             topText.text = "Order: " + (this.currentOrderIndex + 1);
             updateTopBar(this.selectedOrder);
             orderTimer.switchSelectedTimeDown();
+            UsedArrow();
         }
     }
 
@@ -354,5 +368,76 @@ public class GameManager : MonoBehaviour
         if(weightedRandomBool(burstChance) ) {
             activateWaterPipe(Random.Range(0, waterPipes.Length-1));
         }
+    }
+
+    //TUTORIAL FUNCTIONS
+
+    private bool hasMoved;
+    public void Moved() {
+        if(!hasMoved && isTutorial && tutorialManager.tutCount == 0) {
+            tutorialManager.tutCount = 1;
+            hasMoved = true;
+        }
+    }
+    private bool hasSprinted;
+    public void Sprinted() {
+        if(!hasSprinted && isTutorial && tutorialManager.tutCount == 1) {
+            tutorialManager.tutCount = 2;
+            hasSprinted = true;
+        }        
+    }
+    private bool hasOpenedInventory;
+    public void OpenedInventory() {
+        if(!hasOpenedInventory && isTutorial && tutorialManager.tutCount == 2) {
+            tutorialManager.tutCount = 3;
+            hasOpenedInventory = true;
+        }        
+    }
+    private bool hasOpenedSpawn;
+    public void OpenedSpawn() {
+        if(!hasOpenedSpawn && isTutorial && tutorialManager.tutCount == 3) {
+            tutorialManager.tutCount = 4;
+            hasOpenedSpawn = true;
+        }             
+    }
+    private bool hasMovedSpawnItem;
+    public void MovesSpawnItems() {
+        if(!hasMovedSpawnItem && isTutorial && tutorialManager.tutCount == 4) {
+            tutorialManager.tutCount = 5;
+            hasMovedSpawnItem= true;
+        }             
+    }
+    private bool hasOpenedOrder;
+    public void OpenedOrder() {
+        if(!hasOpenedOrder && isTutorial && tutorialManager.tutCount == 5) {
+            tutorialManager.tutCount = 6;
+            hasOpenedOrder = true;
+        }             
+    }
+
+    private bool doneSuccsessfulOrder;
+    public void SuccessfulOrder(bool correct) {
+        if(!doneSuccsessfulOrder && isTutorial && tutorialManager.tutCount == 6) {
+            if (correct) {
+                tutorialManager.tutCount = 7;
+                doneSuccsessfulOrder = true;
+            } else {
+                tutorialManager.tutCount = 100;                
+            }
+        }     
+    }
+    private bool hasUsedArrow;
+    public void UsedArrow() {
+        if(!hasUsedArrow && isTutorial && tutorialManager.tutCount == 7) {
+            tutorialManager.tutCount = 8;
+            hasUsedArrow = true;
+        }         
+    }
+    private bool hasUsedCoffee;
+    public void UsedCoffee() {
+        if(!hasUsedCoffee && isTutorial && tutorialManager.tutCount == 9) {
+            tutorialManager.tutCount = 10;
+            hasUsedCoffee = true;
+        }         
     }
 }

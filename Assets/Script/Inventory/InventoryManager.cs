@@ -73,6 +73,14 @@ public class InventoryManager : MonoBehaviour
         }
         return 0;
     }
+    public float getCost(string itemName) {
+        for (int i = 0; i < itemSOs.Length; i++) {
+            if(itemSOs[i].itemName == itemName) {
+                return itemSOs[i].restockAmount;
+            }
+        }
+        return 0;
+    }
 
     public float getTotalWeight() {
         float totalWeight = 0;
@@ -194,6 +202,7 @@ public class InventoryManager : MonoBehaviour
             InventoryMenu.SetActive(true);
             menuActivated = true;
             controlText.text = inventoryText;
+            gameManager.OpenedInventory();
         } 
     }
 

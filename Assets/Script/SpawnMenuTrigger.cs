@@ -18,6 +18,7 @@ public class SpawnMenuTrigger : MonoBehaviour, IInteractable
             inventoryManager.ItemSpawnMenu.SetActive(true);
             inventoryManager.menuActivated = true;
             inventoryManager.ItemSpawnMenuActivated = true;
+            gameManager.OpenedSpawn();
         }
     }
     private InventoryManager inventoryManager;

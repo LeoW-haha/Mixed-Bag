@@ -39,10 +39,12 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
     private GameObject canvas;
     private Notifier notifier;
     private InventoryManager inventoryManager;
+    private GameManager gameManager;
 
     private void Start() {
         inventoryManager = GameObject.Find("InventoryCanvas").GetComponent<InventoryManager>();
         notifier = GameObject.Find("NotificationHolder").GetComponent<Notifier>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         if (isLocked) {
             itemDescriptionImage.sprite = lockedSprite;
             itemImage.sprite = lockedSprite;
@@ -110,6 +112,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
         if(thisItemSelected) {            
             if(inventoryManager.useItem(this.itemName) && !isSpawn && !isLocked) {
                 minusOneItem();
+                gameManager.UsedCoffee();
             }
         }
 
@@ -119,7 +122,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
         ItemDescriptionNameText.text = itemName;
         ItemDescriptionText.text = itemDescription;
         itemDescriptionImage.sprite = itemSprite;
-        weight.text = "Weight: " + inventoryManager.getWeight(itemName).ToString();
+        weight.text = "Weight: " + inventoryManager.getWeight(itemName).ToString() + " Cost: $" + this.restockCost;
         if(inventoryManager.getWeight(itemName) == 0) {
             weight.text = "";
         }
@@ -175,6 +178,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
             //vice versa                
             } else if (inventoryManager.orderMenuActivated || isSpawn) {
                 int leftOverItems = inventoryManager.addItem(this.itemName, 1, this.itemSprite, this.itemDescription, this.restockCost);
+                gameManager.MovesSpawnItems();
 
                 if (leftOverItems == 0) {
                     this.isFull = false;

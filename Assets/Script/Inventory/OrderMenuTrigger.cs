@@ -19,6 +19,7 @@ public class OrderMenuTrigger : MonoBehaviour, IInteractable
             inventoryManager.OrderMenu.SetActive(true);
             inventoryManager.menuActivated = true;
             inventoryManager.orderMenuActivated = true;
+            gameManager.OpenedOrder();
         }
     }
     private InventoryManager inventoryManager;

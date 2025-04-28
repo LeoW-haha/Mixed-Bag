@@ -75,8 +75,15 @@ public class PlayerCtrl :MonoBehaviour
         if (running && Stamina>0 && !tired && canMove) {
             rb.linearVelocity = new Vector2(speedX * runningSpeed, speedY * runningSpeed);
             Stamina -= RunCost* Time.deltaTime;
+            if (rb.linearVelocity.magnitude > 0) {
+                gameManager.Moved();
+                gameManager.Sprinted();
+            }
         } else if (canMove) {
             rb.linearVelocity = new Vector2(speedX * moveSpeed, speedY * moveSpeed);
+            if (rb.linearVelocity.magnitude > 0) {
+                gameManager.Moved();
+            }
         }
     }
 
