@@ -7757,7 +7757,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timerText: {fileID: 1414575190}
   timers:
-  - 120
+  - 999999
   timerIndex: 0
   isShift: 1
   isOrderCome: 0
