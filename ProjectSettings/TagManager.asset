@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 3
+  tags:
+  - Box
+  - Enemy
+  - Collectible
+  - item
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - items
+  - Walls
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 1234567890
+    locked: 0
+  - name: Map
+    uniqueID: 2345678901
+    locked: 0
+  - name: Items
+    uniqueID: 3456789012
+    locked: 0
+  - name: Player
+    uniqueID: 272922827
+    locked: 0
+  m_RenderingLayers:
+  - Default
