@@ -398,7 +398,17 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Player_BoxDown_0: -165754767257882551
+      Player_BoxDown_1: 1330493285559375805
+      Player_BoxDown_2: -4203707943384001463
+      Player_BoxDown_3: 5079635248349402414
+      Player_BoxDown_4: -5239200164096380435
+      Player_BoxDown_5: 4176256948090966148
+      Player_BoxDown_6: 3719320405226084686
+      Player_BoxDown_7: -868399387104839166
+      Player_BoxDown_8: 8493533188030073477
+      Player_BoxDown_9: -3739197890139372342
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -398,7 +398,17 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Palyer_BoxUp_0: 7027906960834735721
+      Palyer_BoxUp_1: -5462943013207630712
+      Palyer_BoxUp_2: 2196422021390447945
+      Palyer_BoxUp_3: 2089239378955372836
+      Palyer_BoxUp_4: -5943796890216288803
+      Palyer_BoxUp_5: 2623910139461454474
+      Palyer_BoxUp_6: 5663242832960528425
+      Palyer_BoxUp_7: -9150117550694795231
+      Palyer_BoxUp_8: -812799702792610561
+      Palyer_BoxUp_9: 6345902974590904561
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

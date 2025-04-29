@@ -348,7 +348,15 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Factory Ground Tiles Warm_0: 5604361887719294710
+      Factory Ground Tiles Warm_1: -731746161318456839
+      Factory Ground Tiles Warm_2: -4307484691104400464
+      Factory Ground Tiles Warm_3: -5553263645617182358
+      Factory Ground Tiles Warm_4: -5376933360899058282
+      Factory Ground Tiles Warm_5: 760288938851388650
+      Factory Ground Tiles Warm_6: -3242469428135540690
+      Factory Ground Tiles Warm_7: 6947715004977803306
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
