@@ -84,7 +84,9 @@ public class Timer : MonoBehaviour
         if (timerText != null) {
             updateTimerText();
         }
-        this.remainingTime = timers[timerIndex];
+        if (gameManager.restOfStartDone || !gameManager.isWaterLevel) {
+            this.remainingTime = timers[timerIndex];
+        }
     }
     public float updateTimer(float remainingTime, int i) {
         if (remainingTime > 0) {

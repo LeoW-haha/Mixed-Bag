@@ -54,10 +54,18 @@ public class WaterPipe : MonoBehaviour, IInteractable
     }
 
     public void Interact() {
-        if (inventoryManager.findAndUseItemSlot(5357)) {
+        if (inventoryManager.findAndUseItemSlot(5357) && isActive) {
             deactivateWaterPipe();
             notifier.Notify("Leak fixed");
             onCooldown = true;
+            if (!gameManager.waterTutorialOver) {
+                gameManager.FixedPipe();
+                gameManager.waterLevel = 0;
+            }
+        } else if (!isActive) {
+            notifier.Notify("Pipe not broken");
+        } else if (!inventoryManager.findAndUseItemSlot(5357)) {
+            notifier.Notify("No Leak Fixer");
         }
     }
 }

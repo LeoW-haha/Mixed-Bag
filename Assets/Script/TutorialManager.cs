@@ -12,15 +12,20 @@ public class TutorialManager : MonoBehaviour
     public TMP_Text tutorialText;
     public int tutCount = 0;
     public float timer;
+    private bool tutorialOver = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         inventoryManager = GameObject.Find("InventoryCanvas").GetComponent<InventoryManager>();
         playerControl = GameObject.Find("Player").GetComponent<PlayerCtrl>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        SpawnSignal.SetActive(false);
-        OrderSignal.SetActive(false);
-        tutorialText.text = "WASD to Move";
+        if (!gameManager.isWaterLevel) {
+            SpawnSignal.SetActive(false);
+            OrderSignal.SetActive(false);
+            tutorialText.text = "WASD to Move";
+        } else {
+
+        }
     }
 
     // Update is called once per frame
@@ -70,8 +75,17 @@ public class TutorialManager : MonoBehaviour
         if (tutCount == 9) {
             tutorialText.text = "Your energy is low, get a coffee from the spawn menu";
         }
-        if (tutCount == 10) {
+        if (tutCount == 10 && !tutorialOver) {
             tutorialText.text = "That's about all, enjoy the game :)";
+            timer += Time.deltaTime;
+            if (timer >= 3) {
+                tutorialText.text = "";
+                timer = 0;
+                tutorialOver = true;
+            }
+        }
+        if (tutCount == 101) {
+            tutorialText.text = "Grab the pipe fixer from the spawn inventory and fix the pipe";
         }
     }
 }

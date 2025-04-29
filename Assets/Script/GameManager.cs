@@ -54,6 +54,8 @@ public class GameManager : MonoBehaviour
     public bool pauseOn = false;
     public bool gameEnd = false;
     public bool isTutorial;
+    public bool waterTutorialOver = false;
+    public bool restOfStartDone = false;
     private TutorialManager tutorialManager;
 
     public bool isWaterLevel;
@@ -76,38 +78,69 @@ public class GameManager : MonoBehaviour
         if (isTutorial) {
             tutorialManager = GameObject.Find("TutorialCanvas").GetComponent<TutorialManager>();
         }
-        orderTimer.timers = new float[maxOrderAmount];
-        playerControl = GameObject.Find("Player").GetComponent<PlayerCtrl>();
-        for (int i = 0; i<orderTimer.timers.Length; i++) {
-            orderTimer.timers[i] = -1;
-        }
-
-        orders = new Order[maxOrderAmount];
-
-        orders[0] = new Order(this.orderTime, basePenaltyPoints);
-        orders[0].orderItems = new GameObject[orderIcons.Length];
-        orderTimer.addTimer(0, orders[0].orderTime);
-
-        this.selectedOrder = new Order(this.orderTime, basePenaltyPoints);
-        this.selectedOrder = orders[0];
-        currentOrderIndex = 0;
-        notifier = GameObject.Find("NotificationHolder").GetComponent<Notifier>();
-        randomizeOrders();
-        topText.text = "Order: 1";
-        updateTopBar(this.selectedOrder);
-        UpdateScoreUI();
 
         if(isWaterLevel) {
+            tutorialManager = GameObject.Find("TutorialCanvas").GetComponent<TutorialManager>();
             for (int i = 0; i < waterPipes.Length; i++) {
                 waterPipes[i].GetComponent<WaterPipe>().flowRate = averageFlowRate;
             }
-            InvokeRepeating("randomPipeLeak", 1.0f, 1.0f);
+            activateWaterPipe(0);
+            tutorialManager.tutCount = 101;
+        } else {
+            orderTimer.timers = new float[maxOrderAmount];
+            playerControl = GameObject.Find("Player").GetComponent<PlayerCtrl>();
+            for (int i = 0; i<orderTimer.timers.Length; i++) {
+                orderTimer.timers[i] = -1;
+            }
+
+            orders = new Order[maxOrderAmount];
+
+            orders[0] = new Order(this.orderTime, basePenaltyPoints);
+            orders[0].orderItems = new GameObject[orderIcons.Length];
+            orderTimer.addTimer(0, orders[0].orderTime);
+
+            this.selectedOrder = new Order(this.orderTime, basePenaltyPoints);
+            this.selectedOrder = orders[0];
+            currentOrderIndex = 0;
+            notifier = GameObject.Find("NotificationHolder").GetComponent<Notifier>();
+            randomizeOrders();
+            topText.text = "Order: 1";
+            updateTopBar(this.selectedOrder);
+            UpdateScoreUI();            
         }
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (waterTutorialOver && !restOfStartDone) {
+
+            orderTimer.timers = new float[maxOrderAmount];
+            playerControl = GameObject.Find("Player").GetComponent<PlayerCtrl>();
+            for (int i = 0; i<orderTimer.timers.Length; i++) {
+                orderTimer.timers[i] = -1;
+            }
+
+            orders = new Order[maxOrderAmount];
+
+            orders[0] = new Order(this.orderTime, basePenaltyPoints);
+            orders[0].orderItems = new GameObject[orderIcons.Length];
+            orderTimer.addTimer(0, orders[0].orderTime);
+
+            this.selectedOrder = new Order(this.orderTime, basePenaltyPoints);
+            this.selectedOrder = orders[0];
+            currentOrderIndex = 0;
+            notifier = GameObject.Find("NotificationHolder").GetComponent<Notifier>();
+            randomizeOrders();
+            topText.text = "Order: 1";
+            updateTopBar(this.selectedOrder);
+            UpdateScoreUI();
+
+            if (isWaterLevel) {
+                InvokeRepeating("randomPipeLeak", 1.0f, 1.0f);
+            }
+            restOfStartDone = true;
+        }
         this.totalWeight = inventoryManager.getTotalWeight();
         if (Input.GetButtonDown("Pause") && !pauseOn && !gameEnd) {
             pauseMenu.SetActive(true);
@@ -439,5 +472,14 @@ public class GameManager : MonoBehaviour
             tutorialManager.tutCount = 10;
             hasUsedCoffee = true;
         }         
+    }
+
+    public bool hasFixedPipe;
+    public void FixedPipe() {
+        if(!hasUsedCoffee && isWaterLevel && !waterTutorialOver) {
+            tutorialManager.tutCount = 10;
+            hasFixedPipe = true;
+            waterTutorialOver = true;
+        }               
     }
 }
