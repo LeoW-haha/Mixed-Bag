@@ -1537,8 +1537,8 @@ Transform:
   m_GameObject: {fileID: 255506316}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.5, y: 0.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0.87, z: 0}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 295537364}
@@ -1587,7 +1587,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 100
-  m_Sprite: {fileID: 23851249, guid: aace7b5b269d65148a6a5600cd99f528, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0fb83b857abfa3f49b437a517b94a511, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -7233,6 +7233,8 @@ MonoBehaviour:
   pauseOn: 0
   gameEnd: 0
   isTutorial: 0
+  waterTutorialOver: 0
+  restOfStartDone: 0
   isWaterLevel: 0
   waterPipes: []
   waterLevel: 0
@@ -7240,6 +7242,7 @@ MonoBehaviour:
   maxWater: 0
   burstChance: 0
   waterBar: {fileID: 0}
+  hasFixedPipe: 0
 --- !u!4 &1400780457
 Transform:
   m_ObjectHideFlags: 0

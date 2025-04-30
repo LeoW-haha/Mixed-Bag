@@ -5,7 +5,7 @@ public class startMenuController : MonoBehaviour
 {
     public GameObject levelSelectMenu;
     public void OnStartClick() {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("TutorialScene");
     }
     public void toMainMenu() {
         SceneManager.LoadScene("StartScene");

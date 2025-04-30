@@ -1,0 +1,910 @@
+fileFormatVersion: 2
+guid: f0a886f7003154d90b7f03fef89910a7
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 185264476890719730
+    second: Factory Items Cool_0
+  - first:
+      213: -3842467711709468806
+    second: Factory Items Cool_1
+  - first:
+      213: -8607604850634342342
+    second: Factory Items Cool_2
+  - first:
+      213: 2764000996614024402
+    second: Factory Items Cool_3
+  - first:
+      213: 3994301924872988345
+    second: Factory Items Cool_4
+  - first:
+      213: -1467523229404305321
+    second: Factory Items Cool_5
+  - first:
+      213: 8344042867600049345
+    second: Factory Items Cool_6
+  - first:
+      213: 6414085859845990587
+    second: Factory Items Cool_7
+  - first:
+      213: 947014575925852927
+    second: Factory Items Cool_8
+  - first:
+      213: 3005023395537327329
+    second: Factory Items Cool_9
+  - first:
+      213: -6817703543639780861
+    second: Factory Items Cool_10
+  - first:
+      213: -5867246795760213051
+    second: Factory Items Cool_11
+  - first:
+      213: -1040349677790324726
+    second: Factory Items Cool_12
+  - first:
+      213: -3096940868462719312
+    second: Factory Items Cool_13
+  - first:
+      213: 6676715910247782953
+    second: Factory Items Cool_14
+  - first:
+      213: 6933488615795579350
+    second: Factory Items Cool_15
+  - first:
+      213: 1076623084543830428
+    second: Factory Items Cool_16
+  - first:
+      213: 6878358016191291362
+    second: Factory Items Cool_17
+  - first:
+      213: -8652870787918700490
+    second: Factory Items Cool_18
+  - first:
+      213: 4966345291981819425
+    second: Factory Items Cool_19
+  - first:
+      213: -9165529739804620515
+    second: Factory Items Cool_20
+  - first:
+      213: -1815774520487612547
+    second: Factory Items Cool_21
+  - first:
+      213: 7849234784043891435
+    second: Factory Items Cool_22
+  - first:
+      213: 8329898590766462527
+    second: Factory Items Cool_23
+  - first:
+      213: -8613838921135252907
+    second: Factory Items Cool_24
+  - first:
+      213: -6149727813912508279
+    second: Factory Items Cool_25
+  - first:
+      213: 1775194123202735179
+    second: Factory Items Cool_26
+  - first:
+      213: -5939825794705550820
+    second: Factory Items Cool_27
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 0
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: tvOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Factory Items Cool_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 785
+        width: 32
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f5e1966f01329200800000000000000
+      internalID: 185264476890719730
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Factory Items Cool_1
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 782
+        width: 22
+        height: 29
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7726a679ffccaac0800000000000000
+      internalID: -3842467711709468806
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Factory Items Cool_2
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 748
+        width: 62
+        height: 65
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a30c20f4ef4ab8880800000000000000
+      internalID: -8607604850634342342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Factory Items Cool_3
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 787
+        width: 66
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2dc210a1344bb5620800000000000000
+      internalID: 2764000996614024402
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Factory Items Cool_4
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 729
+        width: 20
+        height: 84
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b6a6bd107c9e6730800000000000000
+      internalID: 3994301924872988345
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Factory Items Cool_5
+      rect:
+        serializedVersion: 2
+        x: 230
+        y: 721
+        width: 20
+        height: 92
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 758e8bbe56f42abe0800000000000000
+      internalID: -1467523229404305321
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Factory Items Cool_6
+      rect:
+        serializedVersion: 2
+        x: 262
+        y: 716
+        width: 20
+        height: 97
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c4cee987cefbc370800000000000000
+      internalID: 8344042867600049345
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Factory Items Cool_7
+      rect:
+        serializedVersion: 2
+        x: 293
+        y: 743
+        width: 50
+        height: 68
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb8e9f23b19630950800000000000000
+      internalID: 6414085859845990587
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Factory Items Cool_8
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 753
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ffa7d234db8742d00800000000000000
+      internalID: 947014575925852927
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Factory Items Cool_9
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 751
+        width: 22
+        height: 29
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e49db06bdcf3b920800000000000000
+      internalID: 3005023395537327329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Factory Items Cool_10
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 684
+        width: 66
+        height: 98
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 302dd61bfb6a261a0800000000000000
+      internalID: -6817703543639780861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Factory Items Cool_11
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 524
+        width: 257
+        height: 210
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c3e921102a539ea0800000000000000
+      internalID: -5867246795760213051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Factory Items Cool_12
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 721
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a089d15ea7fef81f0800000000000000
+      internalID: -1040349677790324726
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Factory Items Cool_13
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 721
+        width: 32
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0bec3ec30b47505d0800000000000000
+      internalID: -3096940868462719312
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Factory Items Cool_14
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 720
+        width: 30
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 92a9480eeb578ac50800000000000000
+      internalID: 6676715910247782953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Factory Items Cool_15
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 524
+        width: 98
+        height: 97
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d9d5be2923b83060800000000000000
+      internalID: 6933488615795579350
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Factory Items Cool_16
+      rect:
+        serializedVersion: 2
+        x: 257
+        y: 620
+        width: 30
+        height: 88
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c99683fbdfee0fe00800000000000000
+      internalID: 1076623084543830428
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Factory Items Cool_17
+      rect:
+        serializedVersion: 2
+        x: 295
+        y: 556
+        width: 50
+        height: 162
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2efda013c26d47f50800000000000000
+      internalID: 6878358016191291362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Factory Items Cool_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 428
+        width: 161
+        height: 82
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63060cefcd3dae780800000000000000
+      internalID: -8652870787918700490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Factory Items Cool_19
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 428
+        width: 30
+        height: 91
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 12e8280fab00ce440800000000000000
+      internalID: 4966345291981819425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Factory Items Cool_20
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 396
+        width: 30
+        height: 119
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d19caa0434f7dc080800000000000000
+      internalID: -9165529739804620515
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Factory Items Cool_21
+      rect:
+        serializedVersion: 2
+        x: 223
+        y: 300
+        width: 98
+        height: 162
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d7f612aa1b21dc6e0800000000000000
+      internalID: -1815774520487612547
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Factory Items Cool_22
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 460
+        width: 64
+        height: 66
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bea7395f2751eec60800000000000000
+      internalID: 7849234784043891435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Factory Items Cool_23
+      rect:
+        serializedVersion: 2
+        x: 311
+        y: 460
+        width: 18
+        height: 82
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f3679a572aeb99370800000000000000
+      internalID: 8329898590766462527
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Factory Items Cool_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 220
+        width: 321
+        height: 194
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 55a9c49a32f757880800000000000000
+      internalID: -8613838921135252907
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Factory Items Cool_25
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 364
+        width: 92
+        height: 54
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 988c76ac227c7aaa0800000000000000
+      internalID: -6149727813912508279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Factory Items Cool_26
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 95
+        width: 88
+        height: 143
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b4c2cd056a1c2a810800000000000000
+      internalID: 1775194123202735179
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Factory Items Cool_27
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 0
+        width: 136
+        height: 190
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c129fd609ef719da0800000000000000
+      internalID: -5939825794705550820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: e84d83dd7e55ffe4b9a9aebcbc93ec80
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Factory Items Cool_0: 185264476890719730
+      Factory Items Cool_1: -3842467711709468806
+      Factory Items Cool_10: -6817703543639780861
+      Factory Items Cool_11: -5867246795760213051
+      Factory Items Cool_12: -1040349677790324726
+      Factory Items Cool_13: -3096940868462719312
+      Factory Items Cool_14: 6676715910247782953
+      Factory Items Cool_15: 6933488615795579350
+      Factory Items Cool_16: 1076623084543830428
+      Factory Items Cool_17: 6878358016191291362
+      Factory Items Cool_18: -8652870787918700490
+      Factory Items Cool_19: 4966345291981819425
+      Factory Items Cool_2: -8607604850634342342
+      Factory Items Cool_20: -9165529739804620515
+      Factory Items Cool_21: -1815774520487612547
+      Factory Items Cool_22: 7849234784043891435
+      Factory Items Cool_23: 8329898590766462527
+      Factory Items Cool_24: -8613838921135252907
+      Factory Items Cool_25: -6149727813912508279
+      Factory Items Cool_26: 1775194123202735179
+      Factory Items Cool_27: -5939825794705550820
+      Factory Items Cool_3: 2764000996614024402
+      Factory Items Cool_4: 3994301924872988345
+      Factory Items Cool_5: -1467523229404305321
+      Factory Items Cool_6: 8344042867600049345
+      Factory Items Cool_7: 6414085859845990587
+      Factory Items Cool_8: 947014575925852927
+      Factory Items Cool_9: 3005023395537327329
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
