@@ -98,7 +98,7 @@ public class OrderSystem : MonoBehaviour
         if (itemName == currentOrder.itemName)
         {
             // Correct delivery
-            gameManager.AddPoints(currentOrder.pointsReward, currentOrder.itemName);
+            gameManager.AddPoints(currentOrder.pointsReward, true, currentOrder.itemName);
             Debug.Log($"OrderSystem: Correct delivery!");
             
             // Generate new order
@@ -107,7 +107,7 @@ public class OrderSystem : MonoBehaviour
         else
         {
             // Wrong delivery
-            gameManager.AddPoints(-wrongDeliveryPenalty, "Wrong Item!");
+            gameManager.AddPoints(-wrongDeliveryPenalty, false, "Wrong Item!");
             Debug.Log($"OrderSystem: Wrong delivery.");
         }
     }
@@ -119,7 +119,7 @@ public class OrderSystem : MonoBehaviour
         
         if (gameManager != null)
         {
-            gameManager.AddPoints(-wrongDeliveryPenalty, "Time's up!");
+            gameManager.AddPoints(-wrongDeliveryPenalty, false, "Time's up!");
         }
         
         // Generate new order after a short delay

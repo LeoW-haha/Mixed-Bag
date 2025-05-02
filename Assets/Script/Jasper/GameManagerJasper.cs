@@ -96,13 +96,13 @@ public class GameManagerJasper : MonoBehaviour
         }
     }
 
-    public void AddPoints(int points, string itemName = "")
+    public void AddPoints(int points, bool CorrectOrder, string itemName = "")
     {
         if (!isLevelActive) return;
 
         // Check for combo
         float timeSinceLastDelivery = Time.time - lastDeliveryTime;
-        if (timeSinceLastDelivery < comboTimeWindow)
+        if (timeSinceLastDelivery < comboTimeWindow && CorrectOrder)
         {
             currentCombo++;
             points += comboBonus * currentCombo;
