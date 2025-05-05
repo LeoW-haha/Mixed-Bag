@@ -41,6 +41,10 @@ public class GameManagerJasper : MonoBehaviour
     private bool isLevelActive = false;
     private int currentStars = 0;
 
+    [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private GameObject endMenu;
+    private bool pauseOn;
+
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -49,13 +53,16 @@ public class GameManagerJasper : MonoBehaviour
             return;
         }
         instance = this;
-        DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
     {
         ResetLevel();
         StartLevel();
+        pauseMenu.SetActive(false);
+        endMenu.SetActive(false);
+        Time.timeScale = 1.0f;
+        pauseOn = false;
         if (feedbackText != null)
         {
             feedbackText.gameObject.SetActive(false);
@@ -68,7 +75,26 @@ public class GameManagerJasper : MonoBehaviour
         {
             UpdateTimer();
             CheckStarRating();
+        if (Input.GetButtonDown("Pause") && !pauseOn) {
+            pauseMenu.SetActive(true);
+            Time.timeScale = 0.0f;
+            pauseOn = true;
+        } else if (Input.GetButtonDown("Pause") && pauseOn) {
+            pauseMenu.SetActive(false);
+            if (isLevelActive) {
+                Time.timeScale = 1.0f;
+            }
+            pauseOn = false;
         }
+        }
+    }
+
+    public void unPause() {
+        pauseMenu.SetActive(false);
+            if (isLevelActive) {
+                Time.timeScale = 1.0f;
+            }
+        pauseOn = false;       
     }
 
     private void UpdateTimer()
@@ -204,6 +230,8 @@ public class GameManagerJasper : MonoBehaviour
     public void EndLevel()
     {
         isLevelActive = false;
+        endMenu.SetActive(true);
+        Time.timeScale = 0.0f;
         ShowFeedback($"Level Complete!\nFinal Score: {currentScore}\nStars Earned: {currentStars}");
     }
 
