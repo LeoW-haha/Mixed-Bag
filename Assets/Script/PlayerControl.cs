@@ -10,6 +10,7 @@ public class PlayerCtrl : MonoBehaviour
     private bool running;
     private bool tired;
     private GameManager gameManager;
+    public string currentPackagingColour = "";
 
     private Rigidbody2D rb;
     private float speedX;
@@ -93,6 +94,13 @@ public class PlayerCtrl : MonoBehaviour
             rb.linearVelocity = Vector2.zero;
         }
     }
+
+    public void ApplyPaint(string colour)
+    {
+        currentPackagingColour = colour;
+        Debug.Log("Applied paint colour: " + colour);
+    }
+
 
     private void Flip()
     {
