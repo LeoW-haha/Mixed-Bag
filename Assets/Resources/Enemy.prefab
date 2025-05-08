@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 203501961394016310}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -48,8 +48,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 2
   waypointThreshold: 0.1
-  damageAmount: 1
+  damageAmount: 34
   knockbackForce: 5
+  idleSprite: {fileID: 1930523111398054814, guid: 0a3d3b4c4d84f4a828496128c4a9a70d, type: 3}
+  walkSprites:
+  - {fileID: -1345891395127052216, guid: 0a488896e8e734ea289a44f3ca44b199, type: 3}
+  - {fileID: -423483563591324576, guid: 0a488896e8e734ea289a44f3ca44b199, type: 3}
+  - {fileID: 5386741635050505271, guid: 0a488896e8e734ea289a44f3ca44b199, type: 3}
+  - {fileID: -4210658418653717911, guid: 0a488896e8e734ea289a44f3ca44b199, type: 3}
+  - {fileID: -2796603337978277249, guid: 0a488896e8e734ea289a44f3ca44b199, type: 3}
+  - {fileID: -3171475193242850056, guid: 0a488896e8e734ea289a44f3ca44b199, type: 3}
+  animationSpeed: 0.3
 --- !u!212 &4535196785277597161
 SpriteRenderer:
   m_ObjectHideFlags: 0
