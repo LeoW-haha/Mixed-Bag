@@ -1,199 +1,189 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+
 public class InventoryManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     public GameObject InventoryMenu;
     public GameObject OrderMenu;
     public GameObject ItemSpawnMenu;
-    public bool menuActivated;
-    public bool orderMenuActivated;
-    public bool ItemSpawnMenuActivated;
+    public bool menuActivated = true;
+    public bool orderMenuActivated = false;
+    public bool ItemSpawnMenuActivated = false;
+
     public ItemSlot[] itemSlot;
     public ItemSlot[] OrderItemSlot;
     public ItemSlot[] SpawnItemSlot;
     public ItemSO[] itemSOs;
     public TMP_Text totalWeightText;
+
     private Text controlText;
     private string standardText;
     [TextArea]
     public string inventoryText;
+
     private GameManager gameManager;
-    
     public PlayerCtrl playerControl;
 
     void Start()
     {
-        InventoryMenu.SetActive(false);
-        OrderMenu.SetActive(false);
-        ItemSpawnMenu.SetActive(false);
-        menuActivated = false;
-        ItemSpawnMenuActivated = false;
-        orderMenuActivated = false;
+        InventoryMenu.SetActive(true);
+        OrderMenu.SetActive(true);
+        ItemSpawnMenu.SetActive(true);
+
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
         if (playerControl == null)
         {
-            Debug.LogWarning("PlayerControl not assigned, trying to find...");
             playerControl = GameObject.Find("Player").GetComponent<PlayerCtrl>();
         }
+
         controlText = GameObject.Find("ControlText").GetComponent<Text>();
         standardText = controlText.text;
-        
     }
 
-    public bool useItem(string itemName) {
-        for (int i = 0; i < itemSOs.Length; i++) {
-            if(itemSOs[i].itemName == itemName) {
-                return itemSOs[i].UseItem();
-            }
+    void Update()
+    {
+        totalWeightText.text = "Total Weight: " + gameManager.totalWeight.ToString() + "/" + gameManager.maxWeight.ToString();
+        totalWeightText.color = gameManager.totalWeight > gameManager.maxWeight ? Color.red : Color.white;
+    }
+
+    public bool useItem(string itemName)
+    {
+        foreach (var item in itemSOs)
+        {
+            if (item.itemName == itemName)
+                return item.UseItem();
         }
         return false;
     }
 
-    public int getItemID(string itemName) {
-        for (int i = 0; i < itemSOs.Length; i++) {
-            if(itemSOs[i].itemName == itemName) {
-                return itemSOs[i].getItemID();
-            }
+    public int getItemID(string itemName)
+    {
+        foreach (var item in itemSOs)
+        {
+            if (item.itemName == itemName)
+                return item.getItemID();
         }
         return 0;
     }
 
-    public float getWeight(string itemName) {
-        for (int i = 0; i < itemSOs.Length; i++) {
-            if(itemSOs[i].itemName == itemName) {
-                return itemSOs[i].weight;
-            }
+    public float getWeight(string itemName)
+    {
+        foreach (var item in itemSOs)
+        {
+            if (item.itemName == itemName)
+                return item.weight;
         }
-        return 0;
+        return 0f;
     }
 
-    public float getTotalWeight() {
-        float totalWeight = 0;
-        for (int i=0; i < itemSlot.Length; i++) {
-            totalWeight += getWeight(itemSlot[i].itemName)*itemSlot[i].quantity;
+    public float getTotalWeight()
+    {
+        float total = 0f;
+        foreach (var slot in itemSlot)
+        {
+            total += getWeight(slot.itemName) * slot.quantity;
         }
-        return totalWeight;
+        return total;
     }
 
-    public int[] getOrderItemIDs() {
-        int[] OrderItemIDs = new int[OrderItemSlot.Length];
-        for (int i = 0; i < OrderItemSlot.Length; i++) {
-            OrderItemIDs[i] = this.getItemID(OrderItemSlot[i].itemName);
+    public int[] getOrderItemIDs()
+    {
+        int[] ids = new int[OrderItemSlot.Length];
+        for (int i = 0; i < OrderItemSlot.Length; i++)
+        {
+            ids[i] = getItemID(OrderItemSlot[i].itemName);
         }
-        return OrderItemIDs;
+        return ids;
     }
 
-    public void clearOrderSlots() {
-        for (int i = 0; i < OrderItemSlot.Length; i++) {
-            OrderItemSlot[i].EmptySlot();
+    public void clearOrderSlots()
+    {
+        foreach (var slot in OrderItemSlot)
+        {
+            slot.EmptySlot();
         }
     }
 
-    public bool unlockSlots(int number) {
+    public bool unlockSlots(int number)
+    {
         int count = 0;
-        for (int i = 0; i < itemSlot.Length; i++) {
-            if (itemSlot[i].isLocked && count < number) {
-                itemSlot[i].isLocked = false;
-                itemSlot[i].itemDescriptionImage.sprite = itemSlot[i].emptySprite;
-                itemSlot[i].itemImage.sprite = itemSlot[i].emptySprite;
-                itemSlot[i].itemSprite = itemSlot[i].emptySprite;
+        foreach (var slot in itemSlot)
+        {
+            if (slot.isLocked && count < number)
+            {
+                slot.isLocked = false;
+                slot.itemDescriptionImage.sprite = slot.emptySprite;
+                slot.itemImage.sprite = slot.emptySprite;
+                slot.itemSprite = slot.emptySprite;
                 count++;
             }
         }
-        if (count <= 0) {
-            return false;
-        } else {
-            return true;
-        }
+        return count > 0;
     }
 
-    public int addItem(string itemName, int quantity, Sprite itemSprite, string itemDescription, float restockCost) {
-        for (int i = 0; i < itemSlot.Length; i++) {
-            if((itemSlot[i].isFull == false && itemSlot[i].itemName == itemName) && !itemSlot[i].isLocked || itemSlot[i].quantity == 0 && !itemSlot[i].isSpawn && !itemSlot[i].isLocked) {
-                int leftOverItems = itemSlot[i].addItem(itemName, quantity, itemSprite, itemDescription, restockCost);
-
-                if(leftOverItems > 0) {
-                    leftOverItems = addItem(itemName, leftOverItems, itemSprite, itemDescription, restockCost);
-                }
-                return leftOverItems;
-            }
-        }
-        return quantity;
-    }
-
-    public int addOrderItem(string itemName, int quantity, Sprite itemSprite, string itemDescription, float restockCost) {
-        for (int i = 0; i < OrderItemSlot.Length; i++) {
-            if(OrderItemSlot[i].isFull == false && OrderItemSlot[i].itemName == itemName && !itemSlot[i].isLocked || OrderItemSlot[i].quantity == 0 && !OrderItemSlot[i].isSpawn && !itemSlot[i].isLocked) {
-                int leftOverItems = OrderItemSlot[i].addItem(itemName, quantity, itemSprite, itemDescription, restockCost);
-                
-                if(leftOverItems > 0) {
-                    leftOverItems = addOrderItem(itemName, leftOverItems, itemSprite, itemDescription, restockCost);
-                }
-                return leftOverItems;
-            }
-        }
-        return quantity;
-    }
-
-    public int addSpawnItem(string itemName, int quantity, Sprite itemSprite, string itemDescription, float restockCost) {
-        for (int i = 0; i < SpawnItemSlot.Length; i++) {
-            if(SpawnItemSlot[i].isFull == false && SpawnItemSlot[i].itemName == itemName  && !itemSlot[i].isLocked || SpawnItemSlot[i].quantity == 0 && !SpawnItemSlot[i].isSpawn && !itemSlot[i].isLocked ) {
-                int leftOverItems = SpawnItemSlot[i].addItem(itemName, quantity, itemSprite, itemDescription, restockCost);
-                
-                if(leftOverItems > 0) {
-                    leftOverItems = addSpawnItem(itemName, leftOverItems, itemSprite, itemDescription, restockCost);
-                }
-                return leftOverItems;
-            }
-        }
-        return quantity;
-    }
-
-    // Update is called once per frame
-    void Update()
+    public int addItem(string itemName, int quantity, Sprite itemSprite, string itemDescription, float restockCost)
     {
-        totalWeightText.text = "Total Weight: " + gameManager.totalWeight.ToString() + "/" + gameManager.maxWeight.ToString();
-        if(gameManager.totalWeight > gameManager.maxWeight) {
-            totalWeightText.color = new Color(255, 0, 0);
-        } else {
-            totalWeightText.color = new Color(255, 255, 255);
+        foreach (var slot in itemSlot)
+        {
+            if ((!slot.isFull && slot.itemName == itemName || slot.quantity == 0) && !slot.isSpawn && !slot.isLocked)
+            {
+                int leftOver = slot.addItem(itemName, quantity, itemSprite, itemDescription, restockCost);
+                if (leftOver > 0)
+                    return addItem(itemName, leftOver, itemSprite, itemDescription, restockCost);
+                return 0;
+            }
         }
-
-        if (Input.GetButtonDown("Inventory") && menuActivated && !gameManager.gameEnd) {
-            playerControl.canMove = true;
-            InventoryMenu.SetActive(false);
-            menuActivated = false;
-            if(orderMenuActivated) {
-                OrderMenu.SetActive(false);
-                orderMenuActivated = false;                
-            }
-            if(ItemSpawnMenuActivated) {
-                ItemSpawnMenu.SetActive(false);
-                ItemSpawnMenuActivated = false;
-            }
-            controlText.text = standardText;
-        } else if (Input.GetButtonDown("Inventory") && !menuActivated && !gameManager.gameEnd) {
-            playerControl.canMove = false;
-            InventoryMenu.SetActive(true);
-            menuActivated = true;
-            controlText.text = inventoryText;
-        } 
+        return quantity;
     }
 
-    public void DeselectAllSlots() {
-        for (int i = 0; i < itemSlot.Length; i++) {
-            itemSlot[i].selectedShader.SetActive(false);
-            itemSlot[i].thisItemSelected = false;
+    public int addOrderItem(string itemName, int quantity, Sprite itemSprite, string itemDescription, float restockCost)
+    {
+        foreach (var slot in OrderItemSlot)
+        {
+            if ((!slot.isFull && slot.itemName == itemName || slot.quantity == 0) && !slot.isSpawn && !slot.isLocked)
+            {
+                int leftOver = slot.addItem(itemName, quantity, itemSprite, itemDescription, restockCost);
+                if (leftOver > 0)
+                    return addOrderItem(itemName, leftOver, itemSprite, itemDescription, restockCost);
+                return 0;
+            }
         }
-        for (int i = 0; i < OrderItemSlot.Length; i++) {
-            OrderItemSlot[i].selectedShader.SetActive(false);
-            OrderItemSlot[i].thisItemSelected = false;
+        return quantity;
+    }
+
+    public int addSpawnItem(string itemName, int quantity, Sprite itemSprite, string itemDescription, float restockCost)
+    {
+        foreach (var slot in SpawnItemSlot)
+        {
+            if ((!slot.isFull && slot.itemName == itemName || slot.quantity == 0) && !slot.isSpawn && !slot.isLocked)
+            {
+                int leftOver = slot.addItem(itemName, quantity, itemSprite, itemDescription, restockCost);
+                if (leftOver > 0)
+                    return addSpawnItem(itemName, leftOver, itemSprite, itemDescription, restockCost);
+                return 0;
+            }
         }
-        for (int i = 0; i < SpawnItemSlot.Length; i++) {
-            SpawnItemSlot[i].selectedShader.SetActive(false);
-            SpawnItemSlot[i].thisItemSelected = false;
+        return quantity;
+    }
+
+    public void DeselectAllSlots()
+    {
+        foreach (var slot in itemSlot)
+        {
+            slot.selectedShader.SetActive(false);
+            slot.thisItemSelected = false;
+        }
+        foreach (var slot in OrderItemSlot)
+        {
+            slot.selectedShader.SetActive(false);
+            slot.thisItemSelected = false;
+        }
+        foreach (var slot in SpawnItemSlot)
+        {
+            slot.selectedShader.SetActive(false);
+            slot.thisItemSelected = false;
         }
     }
 }

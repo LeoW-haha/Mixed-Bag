@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1756041178449140443}
   - component: {fileID: 6406118935630718382}
   - component: {fileID: 6067548617311018104}
+  - component: {fileID: -5542335035918717513}
   m_Layer: 6
   m_Name: Ube Roll
   m_TagString: Box
@@ -89,7 +90,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3364930881467687972}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -126,6 +127,20 @@ MonoBehaviour:
   restockCost: 50
   itemDescription: Ube Roll
   startAmount: 3
+--- !u!114 &-5542335035918717513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3364930881467687972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cfcc1c6e2f6aa14f940d05b63a36c13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waypoints: []
+  speed: 2
 --- !u!1 &6144901855797793579
 GameObject:
   m_ObjectHideFlags: 0
