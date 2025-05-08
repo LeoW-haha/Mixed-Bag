@@ -138,7 +138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: TV
-  pointValue: 100
+  pointValue: 150
   pickupSound: {fileID: 8300000, guid: 5baf97f87012f48b9a5cff135b889fbb, type: 3}
   dropSound: {fileID: 8300000, guid: afb26602c123b485dafd7e5faae14bb1, type: 3}
   carryHeight: 0.5
@@ -146,3 +146,4 @@ MonoBehaviour:
   itemSprite: {fileID: 0}
   canBePickedUp: 1
   pickupRadius: 0.3
+  carrySpeedMultiplier: 0.75

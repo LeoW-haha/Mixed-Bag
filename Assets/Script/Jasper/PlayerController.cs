@@ -103,7 +103,14 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            rb.linearVelocity = movement * moveSpeed;
+            float speedMultiplier = 1f;
+            if (carriedItem != null)
+            {
+                CollectibleItem collectible = carriedItem.GetComponent<CollectibleItem>();
+                if (collectible != null)
+                    speedMultiplier = collectible.carrySpeedMultiplier;
+            }
+            rb.linearVelocity = movement * moveSpeed * speedMultiplier;
         }
     }
 
@@ -197,6 +204,12 @@ public class PlayerController : MonoBehaviour
         transform.position = startPosition;
         currentHealth = maxHealth;
         isDead = false;
+
+        // Deduct 200 points for respawn
+        if (GameManagerJasper.Instance != null)
+        {
+            GameManagerJasper.Instance.AddPoints(-200, false);
+        }
         
         // Reset animation state
         if (playerAnimator != null)

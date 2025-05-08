@@ -14,6 +14,9 @@ public class CollectibleItem : MonoBehaviour
     [SerializeField] private bool canBePickedUp = true;
     [SerializeField] private float pickupRadius = 0.3f; // Reduced from 1f to 0.3f
     
+    [Header("Carry Settings")]
+    public float carrySpeedMultiplier = 1f; // Default is normal speed
+    
     private bool isPickedUp = false;
     private Transform playerTransform;
     private ItemCarousel originalCarousel;
