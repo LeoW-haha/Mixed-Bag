@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class GameUIManager : MonoBehaviour
 {
@@ -12,9 +13,12 @@ public class GameUIManager : MonoBehaviour
     public TextMeshProUGUI orderText;
     public TextMeshProUGUI orderPointsText;
     public TextMeshProUGUI orderTimerText;
+    public Image orderImage;
 
     private GameManagerJasper gameManager;
     private OrderSystem orderSystem;
+    private Coroutine gameTimerFlashCoroutine;
+    private bool isGameTimerFlashing = false;
 
     void Start()
     {
@@ -29,13 +33,47 @@ public class GameUIManager : MonoBehaviour
         if (gameManager != null)
         {
             if (scoreText != null)
-                scoreText.text = $"Score: {gameManager.GetCurrentScore()}";
+            {
+                int score = gameManager.GetCurrentScore();
+                scoreText.text = $"Score: {score}";
+                if (score < 0)
+                    scoreText.color = Color.red;
+                else if (score > 0)
+                    scoreText.color = new Color(1f, 0.84f, 0f); // Gold
+                else
+                    scoreText.color = Color.white;
+            }
             if (gameTimerText != null)
             {
                 float timeLeft = Mathf.Max(0, gameManager.levelTimeLimit - Time.timeSinceLevelLoad);
                 int minutes = Mathf.FloorToInt(timeLeft / 60);
                 int seconds = Mathf.FloorToInt(timeLeft % 60);
                 gameTimerText.text = $"Time: {minutes:00}:{seconds:00}";
+
+                if (timeLeft <= 60)
+                {
+                    if (!isGameTimerFlashing)
+                    {
+                        isGameTimerFlashing = true;
+                        if (gameTimerFlashCoroutine != null)
+                            StopCoroutine(gameTimerFlashCoroutine);
+                        gameTimerFlashCoroutine = StartCoroutine(FlashGameTimer());
+                    }
+                }
+                else
+                {
+                    if (isGameTimerFlashing)
+                    {
+                        isGameTimerFlashing = false;
+                        if (gameTimerFlashCoroutine != null)
+                            StopCoroutine(gameTimerFlashCoroutine);
+                        gameTimerText.color = Color.white;
+                    }
+                    else
+                    {
+                        gameTimerText.color = Color.white;
+                    }
+                }
             }
         }
 
@@ -50,13 +88,22 @@ public class GameUIManager : MonoBehaviour
                 if (orderPointsText != null)
                     orderPointsText.text = $"Points: {currentOrder.pointsReward}";
                 if (orderTimerText != null)
-                    orderTimerText.text = $"Order Time: {Mathf.CeilToInt(orderSystem.GetCurrentTime())}s";
+                {
+                    int totalSeconds = Mathf.CeilToInt(orderSystem.GetCurrentTime());
+                    int minutes = totalSeconds / 60;
+                    int seconds = totalSeconds % 60;
+                    orderTimerText.text = $"{minutes:00}:{seconds:00}";
+                    orderTimerText.color = totalSeconds <= 10 ? Color.red : Color.white;
+                }
+                if (orderImage != null)
+                    orderImage.sprite = currentOrder.itemSprite;
             }
             else
             {
                 if (orderText != null) orderText.text = "Order: None";
                 if (orderPointsText != null) orderPointsText.text = "";
                 if (orderTimerText != null) orderTimerText.text = "";
+                if (orderImage != null) orderImage.sprite = null;
             }
         }
     }
@@ -75,5 +122,22 @@ public class GameUIManager : MonoBehaviour
         yield return new WaitForSeconds(duration);
         if (feedbackText != null)
             feedbackText.text = "";
+    }
+
+    private System.Collections.IEnumerator FlashGameTimer()
+    {
+        Color normalColor = Color.red;
+        Color flashColor = Color.white;
+        float flashInterval = 0.5f;
+
+        while (true)
+        {
+            if (gameTimerText != null)
+                gameTimerText.color = flashColor;
+            yield return new WaitForSeconds(flashInterval);
+            if (gameTimerText != null)
+                gameTimerText.color = normalColor;
+            yield return new WaitForSeconds(flashInterval);
+        }
     }
 } 
