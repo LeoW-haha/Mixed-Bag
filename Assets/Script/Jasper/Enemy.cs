@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float waypointThreshold = 0.1f;
     
     [Header("Combat Settings")]
-    [SerializeField] private int damageAmount = 1;
+    [SerializeField] private float damageAmount = 34f;
     [SerializeField] private float knockbackForce = 5f;
     
     [Header("Animation")]

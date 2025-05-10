@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -13,7 +14,8 @@ public class PlayerController : MonoBehaviour
     [Header("Combat Settings")]
     [SerializeField] private float invincibilityDuration = 1f;
     [SerializeField] private float knockbackDuration = 0.2f;
-    [SerializeField] private int maxHealth = 3;
+    [SerializeField] private float maxHealth = 3f;
+    [SerializeField] private Image HealthBar;
     [SerializeField] private float respawnDelay = 2f; // Time before respawning
     
     private Rigidbody2D rb;
@@ -22,7 +24,7 @@ public class PlayerController : MonoBehaviour
     private float lastPickupTime;
     private bool isDead = false;
     private Vector2 movement;
-    private int currentHealth;
+    private float currentHealth;
     private float invincibilityTimer = 0f;
     private float knockbackTimer = 0f;
     private Vector2 knockbackVelocity;
@@ -54,6 +56,9 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+
+        HealthBar.fillAmount = currentHealth/maxHealth;
+
         if (isDead) return;
 
         // Update invincibility
@@ -231,7 +236,7 @@ public class PlayerController : MonoBehaviour
         return carriedItem;
     }
 
-    public void TakeDamage(int amount, Vector2 knockback)
+    public void TakeDamage(float amount, Vector2 knockback)
     {
         if (isDead || invincibilityTimer > 0) return;
 

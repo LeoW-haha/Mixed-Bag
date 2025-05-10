@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 2
   waypointThreshold: 0.1
-  damageAmount: 1
+  damageAmount: 34
   knockbackForce: 5
   idleSprite: {fileID: 1930523111398054814, guid: 0a3d3b4c4d84f4a828496128c4a9a70d, type: 3}
   walkSprites:
