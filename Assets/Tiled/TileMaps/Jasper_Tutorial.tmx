@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="30" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="27">
  <tileset firstgid="1" source="Cool Factory Ground.tsx"/>
- <tileset firstgid="323" source="../../../../../Floor.tsx"/>
+ <tileset firstgid="323" source="../TileSets/Floor.tsx"/>
  <tileset firstgid="645" source="Cool Factory Items.tsx"/>
  <layer id="1" name="Outline" width="50" height="30" visible="0">
   <data encoding="csv">
