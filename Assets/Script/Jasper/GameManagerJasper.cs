@@ -11,7 +11,7 @@ public class GameManagerJasper : MonoBehaviour
     [SerializeField] private GameObject[] starImages;
     
     [Header("Level Settings")]
-    [SerializeField] private float levelTimeLimit = 180f; // 3 minutes default
+    [SerializeField] public float levelTimeLimit = 180f; // 3 minutes default
     [SerializeField] private int scoreForOneStar = 1000;
     [SerializeField] private int scoreForTwoStars = 2000;
     [SerializeField] private int scoreForThreeStars = 3000;
