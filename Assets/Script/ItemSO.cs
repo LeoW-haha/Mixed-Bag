@@ -10,23 +10,34 @@ public class ItemSO : ScriptableObject
     public float weight;
     public itemType ItemType = new itemType();
 
-    public bool UseItem() {
-        if(ItemType == itemType.staminaConsumable) {
-            if (!GameObject.Find("Player").GetComponent<PlayerCtrl>().isStaminaFull()) {
-                GameObject.Find("Player").GetComponent<PlayerCtrl>().regenStamina(staminaAmount);
-                return true;
-            } else {
+    public bool UseItem()
+    {
+        var player = GameObject.Find("Player").GetComponent<PlayerCtrl>();
+
+        switch (ItemType)
+        {
+            case itemType.staminaConsumable:
+                if (!player.isStaminaFull())
+                {
+                    player.regenStamina(staminaAmount);
+                    return true;
+                }
                 return false;
-            }
-        } if (ItemType == itemType.orderItem) {
-            Debug.Log(this.itemName);
-            Debug.Log(this.id);
-            return false;        
-        } if (ItemType == itemType.slotUpgrade) {
-            return GameObject.Find("InventoryCanvas").GetComponent<InventoryManager>().unlockSlots(orderAmount);
+
+            case itemType.orderItem:
+                Debug.Log(this.itemName);
+                Debug.Log(this.id);
+                return false;
+
+            // Remove or ignore slotUpgrade entirely:
+            case itemType.slotUpgrade:
+                Debug.LogWarning("slotUpgrade item used but no slot unlocking logic exists.");
+                return false;
         }
+
         return false;
     }
+
 
     public int getItemID() {
         return this.id;

@@ -121,10 +121,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Slot Upgrade
-  quantity: 1
+  quantity: 0
   sprite: {fileID: -5784643541303560050, guid: debf9869ade8808459b1f99f0e239ff8, type: 3}
-  restockCost: 500
-  itemDescription: Use it to unlock a slot
+  startAmount: 0
 --- !u!1 &6144901855797793579
 GameObject:
   m_ObjectHideFlags: 0

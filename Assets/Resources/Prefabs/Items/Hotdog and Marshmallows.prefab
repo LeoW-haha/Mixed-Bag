@@ -122,11 +122,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Hotdog and Marshmallows
-  quantity: 1
+  quantity: 0
   sprite: {fileID: -3262404026900752489, guid: 2086d8e5dc408f44a9a4905af722f0be, type: 3}
-  restockCost: 25
-  itemDescription: Hotdog and Marshmallows Hotdog and Marshmallows Hotdog and Marshmallows
-  startAmount: 3
+  startAmount: 0
 --- !u!114 &9072247076336475417
 MonoBehaviour:
   m_ObjectHideFlags: 0

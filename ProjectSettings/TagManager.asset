@@ -7,6 +7,9 @@ TagManager:
   - Box
   - SmallDoor
   - BigDoor
+  - Green
+  - Black
+  - Red
   layers:
   - Default
   - TransparentFX

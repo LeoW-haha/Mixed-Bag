@@ -98,7 +98,7 @@ public class PlayerCtrl : MonoBehaviour
     public void ApplyPaint(string colour)
     {
         currentPackagingColour = colour;
-        Debug.Log("Applied paint colour: " + colour);
+
     }
 
 

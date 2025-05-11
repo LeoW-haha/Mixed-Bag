@@ -122,10 +122,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Coffee
-  quantity: 1
+  quantity: 0
   sprite: {fileID: -2899638285309987080, guid: c933616eb7e24494990952ef95041696, type: 3}
-  restockCost: 150
-  itemDescription: Coffee coffee coffee, restores stamina
   startAmount: 0
 --- !u!114 &3996194323414455067
 MonoBehaviour:

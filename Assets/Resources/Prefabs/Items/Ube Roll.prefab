@@ -122,11 +122,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Ube Roll
-  quantity: 1
+  quantity: 0
   sprite: {fileID: 5640743685203282698, guid: 410761a60e86e284d9258b534e75dcb7, type: 3}
-  restockCost: 50
-  itemDescription: Ube Roll
-  startAmount: 3
+  startAmount: 0
 --- !u!114 &-5542335035918717513
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -122,11 +122,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Buko
-  quantity: 3
+  quantity: 0
   sprite: {fileID: -6843050227591961421, guid: 10fb35c00d72846418054e4f255bb30a, type: 3}
-  restockCost: 25
-  itemDescription: What the shizzle is a buko?
-  startAmount: 3
+  startAmount: 0
 --- !u!114 &2474155033225978492
 MonoBehaviour:
   m_ObjectHideFlags: 0

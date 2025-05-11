@@ -122,11 +122,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Fish Balls
-  quantity: 1
+  quantity: 0
   sprite: {fileID: 5824757986180929711, guid: c0770bcbc3c1b1544a6aabcc3f931955, type: 3}
-  restockCost: 25
-  itemDescription: haha balls
-  startAmount: 3
+  startAmount: 0
 --- !u!114 &-2083132439958626437
 MonoBehaviour:
   m_ObjectHideFlags: 0
