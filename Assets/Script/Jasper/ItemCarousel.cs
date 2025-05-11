@@ -15,6 +15,9 @@ public class ItemCarousel : MonoBehaviour
     [SerializeField] private float waypointReachDistance = 0.1f;
     
     private bool isSpawning = false;
+    public bool pipeBurst = false;
+    private OrderSystem orderSystem;
+    [SerializeField] private int orderItemWeight; //Smaller = less likely
     private List<GameObject> activeItems = new List<GameObject>();
 
     private void Start()
@@ -22,13 +25,13 @@ public class ItemCarousel : MonoBehaviour
         // Validate setup
         if (itemPrefabs == null || itemPrefabs.Length == 0)
         {
-            Debug.LogError("ItemCarousel: No item prefabs assigned!");
+            //Debug.LogError("ItemCarousel: No item prefabs assigned!");
             return;
         }
 
         if (pathPoints == null || pathPoints.Length == 0)
         {
-            Debug.LogError("ItemCarousel: No path points assigned!");
+            //Debug.LogError("ItemCarousel: No path points assigned!");
             return;
         }
 
@@ -36,7 +39,7 @@ public class ItemCarousel : MonoBehaviour
         {
             if (prefab == null)
             {
-                Debug.LogWarning("ItemCarousel: One or more item prefabs is null!");
+                //Debug.LogWarning("ItemCarousel: One or more item prefabs is null!");
             }
         }
 
@@ -44,22 +47,23 @@ public class ItemCarousel : MonoBehaviour
         {
             if (point == null)
             {
-                Debug.LogWarning("ItemCarousel: One or more path points is null!");
+                //Debug.LogWarning("ItemCarousel: One or more path points is null!");
             }
         }
 
         if (autoStart)
         {
-            Debug.Log("ItemCarousel: Auto-starting spawn routine...");
+            //Debug.Log("ItemCarousel: Auto-starting spawn routine...");
             StartSpawning();
         }
+        orderSystem = FindFirstObjectByType<OrderSystem>();
     }
 
     public void StartSpawning()
     {
         if (!isSpawning && itemPrefabs.Length > 0 && pathPoints.Length > 0)
         {
-            Debug.Log("ItemCarousel: Starting spawn routine");
+            //Debug.Log("ItemCarousel: Starting spawn routine");
             isSpawning = true;
             StartCoroutine(SpawnRoutine());
         }
@@ -67,7 +71,7 @@ public class ItemCarousel : MonoBehaviour
 
     public void StopSpawning()
     {
-        Debug.Log("ItemCarousel: Stopping spawn routine");
+        //Debug.Log("ItemCarousel: Stopping spawn routine");
         isSpawning = false;
     }
 
@@ -88,16 +92,26 @@ public class ItemCarousel : MonoBehaviour
         int randomIndex = Random.Range(0, itemPrefabs.Length);
         GameObject itemPrefab = itemPrefabs[randomIndex];
 
+        //Prioritizes items that are currently an order
+        if (orderSystem != null) {
+            if (itemPrefab.GetComponent<CollectibleItem>().GetItemName() != orderSystem.GetCurrentOrder().itemName || pipeBurst) {
+                if (Random.Range(0,100) < orderItemWeight) {
+                    randomIndex = Random.Range(0, itemPrefabs.Length);
+                    itemPrefab = itemPrefabs[randomIndex];
+                }
+            }
+        }
+
         if (itemPrefab == null)
         {
-            Debug.LogError("ItemCarousel: Selected prefab is null!");
+            //Debug.LogError("ItemCarousel: Selected prefab is null!");
             return;
         }
 
         // Spawn at first path point
         Vector3 spawnPosition = pathPoints[0].position;
         GameObject newItem = Instantiate(itemPrefab, spawnPosition, Quaternion.identity, transform);
-        Debug.Log($"ItemCarousel: Spawned item {newItem.name} at position {spawnPosition}");
+        //Debug.Log($"ItemCarousel: Spawned item {newItem.name} at position {spawnPosition}");
         
         // Set up item movement
         ItemMover mover = newItem.AddComponent<ItemMover>();
@@ -105,7 +119,7 @@ public class ItemCarousel : MonoBehaviour
         
         // Add to active items list
         activeItems.Add(newItem);
-        Debug.Log($"ItemCarousel: Active items count: {activeItems.Count}");
+        //Debug.Log($"ItemCarousel: Active items count: {activeItems.Count}");
     }
 
     public void RemoveItem(GameObject item)
@@ -114,7 +128,7 @@ public class ItemCarousel : MonoBehaviour
         {
             activeItems.Remove(item);
             Destroy(item);
-            Debug.Log($"ItemCarousel: Removed item. Active items remaining: {activeItems.Count}");
+            //Debug.Log($"ItemCarousel: Removed item. Active items remaining: {activeItems.Count}");
         }
     }
 
@@ -157,7 +171,7 @@ public class ItemMover : MonoBehaviour
         moveSpeed = speed;
         reachDistance = wayPointReachDistance;
         collectibleItem = GetComponent<CollectibleItem>();
-        Debug.Log($"ItemMover: Initialized for {gameObject.name} with {points.Length} points");
+        //Debug.Log($"ItemMover: Initialized for {gameObject.name} with {points.Length} points");
     }
 
     private void Update()
@@ -203,7 +217,7 @@ public class ItemMover : MonoBehaviour
             }
             else
             {
-                Debug.Log($"ItemMover: {gameObject.name} reached point {currentPointIndex-1}, moving to point {currentPointIndex}");
+                //Debug.Log($"ItemMover: {gameObject.name} reached point {currentPointIndex-1}, moving to point {currentPointIndex}");
             }
         }
     }

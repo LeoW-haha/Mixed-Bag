@@ -1,16 +1,10 @@
 fileFormatVersion: 2
-guid: 9a55fe5511a1048e7a5a6d17dcf113a6
+guid: c94add2bc1ee5cf468df2c10ae46c836
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8903608049025104197
-    second: Stars_0
-  - first:
-      213: -7678458166956771760
-    second: Stars_1
-  - first:
-      213: 1222489850116747820
-    second: Stars_2
+      213: 6150502508744014405
+    second: TileSet_V2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -129,37 +123,11 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
-    buildTarget: tvOS
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: iOS
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
     buildTarget: WindowsStoreApps
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -171,67 +139,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Stars_0
+      name: TileSet_V2_0
       rect:
         serializedVersion: 2
-        x: 221
-        y: 206
-        width: 984
-        height: 1008
+        x: 0
+        y: 31
+        width: 256
+        height: 609
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5493375e858ff8b70800000000000000
-      internalID: 8903608049025104197
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Stars_1
-      rect:
-        serializedVersion: 2
-        x: 1293
-        y: 206
-        width: 1277
-        height: 1009
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 05638d7baf2a07590800000000000000
-      internalID: -7678458166956771760
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Stars_2
-      rect:
-        serializedVersion: 2
-        x: 2675
-        y: 213
-        width: 1023
-        height: 1010
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: c22bab9aa0827f010800000000000000
-      internalID: 1222489850116747820
+      spriteID: 54af5d7e179fa5550800000000000000
+      internalID: 6150502508744014405
       vertices: []
       indices: 
       edges: []
@@ -240,7 +164,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 8c7f0e5e4ee754c929063fe6e8f112af
+    spriteID: 471104698b8d83d49b42ac6b1ca34e5f
     internalID: 0
     vertices: []
     indices: 
@@ -249,10 +173,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Stars_0: 8903608049025104197
-      Stars_1: -7678458166956771760
-      Stars_2: 1222489850116747820
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

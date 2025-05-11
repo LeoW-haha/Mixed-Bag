@@ -277,4 +277,11 @@ public class PlayerController : MonoBehaviour
             yield return new WaitForSeconds(flashDuration);
         }
     }
+
+    public void changeSpeed(float speed) {
+        moveSpeed = speed;
+    }
+    public float getSpeed() {
+        return moveSpeed;
+    }
 } 
