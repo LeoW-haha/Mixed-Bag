@@ -3,18 +3,6 @@ using UnityEngine.UI;
 
 public class PaintDisplayUI : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public Image paintIcon;
     public Sprite redSprite;
     public Sprite greenSprite;
@@ -22,6 +10,12 @@ public class PaintDisplayUI : MonoBehaviour
 
     public void UpdatePaintIcon(string color)
     {
+        if (paintIcon == null)
+        {
+            Debug.LogWarning("Paint icon UI is not assigned in the inspector.");
+            return;
+        }
+
         switch (color)
         {
             case "Red":
@@ -32,6 +26,9 @@ public class PaintDisplayUI : MonoBehaviour
                 break;
             case "Black":
                 paintIcon.sprite = blackSprite;
+                break;
+            default:
+                Debug.LogWarning("Unknown paint color: " + color);
                 break;
         }
     }

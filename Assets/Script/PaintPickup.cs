@@ -2,19 +2,12 @@ using UnityEngine;
 
 public class PaintPickup : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    private string paintColor;
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        paintColor = gameObject.name.Replace("(Clone)", "").Trim(); // Automatically use GameObject name
     }
-
-    public string paintColor; // Set this in the Inspector: "Red", "Green", "Black"
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -25,14 +18,18 @@ public class PaintPickup : MonoBehaviour
             {
                 player.currentPackagingColour = paintColor;
 
-                // Update paint UI display
-                PaintDisplayUI paintUI = GameObject.FindObjectOfType<PaintDisplayUI>();
+                PaintDisplayUI paintUI = FindObjectOfType<PaintDisplayUI>();
                 if (paintUI != null)
                 {
                     paintUI.UpdatePaintIcon(paintColor);
                 }
+                else
+                {
+                    Debug.LogWarning("PaintDisplayUI not found in scene.");
+                }
+
+                Destroy(gameObject); // Optional
             }
         }
     }
 }
-

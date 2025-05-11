@@ -10,6 +10,7 @@ TagManager:
   - Green
   - Black
   - Red
+  - PackageStation
   layers:
   - Default
   - TransparentFX

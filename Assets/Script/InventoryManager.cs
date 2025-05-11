@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -9,6 +10,9 @@ public class InventoryManager : MonoBehaviour
 
     private GameManager gameManager;
     public PlayerCtrl playerControl;
+
+    private List<ItemSlot> selectedItems = new List<ItemSlot>();
+
 
     void Start()
     {
@@ -58,6 +62,28 @@ public class InventoryManager : MonoBehaviour
         foreach (var slot in OrderItemSlot) slot.EmptySlot();
     }
 
+    public void AddSelectedItem(ItemSlot slot)
+    {
+        if (!selectedItems.Contains(slot))
+        {
+            selectedItems.Add(slot);
+            if (selectedItems.Count == 2)
+            {
+                StartPackaging();
+            }
+        }
+    }
+
+
+    public void RemoveSelectedItem(ItemSlot slot)
+    {
+        if (selectedItems.Contains(slot))
+        {
+            selectedItems.Remove(slot);
+        }
+    }
+
+
     public int addItem(string itemName, int quantity, Sprite itemSprite)
     {
         for (int i = 0; i < itemSlot.Length; i++)
@@ -67,7 +93,7 @@ public class InventoryManager : MonoBehaviour
             // Add to existing stack
             if (!slot.isFull && slot.itemName == itemName && !slot.isSpawn && !slot.isLocked)
             {
-                Debug.Log($"📦 Stacking {itemName} in slot {i}");
+
                 int leftOver = slot.addItem(itemName, quantity, itemSprite);
                 return leftOver;
             }
@@ -80,13 +106,12 @@ public class InventoryManager : MonoBehaviour
             // Add to truly empty slot
             if (string.IsNullOrEmpty(slot.itemName) && !slot.isLocked && !slot.isSpawn)
             {
-                Debug.Log($"🟢 Placing {itemName} in empty slot {i}");
+
                 int leftOver = slot.addItem(itemName, quantity, itemSprite);
                 return leftOver;
             }
         }
 
-        Debug.LogError($"❌ Could not add item: {itemName} to any slot.");
         return quantity;
     }
 
@@ -141,4 +166,25 @@ public class InventoryManager : MonoBehaviour
             slot.thisItemSelected = false;
         }
     }
+
+    public void StartPackaging()
+    {
+        if (selectedItems.Count == 2)
+        {
+            string usedColor = playerControl.currentPackagingColour;
+            Debug.Log($"✅ Packaging started with: {selectedItems[0].itemName} and {selectedItems[1].itemName} using paint: {usedColor}");
+
+
+            // Clear both selected item slots
+            foreach (var slot in selectedItems)
+            {
+                slot.EmptySlot(); // Make sure this clears the visual and data
+            }
+
+            // Reset selection
+            selectedItems.Clear();
+        }
+    }
+
+
 }

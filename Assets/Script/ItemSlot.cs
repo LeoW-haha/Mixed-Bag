@@ -75,18 +75,22 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
 
     private void OnLeftClick()
     {
-        if (thisItemSelected && inventoryManager.useItem(this.itemName) && !isSpawn && !isLocked)
+        if (thisItemSelected)
         {
-            quantity--;
-            isFull = false;
-            if (quantityText != null) quantityText.text = quantity.ToString();
-            if (quantity <= 0) EmptySlot();
+            // Deselect
+            inventoryManager.RemoveSelectedItem(this);
+            selectedShader.SetActive(false);
+            thisItemSelected = false;
         }
-
-        inventoryManager.DeselectAllSlots();
-        if (selectedShader != null) selectedShader.SetActive(true);
-        thisItemSelected = true;
+        else
+        {
+            // Select
+            inventoryManager.AddSelectedItem(this);
+            selectedShader.SetActive(true);
+            thisItemSelected = true;
+        }
     }
+
 
     private void OnRightClick()
     {
@@ -118,14 +122,21 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
 
     public void EmptySlot()
     {
-        if (!isSpawn)
-        {
-            if (quantityText != null) quantityText.enabled = false;
-            if (slotImage != null) slotImage.sprite = emptySprite;
-            itemName = string.Empty;
-            itemSprite = null;
-            quantity = 0;
-            isFull = false;
-        }
+        if (quantityText != null)
+            quantityText.enabled = false;
+
+        if (slotImage != null)
+            slotImage.sprite = emptySprite;
+
+        itemName = "";
+        quantity = 0;
+        itemSprite = emptySprite;
+        isFull = false;
+        thisItemSelected = false;
+
+        if (selectedShader != null)
+            selectedShader.SetActive(false);
     }
+
+
 }

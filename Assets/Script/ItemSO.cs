@@ -5,9 +5,7 @@ public class ItemSO : ScriptableObject
 {
     public string itemName;
     public int id;
-    public float staminaAmount;
     public int orderAmount;
-    public float weight;
     public itemType ItemType = new itemType();
 
     public bool UseItem()
@@ -16,13 +14,7 @@ public class ItemSO : ScriptableObject
 
         switch (ItemType)
         {
-            case itemType.staminaConsumable:
-                if (!player.isStaminaFull())
-                {
-                    player.regenStamina(staminaAmount);
-                    return true;
-                }
-                return false;
+            
 
             case itemType.orderItem:
                 Debug.Log(this.itemName);
@@ -43,13 +35,9 @@ public class ItemSO : ScriptableObject
         return this.id;
     }
 
-    public float getWeight() {
-        return this.weight;
-    }
 
     public enum itemType {
         orderItem,
-        staminaConsumable,
         slotUpgrade
     };
 }
