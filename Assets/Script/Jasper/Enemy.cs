@@ -56,7 +56,7 @@ public class Enemy : MonoBehaviour
 
         // Rainbow mode logic
         float timeLeft = gameDuration - Time.time;
-        if (!isRainbowMode && timeLeft <= 120f) // Last 2 minutes
+        if (!isRainbowMode && timeLeft <= 60f) // Last 1 minute
         {
             isRainbowMode = true;
             moveSpeed = originalMoveSpeed * 2f;

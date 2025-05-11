@@ -8,9 +8,11 @@ public class OrderDisplay : MonoBehaviour
     private GameManagerJasper gameManager;
     
     [Header("UI References")]
-    [SerializeField] private TextMeshPro orderText;
-    [SerializeField] private TextMeshPro timerText;
-    [SerializeField] private TextMeshPro scoreText;
+    [SerializeField] private TextMeshProUGUI orderText;
+    [SerializeField] private TextMeshProUGUI orderTimerText;
+    [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private TextMeshProUGUI feedbackText;
+    [SerializeField] private TextMeshProUGUI gameTimerText;
     
     [Header("Display Settings")]
     [SerializeField] private float displayScale = 1f;
@@ -42,54 +44,42 @@ public class OrderDisplay : MonoBehaviour
         spriteRenderer.sortingOrder = orderInLayer;
 
         // Create TextMeshPro components if not assigned
-        if (timerText == null)
+        if (orderTimerText == null)
         {
-            GameObject timerTextObj = new GameObject("TimerText");
-            timerTextObj.transform.SetParent(transform);
-            timerText = timerTextObj.AddComponent<TextMeshPro>();
-            timerText.alignment = TextAlignmentOptions.Center;
-            timerText.fontSize = 3;
+            GameObject orderTimerTextObj = new GameObject("OrderTimerText");
+            orderTimerTextObj.transform.SetParent(transform);
+            orderTimerText = orderTimerTextObj.AddComponent<TextMeshProUGUI>();
+            orderTimerText.alignment = TextAlignmentOptions.Center;
+            orderTimerText.fontSize = 3;
         }
         
-        // Position timer text (first element)
-        timerText.transform.localPosition = new Vector3(0, startingOffset, 0);
-        
-        // Set timer text rendering order
-        timerText.sortingLayerID = SortingLayer.NameToID(sortingLayerName);
-        timerText.sortingOrder = orderInLayer + 1;
+        // Position order timer text (first element)
+        orderTimerText.transform.localPosition = new Vector3(0, startingOffset, 0);
 
         if (orderText == null)
         {
             GameObject orderTextObj = new GameObject("OrderText");
             orderTextObj.transform.SetParent(transform);
-            orderText = orderTextObj.AddComponent<TextMeshPro>();
+            orderText = orderTextObj.AddComponent<TextMeshProUGUI>();
             orderText.alignment = TextAlignmentOptions.Center;
             orderText.fontSize = 3;
         }
         
         // Position order text (second element)
         orderText.transform.localPosition = new Vector3(0, startingOffset - spacingBetweenTexts, 0);
-        
-        // Set order text rendering order
-        orderText.sortingLayerID = SortingLayer.NameToID(sortingLayerName);
-        orderText.sortingOrder = orderInLayer + 1;
 
         // Create and position score text (third element)
         if (scoreText == null)
         {
             GameObject scoreTextObj = new GameObject("ScoreText");
             scoreTextObj.transform.SetParent(transform);
-            scoreText = scoreTextObj.AddComponent<TextMeshPro>();
+            scoreText = scoreTextObj.AddComponent<TextMeshProUGUI>();
             scoreText.alignment = TextAlignmentOptions.Center;
             scoreText.fontSize = 3;
         }
         
         // Position score text below order text
         scoreText.transform.localPosition = new Vector3(0, startingOffset - (spacingBetweenTexts * 2), 0);
-        
-        // Set score text rendering order
-        scoreText.sortingLayerID = SortingLayer.NameToID(sortingLayerName);
-        scoreText.sortingOrder = orderInLayer + 1;
 
         // Set the scale
         transform.localScale = Vector3.one * displayScale;
@@ -129,21 +119,21 @@ public class OrderDisplay : MonoBehaviour
             spriteRenderer.sprite = currentOrder.itemSprite;
             spriteRenderer.enabled = true;
 
-            // Update timer text (first element)
-            if (timerText != null)
+            // Update order timer text (first element)
+            if (orderTimerText != null)
             {
                 float timeLeft = orderSystem.GetCurrentTime();
-                timerText.text = $"Time: {Mathf.CeilToInt(timeLeft)}s";
+                orderTimerText.text = $"Time: {Mathf.CeilToInt(timeLeft)}s";
                 
                 // Update timer color based on time remaining
                 if (timeLeft <= criticalThreshold)
-                    timerText.color = timerCriticalColor;
+                    orderTimerText.color = timerCriticalColor;
                 else if (timeLeft <= warningThreshold)
-                    timerText.color = timerWarningColor;
+                    orderTimerText.color = timerWarningColor;
                 else
-                    timerText.color = timerNormalColor;
+                    orderTimerText.color = timerNormalColor;
                 
-                timerText.enabled = true;
+                orderTimerText.enabled = true;
             }
 
             // Update order text (second element)
@@ -165,7 +155,7 @@ public class OrderDisplay : MonoBehaviour
             // Hide everything if no order
             spriteRenderer.enabled = false;
             if (orderText != null) orderText.enabled = false;
-            if (timerText != null) timerText.enabled = false;
+            if (orderTimerText != null) orderTimerText.enabled = false;
             if (scoreText != null) scoreText.enabled = false;
         }
     }

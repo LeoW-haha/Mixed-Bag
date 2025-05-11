@@ -11,7 +11,7 @@ public class GameManagerJasper : MonoBehaviour
     [SerializeField] private GameObject[] starImages;
     
     [Header("Level Settings")]
-    [SerializeField] private float levelTimeLimit = 180f; // 3 minutes default
+    [SerializeField] public float levelTimeLimit = 180f; // 3 minutes default
     [SerializeField] private int scoreForOneStar = 1000;
     [SerializeField] private int scoreForTwoStars = 2000;
     [SerializeField] private int scoreForThreeStars = 3000;
@@ -43,6 +43,8 @@ public class GameManagerJasper : MonoBehaviour
 
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject endMenu;
+    [Header("End of Game Popup")]
+    public GameObject starsPopup;
     private bool pauseOn;
 
     private void Awake()
@@ -104,6 +106,20 @@ public class GameManagerJasper : MonoBehaviour
             levelTimer -= Time.deltaTime;
             UpdateTimerDisplay();
 
+            // Speed up music in the last minute
+            var musicManager = FindObjectOfType<GameMusicManager>();
+            if (musicManager != null && musicManager.musicSource != null)
+            {
+                if (levelTimer <= 60f)
+                {
+                    musicManager.musicSource.pitch = 1.2f; // Speed up
+                }
+                else
+                {
+                    musicManager.musicSource.pitch = 1.0f; // Normal speed
+                }
+            }
+
             if (levelTimer <= 0)
             {
                 levelTimer = 0;
@@ -143,7 +159,7 @@ public class GameManagerJasper : MonoBehaviour
         UpdateScoreDisplay();
         
         // Show feedback
-        string feedbackMessage = $"+{points} points";
+        string feedbackMessage = $"{(points > 0 ? "+" : "")}{points} points";
         if (currentCombo > 0)
         {
             feedbackMessage += $"\nCombo x{currentCombo + 1}!";
@@ -233,6 +249,14 @@ public class GameManagerJasper : MonoBehaviour
         endMenu.SetActive(true);
         Time.timeScale = 0.0f;
         ShowFeedback($"Level Complete!\nFinal Score: {currentScore}\nStars Earned: {currentStars}");
+        // Stop music and play times up sound
+        var musicManager = FindObjectOfType<GameMusicManager>();
+        if (musicManager != null)
+        {
+            musicManager.OnTimeUp();
+        }
+        if (starsPopup != null)
+            starsPopup.SetActive(true);
     }
 
     public void ResetLevel()
@@ -245,6 +269,8 @@ public class GameManagerJasper : MonoBehaviour
         UpdateScoreDisplay();
         UpdateTimerDisplay();
         UpdateStarDisplay();
+        if (starsPopup != null)
+            starsPopup.SetActive(false);
     }
 
     public int GetCurrentScore()
