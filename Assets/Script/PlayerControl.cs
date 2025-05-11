@@ -24,6 +24,9 @@ public class PlayerCtrl : MonoBehaviour
     public float RunCost;
     public float staminaDrain;
 
+    public bool hasPackage = false;
+
+
     void Start()
     {
         startMoveSpeed = moveSpeed;

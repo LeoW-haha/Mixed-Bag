@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Item : MonoBehaviour
 {
@@ -16,22 +16,35 @@ public class Item : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.CompareTag("Player"))
         {
-
-            int leftOverItems = inventoryManager.addItem(itemName, quantity, sprite);
-
-
-            if (leftOverItems <= 0)
+            PlayerCtrl player = collision.gameObject.GetComponent<PlayerCtrl>();
+            if (player != null)
             {
-                Destroy(gameObject);
-            }
-            else
-            {
-                quantity = leftOverItems;
+                if (player.hasPackage)
+                {
+                    Debug.Log("❌ Cannot pick up item while holding a package.");
+                    return;
+                }
+
+                if (inventoryManager != null)
+                {
+                    int leftOverItems = inventoryManager.addItem(itemName, quantity, sprite);
+
+                    if (leftOverItems <= 0)
+                    {
+                        Destroy(gameObject);
+                    }
+                    else
+                    {
+                        quantity = leftOverItems;
+                    }
+                }
+                else
+                {
+                    Debug.LogWarning("InventoryManager not found.");
+                }
             }
         }
     }
-
 }

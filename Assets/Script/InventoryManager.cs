@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
@@ -12,6 +13,13 @@ public class InventoryManager : MonoBehaviour
     public PlayerCtrl playerControl;
 
     private List<ItemSlot> selectedItems = new List<ItemSlot>();
+    public GameObject packagePrefab;
+    public Sprite redPackageSprite;
+    public Sprite greenPackageSprite;
+    public Sprite blackPackageSprite;
+    public float packagingDelay = 4f;
+    public GameObject currentPackage;
+
 
 
     void Start()
@@ -171,20 +179,45 @@ public class InventoryManager : MonoBehaviour
     {
         if (selectedItems.Count == 2)
         {
-            string usedColor = playerControl.currentPackagingColour;
-            Debug.Log($"✅ Packaging started with: {selectedItems[0].itemName} and {selectedItems[1].itemName} using paint: {usedColor}");
-
-
-            // Clear both selected item slots
-            foreach (var slot in selectedItems)
-            {
-                slot.EmptySlot(); // Make sure this clears the visual and data
-            }
-
-            // Reset selection
-            selectedItems.Clear();
+            Debug.Log($"✅ Packaging started with: {selectedItems[0].itemName} and {selectedItems[1].itemName} using paint: {playerControl.currentPackagingColour}");
+            StartCoroutine(SpawnPackageAfterDelay());
         }
     }
 
+    private IEnumerator SpawnPackageAfterDelay()
+    {
+        Debug.Log($"✅ Packaging started with: {selectedItems[0].itemName} and {selectedItems[1].itemName} using paint: {playerControl.currentPackagingColour}");
+
+        yield return new WaitForSeconds(packagingDelay);
+
+        foreach (var slot in selectedItems)
+        {
+            slot.EmptySlot();
+        }
+        selectedItems.Clear();
+
+        GameObject package = Instantiate(packagePrefab, playerControl.transform.position, Quaternion.identity);
+        SpriteRenderer sr = package.GetComponent<SpriteRenderer>();
+
+        if (sr != null)
+        {
+            switch (playerControl.currentPackagingColour)
+            {
+                case "Red": sr.sprite = redPackageSprite; break;
+                case "Green": sr.sprite = greenPackageSprite; break;
+                case "Black": sr.sprite = blackPackageSprite; break;
+                default: Debug.LogWarning("❌ Unknown paint color during packaging."); break;
+            }
+        }
+
+        var pf = package.GetComponent<PackageFollower>();
+        if (pf != null)
+        {
+            pf.target = playerControl.transform;
+        }
+
+        currentPackage = package;
+        playerControl.hasPackage = true;
+    }
 
 }

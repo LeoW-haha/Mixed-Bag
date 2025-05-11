@@ -3,8 +3,8 @@ guid: 306b49daa95588141b46d8066ff345f9
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3942799119933902309
-    second: ChatGPT_Image_May_11__2025__09_57_32_PM-removebg-preview (1)_0
+      213: -7471015802753266240
+    second: BlackPackage_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 270
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 0
   alphaUsage: 1
@@ -165,7 +165,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ChatGPT_Image_May_11__2025__09_57_32_PM-removebg-preview (1)_0
+      name: BlackPackage_0
       rect:
         serializedVersion: 2
         x: 74
@@ -173,15 +173,15 @@ TextureImporter:
         width: 352
         height: 397
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b12fd9b171d5849c0800000000000000
-      internalID: -3942799119933902309
+      spriteID: 0cdcf85e5be915890800000000000000
+      internalID: -7471015802753266240
       vertices: []
       indices: 
       edges: []
@@ -190,7 +190,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 2fcfba6ea1418c949aff82bf588d4307
+    spriteID: 0f40ac9008458514fa3c07e82704f688
     internalID: 0
     vertices: []
     indices: 
@@ -199,7 +199,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      BlackPackage_0: -7471015802753266240
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
