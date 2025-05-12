@@ -127,21 +127,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4174915222112045146, guid: 01ae7f82b7c949b49aef92fd36611366, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4247167279345669665, guid: 01ae7f82b7c949b49aef92fd36611366, type: 3}
-      propertyPath: m_IsActive
-      value: 0
+    - target: {fileID: 39376712731383645, guid: 01ae7f82b7c949b49aef92fd36611366, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: WaterSceneJasper
       objectReference: {fileID: 0}
     - target: {fileID: 4909222226877024229, guid: 01ae7f82b7c949b49aef92fd36611366, type: 3}
       propertyPath: m_Name
       value: CanvasJasper
-      objectReference: {fileID: 0}
-    - target: {fileID: 7438733176102569992, guid: 01ae7f82b7c949b49aef92fd36611366, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8216218605908316757, guid: 01ae7f82b7c949b49aef92fd36611366, type: 3}
       propertyPath: m_Pivot.x
@@ -1123,6 +1115,17 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &707771154 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4545983233324080173, guid: 01ae7f82b7c949b49aef92fd36611366, type: 3}
+  m_PrefabInstance: {fileID: 62435172}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &738180474
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1598,15 +1601,16 @@ MonoBehaviour:
   timerText: {fileID: 1510812768}
   feedbackText: {fileID: 1297045834}
   starImages: []
-  levelTimeLimit: 180
+  levelTimeLimit: 1
   scoreForOneStar: 1000
-  scoreForTwoStars: 2000
-  scoreForThreeStars: 3000
+  scoreForTwoStars: 1500
+  scoreForThreeStars: 2000
   feedbackDisplayTime: 2
   comboBonus: 50
   comboTimeWindow: 5
   pauseMenu: {fileID: 62435174}
   starsPopup: {fileID: 62435173}
+  starText: {fileID: 707771154}
 --- !u!4 &935436249
 Transform:
   m_ObjectHideFlags: 0

@@ -1,8 +1,17 @@
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
 
 public class ObjectivesPopupManager : MonoBehaviour
 {
     public GameObject objectivesPopup;
+    private GameManagerJasper gameManager;
+    [SerializeField] private GameObject[] starImages;
+    [SerializeField] private TextMeshProUGUI starText;
+
+    void Start() {
+        gameManager = GameManagerJasper.Instance;
+    }
 
     void Update()
     {
@@ -11,6 +20,9 @@ public class ObjectivesPopupManager : MonoBehaviour
         {
             if (objectivesPopup != null)
                 objectivesPopup.SetActive(!objectivesPopup.activeSelf);
+                if (starText != null) {
+                    starText.text = gameManager.formatStarText();
+                }
         }
     }
 } 

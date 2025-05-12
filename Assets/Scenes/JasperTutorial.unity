@@ -1231,15 +1231,15 @@ MonoBehaviour:
   feedbackText: {fileID: 171764664}
   starImages: []
   levelTimeLimit: 180
-  scoreForOneStar: 1000
-  scoreForTwoStars: 2000
-  scoreForThreeStars: 3000
+  scoreForOneStar: 550
+  scoreForTwoStars: 1000
+  scoreForThreeStars: 1500
   feedbackDisplayTime: 2
   comboBonus: 50
   comboTimeWindow: 5
   pauseMenu: {fileID: 1173356631}
-  endMenu: {fileID: 3257926663727609952}
   starsPopup: {fileID: 779100140}
+  starText: {fileID: 3257926663727609952}
 --- !u!4 &935436249
 Transform:
   m_ObjectHideFlags: 0
@@ -1459,6 +1459,7 @@ MonoBehaviour:
     timeLimit: 30
     itemSprite: {fileID: 21300000, guid: 6fc2ddd35b0904666b4cc49daf8a1524, type: 3}
   defaultTimeLimit: 30
+  healAmount: 34
   wrongDeliveryPenalty: 100
 --- !u!4 &1417371822
 Transform:
@@ -1677,6 +1678,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 39376712731383645, guid: 01ae7f82b7c949b49aef92fd36611366, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: Jasper
+      objectReference: {fileID: 0}
     - target: {fileID: 4909222226877024229, guid: 01ae7f82b7c949b49aef92fd36611366, type: 3}
       propertyPath: m_Name
       value: Canvas
@@ -1766,11 +1771,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01ae7f82b7c949b49aef92fd36611366, type: 3}
---- !u!1 &3257926663727609952 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7438733176102569992, guid: 01ae7f82b7c949b49aef92fd36611366, type: 3}
+--- !u!114 &3257926663727609952 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4545983233324080173, guid: 01ae7f82b7c949b49aef92fd36611366, type: 3}
   m_PrefabInstance: {fileID: 3257926663727609951}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -44,6 +44,7 @@ public class GameManagerJasper : MonoBehaviour
     [SerializeField] private GameObject pauseMenu;
     [Header("End of Game Popup")]
     public GameObject starsPopup;
+    [SerializeField] private TextMeshProUGUI starText;
     private bool pauseOn;
 
     private void Awake()
@@ -260,6 +261,8 @@ public class GameManagerJasper : MonoBehaviour
         }
         if (starsPopup != null)
             starsPopup.SetActive(true);
+            starText.text = formatStarText();
+
     }
 
     public void ResetLevel()
@@ -288,5 +291,9 @@ public class GameManagerJasper : MonoBehaviour
 
     public float getCurrentTime() {
         return levelTimer;
+    }
+
+    public string formatStarText() {
+        return scoreForOneStar + "     " + scoreForTwoStars + "     " + scoreForThreeStars;
     }
 } 
