@@ -285,4 +285,8 @@ public class GameManagerJasper : MonoBehaviour
     {
         return currentStars;
     }
+
+    public float getCurrentTime() {
+        return levelTimer;
+    }
 } 

@@ -25,10 +25,11 @@ public class Enemy : MonoBehaviour
     private bool isRainbowMode = false;
     private float originalMoveSpeed;
     private Coroutine rainbowCoroutine;
-    private float gameDuration = 180f; // 3 minutes in seconds
+    private GameManagerJasper gameManager;
 
     private void Start()
     {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManagerJasper>(); 
         spriteRenderer = GetComponent<SpriteRenderer>();
         if (spriteRenderer == null)
         {
@@ -55,13 +56,14 @@ public class Enemy : MonoBehaviour
         }
 
         // Rainbow mode logic
-        float timeLeft = gameDuration - Time.time;
-        if (!isRainbowMode && timeLeft <= 60f) // Last 1 minute
-        {
-            isRainbowMode = true;
-            moveSpeed = originalMoveSpeed * 2f;
-            if (rainbowCoroutine == null)
-                rainbowCoroutine = StartCoroutine(RainbowFlash());
+        if (gameManager != null) {
+            if (!isRainbowMode && gameManager.getCurrentTime() <= 60f) // Last 1 minute
+            {
+                isRainbowMode = true;
+                moveSpeed = originalMoveSpeed * 2f;
+                if (rainbowCoroutine == null)
+                    rainbowCoroutine = StartCoroutine(RainbowFlash());
+            }
         }
 
         Vector3 targetPosition = waypoints[currentWaypointIndex].position;
