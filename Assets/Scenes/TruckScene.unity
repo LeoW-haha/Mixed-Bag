@@ -1601,7 +1601,7 @@ MonoBehaviour:
   timerText: {fileID: 1510812768}
   feedbackText: {fileID: 1297045834}
   starImages: []
-  levelTimeLimit: 1
+  levelTimeLimit: 180
   scoreForOneStar: 1000
   scoreForTwoStars: 1500
   scoreForThreeStars: 2000

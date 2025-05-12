@@ -1678,10 +1678,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 39376712731383645, guid: 01ae7f82b7c949b49aef92fd36611366, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: Jasper
-      objectReference: {fileID: 0}
+    - target: {fileID: 1533850370233554873, guid: 01ae7f82b7c949b49aef92fd36611366, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 935436248}
     - target: {fileID: 4909222226877024229, guid: 01ae7f82b7c949b49aef92fd36611366, type: 3}
       propertyPath: m_Name
       value: Canvas
