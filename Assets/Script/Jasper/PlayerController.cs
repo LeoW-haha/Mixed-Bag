@@ -258,6 +258,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void Heal(float amount)
+    {
+        if (isDead) return;
+        currentHealth += amount;      
+        if (currentHealth >= maxHealth) {
+            currentHealth = maxHealth;
+        }  
+    }
+
     private IEnumerator FlashSprite()
     {
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();

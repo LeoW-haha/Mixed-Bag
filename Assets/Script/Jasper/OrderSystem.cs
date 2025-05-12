@@ -16,18 +16,21 @@ public class OrderSystem : MonoBehaviour
     [Header("Order Settings")]
     [SerializeField] private List<OrderItem> possibleOrders;
     [SerializeField] private float defaultTimeLimit = 30f;
+    [SerializeField] private float healAmount = 34f;
     [SerializeField] private int wrongDeliveryPenalty = 100;
 
     private OrderItem currentOrder;
     private float currentTime;
     private bool isOrderActive;
     private GameManagerJasper gameManager;
+    private PlayerController playerController;
 
     private void Start()
     {
         Debug.Log("OrderSystem: Starting...");
         
         gameManager = GameManagerJasper.Instance;
+        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
         if (gameManager == null)
         {
             Debug.LogError("GameManager not found!");
@@ -100,6 +103,11 @@ public class OrderSystem : MonoBehaviour
             // Correct delivery
             gameManager.AddPoints(currentOrder.pointsReward, true, currentOrder.itemName);
             Debug.Log($"OrderSystem: Correct delivery!");
+
+            //Update the players health
+            if (playerController != null) {
+                playerController.Heal(healAmount);
+            } 
             
             // Generate new order
             GenerateNewOrder();
