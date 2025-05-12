@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7752697589001775720}
   - component: {fileID: 437705752306834033}
   m_Layer: 0
-  m_Name: Book
+  m_Name: Pipe FIxer
   m_TagString: item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 68924405
   m_SortingLayer: 4
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: e6453385c85b64067aeb19642929b377, type: 3}
+  m_Sprite: {fileID: -3829704427384931014, guid: 92e2dfa43a7be824ca3ea71dd8c0d6d5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -137,8 +137,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d72758f7df0c94915b60de52b07085c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: Book
-  pointValue: 100
+  itemName: Pipe Fixer
+  pointValue: 0
   pickupSound: {fileID: 8300000, guid: 5baf97f87012f48b9a5cff135b889fbb, type: 3}
   dropSound: {fileID: 8300000, guid: afb26602c123b485dafd7e5faae14bb1, type: 3}
   carryHeight: 0.5
@@ -146,4 +146,4 @@ MonoBehaviour:
   itemSprite: {fileID: 0}
   canBePickedUp: 1
   pickupRadius: 0.4
-  carrySpeedMultiplier: 1
+  carrySpeedMultiplier: 0.75

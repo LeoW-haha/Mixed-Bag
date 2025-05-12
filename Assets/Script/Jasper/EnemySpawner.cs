@@ -16,6 +16,10 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float minSpawnInterval = 5f;
     [SerializeField] private float maxSpawnInterval = 10f;
     [SerializeField] private int maxEnemiesAtOnce = 3;
+    [SerializeField] private bool spawnImmediately = true;
+    [SerializeField] private float enemySpawnTimer;
+    private bool spawned = false;
+    [SerializeField] private GameObject doorSprite;
     
     [Header("Path Settings")]
     [SerializeField] private Transform[] pathWaypoints;
@@ -38,7 +42,25 @@ public class EnemySpawner : MonoBehaviour
             return;
         }
 
-        StartCoroutine(SpawnRoutine());
+        if (spawnImmediately) {
+            StartCoroutine(SpawnRoutine());
+            spawned = true;
+            if (doorSprite != null) {
+                doorSprite.SetActive(false);
+            }
+        }        
+    }
+    private void Update() {
+        if (!spawned) {
+            enemySpawnTimer -= Time.deltaTime;
+            if (enemySpawnTimer <= 0) {
+                StartCoroutine(SpawnRoutine());
+                spawned = true;
+                if (doorSprite != null) {
+                    doorSprite.SetActive(false);
+                }
+            }
+        }
     }
 
     private IEnumerator SpawnRoutine()

@@ -48,9 +48,9 @@ public class Enemy : MonoBehaviour
     private void Update()
     {
         if (!isMoving || waypoints == null || waypoints.Length == 0) {
-            if (!isMoving) Debug.Log("[Enemy] Not moving (isMoving is false)");
-            if (waypoints == null) Debug.Log("[Enemy] Not moving (waypoints is null)");
-            if (waypoints != null && waypoints.Length == 0) Debug.Log("[Enemy] Not moving (waypoints is empty)");
+            if (!isMoving) //Debug.Log("[Enemy] Not moving (isMoving is false)");
+            if (waypoints == null) //Debug.Log("[Enemy] Not moving (waypoints is null)");
+            if (waypoints != null && waypoints.Length == 0) //Debug.Log("[Enemy] Not moving (waypoints is empty)");
             return;
         }
 
@@ -71,7 +71,7 @@ public class Enemy : MonoBehaviour
         // Animation logic
         UpdateAnimation();
 
-        Debug.Log($"[Enemy] Moving towards waypoint {currentWaypointIndex} at {targetPosition}, current position: {transform.position}");
+        //Debug.Log($"[Enemy] Moving towards waypoint {currentWaypointIndex} at {targetPosition}, current position: {transform.position}");
 
         // Flip sprite based on movement direction
         if (spriteRenderer != null && moveDirection.x != 0)
@@ -91,7 +91,7 @@ public class Enemy : MonoBehaviour
             else
             {
                 currentWaypointIndex++;
-                Debug.Log($"[Enemy] Reached waypoint {currentWaypointIndex}, moving to next.");
+                //Debug.Log($"[Enemy] Reached waypoint {currentWaypointIndex}, moving to next.");
             }
         }
     }
@@ -150,11 +150,11 @@ public class Enemy : MonoBehaviour
             isMoving = true;
             currentWaypointIndex = 0;
             originalMoveSpeed = moveSpeed;
-            Debug.Log($"[Enemy] Initialized with {waypoints.Length} waypoints. Starting at {waypoints[0].position}");
+            //Debug.Log($"[Enemy] Initialized with {waypoints.Length} waypoints. Starting at {waypoints[0].position}");
         }
         else
         {
-            Debug.LogWarning("[Enemy] Initialize called with null or empty waypoints!");
+            //Debug.LogWarning("[Enemy] Initialize called with null or empty waypoints!");
         }
     }
 

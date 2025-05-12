@@ -124,7 +124,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.1
+  m_Radius: 0.3
 --- !u!114 &437705752306834033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,4 +145,5 @@ MonoBehaviour:
   startDelay: 0
   itemSprite: {fileID: 0}
   canBePickedUp: 1
-  pickupRadius: 0.3
+  pickupRadius: 0.4
+  carrySpeedMultiplier: 1
