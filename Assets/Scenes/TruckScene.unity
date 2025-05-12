@@ -127,6 +127,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4174915222112045146, guid: 01ae7f82b7c949b49aef92fd36611366, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4247167279345669665, guid: 01ae7f82b7c949b49aef92fd36611366, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4909222226877024229, guid: 01ae7f82b7c949b49aef92fd36611366, type: 3}
       propertyPath: m_Name
       value: CanvasJasper
@@ -1115,11 +1123,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!1 &713279750 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7438733176102569992, guid: 01ae7f82b7c949b49aef92fd36611366, type: 3}
-  m_PrefabInstance: {fileID: 62435172}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &738180474
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1603,7 +1606,6 @@ MonoBehaviour:
   comboBonus: 50
   comboTimeWindow: 5
   pauseMenu: {fileID: 62435174}
-  endMenu: {fileID: 713279750}
   starsPopup: {fileID: 62435173}
 --- !u!4 &935436249
 Transform:
@@ -2148,6 +2150,7 @@ MonoBehaviour:
     timeLimit: 30
     itemSprite: {fileID: 21300000, guid: 6fc2ddd35b0904666b4cc49daf8a1524, type: 3}
   defaultTimeLimit: 30
+  healAmount: 34
   wrongDeliveryPenalty: 100
 --- !u!4 &1417371822
 Transform:

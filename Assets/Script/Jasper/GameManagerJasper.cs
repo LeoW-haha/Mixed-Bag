@@ -42,7 +42,6 @@ public class GameManagerJasper : MonoBehaviour
     private int currentStars = 0;
 
     [SerializeField] private GameObject pauseMenu;
-    [SerializeField] private GameObject endMenu;
     [Header("End of Game Popup")]
     public GameObject starsPopup;
     private bool pauseOn;
@@ -62,11 +61,13 @@ public class GameManagerJasper : MonoBehaviour
         ResetLevel();
         StartLevel();
         pauseMenu.SetActive(false);
-        endMenu.SetActive(false);
         Time.timeScale = 1.0f;
         pauseOn = false;
         if (pauseMenu != null) {
             pauseMenu.SetActive(false);
+        }
+        if (starsPopup != null) {
+            starsPopup.SetActive(false);
         }
         if (feedbackText != null)
         {
@@ -249,7 +250,6 @@ public class GameManagerJasper : MonoBehaviour
     public void EndLevel()
     {
         isLevelActive = false;
-        endMenu.SetActive(true);
         Time.timeScale = 0.0f;
         ShowFeedback($"Level Complete!\nFinal Score: {currentScore}\nStars Earned: {currentStars}");
         // Stop music and play times up sound
