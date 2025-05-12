@@ -65,6 +65,9 @@ public class GameManagerJasper : MonoBehaviour
         endMenu.SetActive(false);
         Time.timeScale = 1.0f;
         pauseOn = false;
+        if (pauseMenu != null) {
+            pauseMenu.SetActive(false);
+        }
         if (feedbackText != null)
         {
             feedbackText.gameObject.SetActive(false);

@@ -231,6 +231,8 @@ MonoBehaviour:
   - {fileID: 139235749}
   - {fileID: 1096443731}
   waypointReachDistance: 0.1
+  pipeBurst: 0
+  orderItemWeight: 0
 --- !u!4 &362214648
 Transform:
   m_ObjectHideFlags: 0
@@ -703,6 +705,9 @@ MonoBehaviour:
   minSpawnInterval: 5
   maxSpawnInterval: 7
   maxEnemiesAtOnce: 25
+  spawnImmediately: 1
+  enemySpawnTimer: 0
+  doorSprite: {fileID: 0}
   pathWaypoints:
   - {fileID: 1520659055}
   - {fileID: 1590677170}
@@ -1250,8 +1255,8 @@ MonoBehaviour:
   comboBonus: 50
   comboTimeWindow: 5
   pauseMenu: {fileID: 1173356631}
-  endMenu: {fileID: 1131815143}
-  starsPopup: {fileID: 0}
+  endMenu: {fileID: 3257926663727609952}
+  starsPopup: {fileID: 3257926663727609953}
 --- !u!4 &935436249
 Transform:
   m_ObjectHideFlags: 0
@@ -1309,6 +1314,8 @@ MonoBehaviour:
   - {fileID: 1239186016}
   - {fileID: 1843014709}
   waypointReachDistance: 0.1
+  pipeBurst: 0
+  orderItemWeight: 0
 --- !u!4 &1041734610
 Transform:
   m_ObjectHideFlags: 0
@@ -1453,11 +1460,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 362214648}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1131815143 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5833851507106536138, guid: 01ae7f82b7c949b49aef92fd36611366, type: 3}
-  m_PrefabInstance: {fileID: 3257926663727609951}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1173356631 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6648382668448508215, guid: 01ae7f82b7c949b49aef92fd36611366, type: 3}
@@ -2380,6 +2382,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -655
       objectReference: {fileID: 0}
+    - target: {fileID: 6648382668448508215, guid: 01ae7f82b7c949b49aef92fd36611366, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8216218605908316757, guid: 01ae7f82b7c949b49aef92fd36611366, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -2476,6 +2482,16 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01ae7f82b7c949b49aef92fd36611366, type: 3}
+--- !u!1 &3257926663727609952 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7438733176102569992, guid: 01ae7f82b7c949b49aef92fd36611366, type: 3}
+  m_PrefabInstance: {fileID: 3257926663727609951}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3257926663727609953 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4247167279345669665, guid: 01ae7f82b7c949b49aef92fd36611366, type: 3}
+  m_PrefabInstance: {fileID: 3257926663727609951}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3631884561590128320
 PrefabInstance:
   m_ObjectHideFlags: 0

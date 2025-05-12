@@ -316,6 +316,8 @@ MonoBehaviour:
   - {fileID: 823353740}
   - {fileID: 374626589}
   waypointReachDistance: 0.1
+  pipeBurst: 0
+  orderItemWeight: 0
 --- !u!4 &362214648
 Transform:
   m_ObjectHideFlags: 0
@@ -1236,7 +1238,7 @@ MonoBehaviour:
   comboBonus: 50
   comboTimeWindow: 5
   pauseMenu: {fileID: 1173356631}
-  endMenu: {fileID: 1131815143}
+  endMenu: {fileID: 3257926663727609952}
   starsPopup: {fileID: 779100140}
 --- !u!4 &935436249
 Transform:
@@ -1352,6 +1354,8 @@ MonoBehaviour:
   - {fileID: 552661528}
   - {fileID: 775214779}
   waypointReachDistance: 0.1
+  pipeBurst: 0
+  orderItemWeight: 0
 --- !u!4 &1041734610
 Transform:
   m_ObjectHideFlags: 0
@@ -1372,11 +1376,6 @@ Transform:
   - {fileID: 775214779}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1131815143 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5833851507106536138, guid: 01ae7f82b7c949b49aef92fd36611366, type: 3}
-  m_PrefabInstance: {fileID: 3257926663727609951}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1173356631 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6648382668448508215, guid: 01ae7f82b7c949b49aef92fd36611366, type: 3}
@@ -1767,6 +1766,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01ae7f82b7c949b49aef92fd36611366, type: 3}
+--- !u!1 &3257926663727609952 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7438733176102569992, guid: 01ae7f82b7c949b49aef92fd36611366, type: 3}
+  m_PrefabInstance: {fileID: 3257926663727609951}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

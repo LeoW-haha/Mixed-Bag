@@ -542,11 +542,6 @@ Canvas:
   m_SortingLayerID: 877047911
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!1 &226091587 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6648382668448508215, guid: 01ae7f82b7c949b49aef92fd36611366, type: 3}
-  m_PrefabInstance: {fileID: 680633723}
-  m_PrefabAsset: {fileID: 0}
 --- !u!198 &250521139 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 1934872521650470558, guid: 96a885a1687aee74a9a3e07a03b96313, type: 3}
@@ -1247,29 +1242,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 404315556766041122, guid: 01ae7f82b7c949b49aef92fd36611366, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -716.55
-      objectReference: {fileID: 0}
-    - target: {fileID: 4174915222112045146, guid: 01ae7f82b7c949b49aef92fd36611366, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
+    - target: {fileID: 1533850370233554873, guid: 01ae7f82b7c949b49aef92fd36611366, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 935436248}
     - target: {fileID: 4909222226877024229, guid: 01ae7f82b7c949b49aef92fd36611366, type: 3}
       propertyPath: m_Name
       value: CanvasJasper
-      objectReference: {fileID: 0}
-    - target: {fileID: 5987978132549384051, guid: 01ae7f82b7c949b49aef92fd36611366, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 655
-      objectReference: {fileID: 0}
-    - target: {fileID: 5987978132549384051, guid: 01ae7f82b7c949b49aef92fd36611366, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -655
-      objectReference: {fileID: 0}
-    - target: {fileID: 7958442268075485014, guid: 01ae7f82b7c949b49aef92fd36611366, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -150
       objectReference: {fileID: 0}
     - target: {fileID: 8216218605908316757, guid: 01ae7f82b7c949b49aef92fd36611366, type: 3}
       propertyPath: m_Pivot.x
@@ -1351,18 +1330,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8217506791553407898, guid: 01ae7f82b7c949b49aef92fd36611366, type: 3}
-      propertyPath: m_Maskable
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01ae7f82b7c949b49aef92fd36611366, type: 3}
---- !u!1 &684284057 stripped
+--- !u!1 &680633724 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 5833851507106536138, guid: 01ae7f82b7c949b49aef92fd36611366, type: 3}
+  m_CorrespondingSourceObject: {fileID: 7438733176102569992, guid: 01ae7f82b7c949b49aef92fd36611366, type: 3}
   m_PrefabInstance: {fileID: 680633723}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &687372485
@@ -2017,9 +1992,14 @@ MonoBehaviour:
   leakChance: 5
   drainRate: 2
   WaterBar: {fileID: 460550703}
-  WaterSurface: {fileID: 954189102}
+  WaterSurface: {fileID: 934074875}
   WaterSurfaceCollider: {fileID: 72277209}
   complete: 0
+--- !u!1 &934074875 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -3735982950467124265, guid: ce5782eaba07b964698bc1efc5623536, type: 3}
+  m_PrefabInstance: {fileID: 950888941}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &935436247
 GameObject:
   m_ObjectHideFlags: 0
@@ -2060,8 +2040,8 @@ MonoBehaviour:
   feedbackDisplayTime: 2
   comboBonus: 50
   comboTimeWindow: 5
-  pauseMenu: {fileID: 226091587}
-  endMenu: {fileID: 684284057}
+  pauseMenu: {fileID: 1123132970}
+  endMenu: {fileID: 680633724}
   starsPopup: {fileID: 129187739}
 --- !u!4 &935436249
 Transform:
@@ -2657,6 +2637,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1041734610}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1123132970 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6648382668448508215, guid: 01ae7f82b7c949b49aef92fd36611366, type: 3}
+  m_PrefabInstance: {fileID: 680633723}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1136987847
 GameObject:
   m_ObjectHideFlags: 0
