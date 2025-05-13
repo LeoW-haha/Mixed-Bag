@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using System.Collections;
 
 public class Order
 {
@@ -88,6 +89,14 @@ public class GameManager : MonoBehaviour
     public Transform tickSlotContainer; // Parent object that holds TickSlots
     private int currentTickSlotIndex = 0;
 
+    public float spawnInterval = 5f;  // Default value
+    public int itemsPerSpawn = 3;
+
+    [Header("Order UI Containers")]
+    public GameObject orderBox1; // Top UI box
+    public GameObject orderBox2; // Second UI box
+
+
     private void CreateSecondOrder()
     {
         if (orders.Length > 1 && orders[1] == null)
@@ -108,16 +117,16 @@ public class GameManager : MonoBehaviour
     public void VerifyDelivery(DeliveryPackage delivered)
     {
         bool matched = false;
-        int matchedOrderIndex = -1;
 
         for (int i = 0; i < orders.Length; i++)
         {
             if (orders[i] == null) continue;
 
+            string orderColor = orders[i].requiredPackagingColour;
             var requiredItems = orders[i].orderItems;
+
             string required1 = requiredItems[0].GetComponent<Item>().itemName;
             string required2 = requiredItems[1].GetComponent<Item>().itemName;
-            string orderColor = orders[i].requiredPackagingColour;
 
             bool colorMatch = delivered.paintColor == orderColor;
             bool item1Match = delivered.item1 == required1 || delivered.item1 == required2;
@@ -129,12 +138,24 @@ public class GameManager : MonoBehaviour
             if (colorMatch && itemsMatch)
             {
                 matched = true;
-                matchedOrderIndex = i;
+
+                // ✅ Disable correct order UI box
+                if (i == 0 && orderBox1 != null)
+                {
+                    orderBox1.SetActive(false);
+                    StartCoroutine(ReenableOrderBox(orderBox1, i));
+                }
+                else if (i == 1 && orderBox2 != null)
+                {
+                    orderBox2.SetActive(false);
+                    StartCoroutine(ReenableOrderBox(orderBox2, i));
+                }
+
                 break;
             }
         }
 
-        // Floating tick/cross
+        // ✅ Floating feedback
         GameObject feedback = new GameObject("DeliveryFeedback");
         SpriteRenderer sr = feedback.AddComponent<SpriteRenderer>();
         sr.sprite = matched ? tickSprite : xSprite;
@@ -142,7 +163,7 @@ public class GameManager : MonoBehaviour
         feedback.transform.position = deliveryZone1.position + Vector3.up * 2;
         Destroy(feedback, 2f);
 
-        // Record tick/cross in the tickSlotContainer
+        // ✅ Tick Slot
         if (tickSlotContainer != null && currentTickSlotIndex < tickSlotContainer.childCount)
         {
             Transform slot = tickSlotContainer.GetChild(currentTickSlotIndex);
@@ -155,6 +176,25 @@ public class GameManager : MonoBehaviour
             currentTickSlotIndex++;
         }
     }
+
+    private IEnumerator ReenableOrderBox(GameObject box, int orderIndex)
+    {
+        float waitTime = orderTimer.timers[orderIndex];
+
+        // Wait until this order’s timer runs out
+        while (waitTime > 0)
+        {
+            waitTime -= Time.deltaTime;
+            yield return null;
+        }
+
+        if (box != null)
+        {
+            box.SetActive(true);
+        }
+    }
+
+
 
 
 
@@ -297,22 +337,31 @@ public class GameManager : MonoBehaviour
 
         Debug.Log($"🎲 Order {orderIndex} randomized: {order.orderItems[0]?.GetComponent<Item>()?.itemName}, {order.orderItems[1]?.GetComponent<Item>()?.itemName}, {order.requiredPackagingColour}");
 
-        SpawnConveyorItem(order.orderItems[0], spawnLocation1.position, wayPoint1, wayPoint2);
-        SpawnConveyorItem(order.orderItems[1], spawnLocation2.position, wayPoint3, wayPoint4);
+        SpawnConveyorItemMultiple(order.orderItems[0], spawnLocation1.position, wayPoint1, wayPoint2);
+        SpawnConveyorItemMultiple(order.orderItems[1], spawnLocation2.position, wayPoint3, wayPoint4);
+
     }
 
-
-
-
-    private void SpawnConveyorItem(GameObject prefab, Vector3 spawnPos, Transform wp1, Transform wp2)
+    private void SpawnConveyorItemMultiple(GameObject prefab, Vector3 spawnPos, Transform wp1, Transform wp2)
     {
-        GameObject item = Instantiate(prefab, spawnPos, Quaternion.identity);
-        ConveyorMover mover = item.GetComponent<ConveyorMover>();
-        if (mover != null)
+        StartCoroutine(SpawnItemsWithDelay(prefab, spawnPos, wp1, wp2, itemsPerSpawn, spawnInterval));
+    }
+
+    private IEnumerator SpawnItemsWithDelay(GameObject prefab, Vector3 spawnPos, Transform wp1, Transform wp2, int quantity, float interval)
+    {
+        for (int i = 0; i < quantity; i++)
         {
-            mover.SetPath(wp1, wp2);
+            GameObject item = Instantiate(prefab, spawnPos, Quaternion.identity);
+            ConveyorMover mover = item.GetComponent<ConveyorMover>();
+            if (mover != null)
+            {
+                mover.SetPath(wp1, wp2);
+            }
+
+            yield return new WaitForSeconds(interval);
         }
     }
+
 
     public void randomizeOrders()
     {

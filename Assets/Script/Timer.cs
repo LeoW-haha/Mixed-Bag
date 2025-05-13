@@ -18,45 +18,47 @@ public class Timer : MonoBehaviour
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         notifier = GameObject.Find("NotificationHolder").GetComponent<Notifier>();
-
-        // 🟢 Force shift timer to 2 minutes if this is the shift timer
-        if (isShift)
-            timers[0] = 120f;
-
         if (timers.Length > 0)
         {
             remainingTime = timers[0];
         }
-
         timerIndex = 0;
     }
 
-
-    public void addTimer(int index, float time) {
+    public void addTimer(int index, float time)
+    {
         bool firstAdd = false;
-        if (timers[0] == 0) {
+        if (timers[0] == 0)
+        {
             firstAdd = true;
         }
-        if (timers.Length >= index+1) {
+        if (timers.Length >= index + 1)
+        {
             timers[index] = time;
-            if (firstAdd) {
+            if (firstAdd)
+            {
                 this.remainingTime = timers[0];
             }
         }
     }
 
-    public void switchSelectedTimeUp() {
-        if (this.timers[this.timerIndex] != -1) {
+    public void switchSelectedTimeUp()
+    {
+        if (this.timers[this.timerIndex] != -1)
+        {
             this.timers[this.timerIndex] = this.remainingTime;
         }
         this.timerIndex += 1;
-        if (this.timerIndex >= this.timers.Length) {
+        if (this.timerIndex >= this.timers.Length)
+        {
             this.timerIndex = 0;
         }
-        if ( this.timerIndex < 0) {
+        if (this.timerIndex < 0)
+        {
             this.timerIndex = this.timers.Length - 1;
         }
-        if (this.timers[timerIndex] == -1) {
+        if (this.timers[timerIndex] == -1)
+        {
             switchSelectedTimeUp();
             return;
         }
@@ -64,18 +66,23 @@ public class Timer : MonoBehaviour
         updateTimerText();
     }
 
-    public void switchSelectedTimeDown() {
-        if (this.timers[this.timerIndex] != -1) {
+    public void switchSelectedTimeDown()
+    {
+        if (this.timers[this.timerIndex] != -1)
+        {
             this.timers[this.timerIndex] = this.remainingTime;
         }
         this.timerIndex -= 1;
-        if (this.timerIndex >= this.timers.Length) {
+        if (this.timerIndex >= this.timers.Length)
+        {
             this.timerIndex = 0;
         }
-        if ( this.timerIndex < 0) {
+        if (this.timerIndex < 0)
+        {
             this.timerIndex = this.timers.Length - 1;
         }
-        if (this.timers[timerIndex] == -1) {
+        if (this.timers[timerIndex] == -1)
+        {
             switchSelectedTimeDown();
             return;
         }
@@ -88,62 +95,83 @@ public class Timer : MonoBehaviour
     void Update()
     {
         updateAll();
-        if (timerText != null) {
+        if (timerText != null)
+        {
             updateTimerText();
         }
         this.remainingTime = timers[timerIndex];
     }
-    public float updateTimer(float remainingTime, int i) {
-        if (remainingTime > 0) {
+    public float updateTimer(float remainingTime, int i)
+    {
+        if (remainingTime > 0)
+        {
             remainingTime -= Time.deltaTime;
-            if (remainingTime <= 10.0f && !isOrderCome && !isShift && !past10) {
-                notifier.Notify("Warning: Order " + (i+1) + " expires in 10 seconds");
+            if (remainingTime <= 10.0f && !isOrderCome && !isShift && !past10)
+            {
+                notifier.Notify("Warning: Order " + (i + 1) + " expires in 10 seconds");
                 past10 = true;
             }
-            if (remainingTime <= 5.0f && !isOrderCome && !isShift && !past5) {
-                notifier.Notify("Warning: Order " + (i+1) + " expires in 5 seconds");
+            if (remainingTime <= 5.0f && !isOrderCome && !isShift && !past5)
+            {
+                notifier.Notify("Warning: Order " + (i + 1) + " expires in 5 seconds");
                 past5 = true;
             }
             return remainingTime;
-        } else if (remainingTime != -1) {
+        }
+        else if (remainingTime != -1)
+        {
             remainingTime = 0;
             gameManager.endTimer(isShift, isOrderCome, i);
             remainingTime = resetTime(i);
             return remainingTime;
-        } else {
+        }
+        else
+        {
             return -1;
         }
 
 
     }
-    public void updateTimerText() {
-        if (gameManager.waitingForOrder) {
+    public void updateTimerText()
+    {
+        if (gameManager.waitingForOrder)
+        {
             timerText.text = "Waiting for Order";
             return;
         }
-        int minutes = Mathf.FloorToInt (this.remainingTime / 60);
+        int minutes = Mathf.FloorToInt(this.remainingTime / 60);
         int seconds = Mathf.FloorToInt(this.remainingTime % 60);
-        if(isShift) {
-            timerText.text = "Shift: " + string.Format("{0:00}:{1:00}",minutes, seconds);
-        } else {
-            timerText.text = "Order: " +  string.Format("{0:00}:{1:00}",minutes, seconds);
+        if (isShift)
+        {
+            timerText.text = "Shift: " + string.Format("{0:00}:{1:00}", minutes, seconds);
+        }
+        else
+        {
+            timerText.text = "Shift: " + string.Format("{0:00}:{1:00}", minutes, seconds);
         }
     }
-    public void updateAll() {
-        for (int i = 0; i < timers.Length; i++) {
-            if (timers[i] != -1) {
+    public void updateAll()
+    {
+        for (int i = 0; i < timers.Length; i++)
+        {
+            if (timers[i] != -1)
+            {
                 timers[i] = updateTimer(timers[i], i);
             }
         }
     }
-    public float resetTime(int i) {
+    public float resetTime(int i)
+    {
         timers[i] = gameManager.getOrders()[i].orderTime;
-        if (isOrderCome) {
+        if (isOrderCome)
+        {
             timers[i] = gameManager.arriveTime;
         }
-        if (i == timerIndex) {
+        if (i == timerIndex)
+        {
             this.remainingTime = gameManager.getOrders()[i].orderTime;
-            if (isOrderCome) {
+            if (isOrderCome)
+            {
                 this.remainingTime = gameManager.arriveTime;
             }
         }
