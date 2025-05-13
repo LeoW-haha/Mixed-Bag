@@ -7,6 +7,7 @@ using System.Collections;
 
 public class Order
 {
+    public bool isCompleted;
     public GameObject[] orderItems; // First 2 are items, last is packaging colour visual
     public string requiredPackagingColour;
     public float orderTime;
@@ -16,6 +17,7 @@ public class Order
     {
         this.orderTime = orderTime;
         this.penaltyPoints = penaltyPoints;
+        isCompleted = false;
     }
 }
 
@@ -103,7 +105,7 @@ public class GameManager : MonoBehaviour
         {
             orders[1] = new Order(orderTime, basePenaltyPoints) { orderItems = new GameObject[orderIcons.Length] };
             orderTimer.addTimer(1, orders[1].orderTime);
-            randomizeOrder(orders[1], 1); // Pass correct index
+            randomizeOrder(orders[1], 1); // Show in second canvas
             notifier.Notify("Order 2 has arrived!");
 
             Debug.Log("🟢 Order 2 created and randomized.");
@@ -114,6 +116,16 @@ public class GameManager : MonoBehaviour
 
 
 
+    private void ClearOrderIcons(Image[] iconSet)
+    {
+        foreach (var icon in iconSet)
+        {
+            if (icon != null)
+            {
+                icon.sprite = emptySprite;
+            }
+        }
+    }
     public void VerifyDelivery(DeliveryPackage delivered)
     {
         bool matched = false;
@@ -138,24 +150,28 @@ public class GameManager : MonoBehaviour
             if (colorMatch && itemsMatch)
             {
                 matched = true;
+                orders[i].isCompleted = true;
 
-                // ✅ Disable correct order UI box
-                if (i == 0 && orderBox1 != null)
+                // ✅ Hide UI box and log
+                if (i == 0 && orderIcons != null)
                 {
-                    orderBox1.SetActive(false);
-                    StartCoroutine(ReenableOrderBox(orderBox1, i));
+                    ClearOrderIcons(orderIcons);
+                    Debug.Log($"✅ Delivery matched Order {i}, cleared top order icons.");
                 }
-                else if (i == 1 && orderBox2 != null)
+                else if (i == 1 && orderIcons2 != null)
                 {
-                    orderBox2.SetActive(false);
-                    StartCoroutine(ReenableOrderBox(orderBox2, i));
+                    ClearOrderIcons(orderIcons2);
+                    Debug.Log($"✅ Delivery matched Order {i}, cleared bottom order icons.");
                 }
+
 
                 break;
             }
         }
 
-        // ✅ Floating feedback
+
+
+        // Show tick/cross sprite
         GameObject feedback = new GameObject("DeliveryFeedback");
         SpriteRenderer sr = feedback.AddComponent<SpriteRenderer>();
         sr.sprite = matched ? tickSprite : xSprite;
@@ -163,7 +179,7 @@ public class GameManager : MonoBehaviour
         feedback.transform.position = deliveryZone1.position + Vector3.up * 2;
         Destroy(feedback, 2f);
 
-        // ✅ Tick Slot
+        // Update canvas tick slot
         if (tickSlotContainer != null && currentTickSlotIndex < tickSlotContainer.childCount)
         {
             Transform slot = tickSlotContainer.GetChild(currentTickSlotIndex);
@@ -176,6 +192,8 @@ public class GameManager : MonoBehaviour
             currentTickSlotIndex++;
         }
     }
+
+
 
     private IEnumerator ReenableOrderBox(GameObject box, int orderIndex)
     {
@@ -281,19 +299,18 @@ public class GameManager : MonoBehaviour
 
         orders = new Order[maxOrderAmount];
 
-        // ✅ Create both orders immediately, for now
+        // ✅ Only create Order 0 at start
+        // ✅ Create both orders at start
         orders[0] = new Order(orderTime, basePenaltyPoints) { orderItems = new GameObject[orderIcons.Length] };
         orders[1] = new Order(orderTime, basePenaltyPoints) { orderItems = new GameObject[orderIcons.Length] };
-
         selectedOrder = orders[0];
         currentOrderIndex = 0;
 
-        // ✅ Set timers and display for both orders
         orderTimer.addTimer(0, orders[0].orderTime);
         orderTimer.addTimer(1, orders[1].orderTime);
+        randomizeOrder(orders[0], 0); // Top canvas
+        randomizeOrder(orders[1], 1); // Bottom canvas
 
-        randomizeOrder(orders[0], 0); // Show in first top box
-        randomizeOrder(orders[1], 1); // Show in second top box
 
         topText.text = "Order: 1";
         updateTopBar(selectedOrder);
@@ -405,6 +422,7 @@ public class GameManager : MonoBehaviour
             endMenu.SetActive(true);
             Time.timeScale = 0f;
             gameEnd = true;
+            Debug.Log("🔴 Shift ended. Game over.");
             return;
         }
 
@@ -416,33 +434,47 @@ public class GameManager : MonoBehaviour
                 {
                     orders[j] = new Order(orderTime, basePenaltyPoints) { orderItems = new GameObject[orderIcons.Length] };
                     orderTimer.addTimer(j, orders[j].orderTime);
-                    randomizeOrder(orders[j]);
-
-                    if (disableButtons || waitingForOrder)
-                    {
-                        disableButtons = false;
-                        waitingForOrder = false;
-                        selectedOrder = orders[j];
-                        orderTimer.timerIndex = j;
-                        currentOrderIndex = j;
-                        updateTopBar(selectedOrder);
-                    }
-
+                    orders[j].isCompleted = false;
+                    randomizeOrder(orders[j], j);
                     notifier.Notify("New order arrived");
-                    break;
+                    Debug.Log($"🟢 Order {j} created after order come.");
+                    return;
                 }
             }
-            return;
         }
 
-        notifier.Notify($"Order Time {i + 1} expired");
-        minusScore(orders[i].penaltyPoints);
-        randomizeOrder(orders[i]);
-        if (i == currentOrderIndex)
-            updateTopBar(selectedOrder);
+        if (orders[i] != null && orders[i].isCompleted)
+        {
+            Debug.Log($"✅ Order {i} was completed. Replacing with new.");
+        }
+        else
+        {
+            notifier.Notify($"Order Time {i + 1} expired");
+            minusScore(orders[i].penaltyPoints);
+            Debug.Log($"⚠️ Order {i} expired. Replacing with new.");
+        }
 
-        orders[i].orderTime = orderTime;
+        // Replace with new order
+        orders[i] = new Order(orderTime, basePenaltyPoints) { orderItems = new GameObject[orderIcons.Length] };
+        orderTimer.addTimer(i, orderTime);
+        randomizeOrder(orders[i], i);
+
+        // Re-enable corresponding canvas box
+        if (i == 0 && orderBox1 != null)
+        {
+            orderBox1.SetActive(true);
+            Debug.Log("🟢 Re-enabled orderBox1");
+        }
+        else if (i == 1 && orderBox2 != null)
+        {
+            orderBox2.SetActive(true);
+            Debug.Log("🟢 Re-enabled orderBox2");
+        }
+
+        if (i == currentOrderIndex)
+            updateTopBar(orders[i]);
     }
+
 
     public void AddScore(float points)
     {

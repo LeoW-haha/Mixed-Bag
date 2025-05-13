@@ -13,7 +13,6 @@ public class PaintPickup : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            Debug.Log($"🎨 Paint barrel touched: {paintColor}");
 
             PlayerCtrl player = collision.GetComponent<PlayerCtrl>();
             if (player != null)
