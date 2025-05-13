@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 
 public class Timer : MonoBehaviour
@@ -16,13 +16,21 @@ public class Timer : MonoBehaviour
 
     void Start()
     {
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>(); 
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         notifier = GameObject.Find("NotificationHolder").GetComponent<Notifier>();
-        if (timers.Length > 0) {
+
+        // 🟢 Force shift timer to 2 minutes if this is the shift timer
+        if (isShift)
+            timers[0] = 120f;
+
+        if (timers.Length > 0)
+        {
             remainingTime = timers[0];
         }
+
         timerIndex = 0;
     }
+
 
     public void addTimer(int index, float time) {
         bool firstAdd = false;
