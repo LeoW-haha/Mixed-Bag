@@ -1,0 +1,92 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5688796165350602896
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2510547875790903404}
+  - component: {fileID: 271931189290838057}
+  - component: {fileID: 5568634820696379809}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2510547875790903404
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5688796165350602896}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.62734, y: -0.77375066, z: -0.04574365}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &271931189290838057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5688796165350602896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c662682f4a81d3d4f8f4217a9e81100a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  score: 0
+  scoreText: {fileID: 0}
+  totalWeight: 0
+  maxWeight: 15
+  orderIcons:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  Items:
+  - {fileID: 3364930881467687972, guid: 857a2e05d67eb004ca03e10bc7202ff8, type: 3}
+  - {fileID: 3364930881467687972, guid: c30e4bd2e5b254946a0be277ec8a9a82, type: 3}
+  - {fileID: 3364930881467687972, guid: 5cf6c187d80c89b4491e926f6eba7582, type: 3}
+  - {fileID: 3364930881467687972, guid: 9cdddb5fbda30114787a324fe692ffaa, type: 3}
+  - {fileID: 3364930881467687972, guid: edcdba1d61aafb74abde880f8b8db453, type: 3}
+  maxOrderAmount: 3
+  maxOrders: 3
+  currentOrderIndex: 0
+  topText: {fileID: 0}
+  emptySprite: {fileID: -8527568592950175283, guid: 20361b50b1e53ba4c922f9aa500c8c30, type: 3}
+  orderTime: 30
+  arriveTime: 10
+  basePenaltyPoints: 100
+  waitingForOrder: 0
+  pauseMenu: {fileID: 0}
+  endMenu: {fileID: 0}
+  pauseOn: 0
+  gameEnd: 0
+--- !u!114 &5568634820696379809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5688796165350602896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5687fac0985697488806aa8163db183, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timerText: {fileID: 0}
+  timers:
+  - 10
+  timerIndex: 0
+  isShift: 0
+  isOrderCome: 1
