@@ -68,6 +68,120 @@ public class GameManager : MonoBehaviour
         InitializeGame();
     }
 
+    [Header("Delivery Conveyor Setup")]
+    public Transform deliveryZone1;
+    public Transform deliveryZone2;
+    public Transform deliveryWaypoint1;
+    public Transform deliveryWaypoint2;
+    public Transform deliveryWaypoint3;
+    public Transform deliveryWaypoint4;
+
+    public Sprite tickSprite;  // assign in Inspector
+    public Sprite xSprite;
+    [Header("Delivery Result System")]
+    public DeliveryFeedbackUI floatingFeedback; // Drag the TickSlot UI object that has the script
+    public Transform tickSlotContainer; // Parent object that holds TickSlots
+    private int currentTickSlotIndex = 0;
+
+
+    public void VerifyDelivery(DeliveryPackage delivered)
+    {
+        string orderColor = selectedOrder.requiredPackagingColour;
+        var requiredItems = selectedOrder.orderItems;
+
+        string required1 = requiredItems[0].GetComponent<Item>().itemName;
+        string required2 = requiredItems[1].GetComponent<Item>().itemName;
+
+        bool colorMatch = delivered.paintColor == orderColor;
+        bool item1Match = delivered.item1 == required1 || delivered.item1 == required2;
+        bool item2Match = delivered.item2 == required1 || delivered.item2 == required2;
+        bool distinct = delivered.item1 != delivered.item2;
+
+        bool itemsMatch = item1Match && item2Match && distinct;
+        bool success = colorMatch && itemsMatch;
+
+        // ✅ Floating feedback on top of delivery location
+        GameObject feedback = new GameObject("DeliveryFeedback");
+        SpriteRenderer sr = feedback.AddComponent<SpriteRenderer>();
+        sr.sprite = success ? tickSprite : xSprite;
+        sr.sortingOrder = 10;
+        feedback.transform.position = deliveryZone1.position + Vector3.up * 2;
+        Destroy(feedback, 2f);
+
+        // ✅ Add to tick slot container
+        if (tickSlotContainer != null && currentTickSlotIndex < tickSlotContainer.childCount)
+        {
+            Transform slot = tickSlotContainer.GetChild(currentTickSlotIndex);
+            Image img = slot.GetComponent<Image>();
+            if (img != null)
+            {
+                img.sprite = success ? tickSprite : xSprite;
+                img.enabled = true;
+            }
+            currentTickSlotIndex++;
+        }
+    }
+
+
+    public void ShowDeliveryFeedback(bool success)
+    {
+        // ✅ Show floating tick/cross
+        if (floatingFeedback != null)
+        {
+            floatingFeedback.ShowResult(success);
+        }
+
+        // ✅ Show permanent tick/cross in canvas slot
+        if (tickSlotContainer != null && currentTickSlotIndex < tickSlotContainer.childCount)
+        {
+            Transform slot = tickSlotContainer.GetChild(currentTickSlotIndex);
+            Image image = slot.GetComponent<Image>();
+
+            if (image != null)
+            {
+                image.sprite = success ? floatingFeedback.tickSprite : floatingFeedback.crossSprite;
+                image.enabled = true;
+            }
+
+            currentTickSlotIndex++;
+        }
+    }
+
+
+
+
+    public void SendToDeliveryConveyor(GameObject package, int deliveryZone)
+    {
+        switch (deliveryZone)
+        {
+            case 1:
+                MoveExistingPackageToConveyor(package, deliveryZone1.position, deliveryWaypoint1, deliveryWaypoint2);
+                break;
+            case 2:
+                MoveExistingPackageToConveyor(package, deliveryZone2.position, deliveryWaypoint3, deliveryWaypoint4);
+                break;
+            default:
+                Debug.LogWarning("Invalid delivery zone selected.");
+                break;
+        }
+    }
+
+    private void MoveExistingPackageToConveyor(GameObject package, Vector3 position, Transform wp1, Transform wp2)
+    {
+        package.transform.position = position; // Move existing package
+
+        ConveyorMover mover = package.GetComponent<ConveyorMover>();
+        if (mover == null)
+        {
+            mover = package.AddComponent<ConveyorMover>();
+        }
+
+        mover.SetPath(wp1, wp2);
+    }
+
+
+
+
     private void InitializeGame()
     {
         pauseMenu.SetActive(false);
@@ -103,8 +217,25 @@ public class GameManager : MonoBehaviour
 
     public void randomizeOrder(Order order)
     {
-        for (int i = 0; i < orderIcons.Length - 1; i++)
-            order.orderItems[i] = Items[Random.Range(0, Items.Length)];
+        List<GameObject> chosenItems = new List<GameObject>();
+
+        while (chosenItems.Count < orderIcons.Length - 1)
+        {
+            GameObject candidate = Items[Random.Range(0, Items.Length)];
+
+            // Check if this item hasn't been picked yet
+            if (!chosenItems.Contains(candidate))
+            {
+                chosenItems.Add(candidate);
+            }
+        }
+
+        // Assign unique items to the order
+        for (int i = 0; i < chosenItems.Count; i++)
+        {
+            order.orderItems[i] = chosenItems[i];
+        }
+
 
         string[] colours = { "Green", "Black", "Red" };
         order.requiredPackagingColour = colours[Random.Range(0, colours.Length)];

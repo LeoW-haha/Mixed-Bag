@@ -13,14 +13,16 @@ public class InventoryManager : MonoBehaviour
     public PlayerCtrl playerControl;
 
     private List<ItemSlot> selectedItems = new List<ItemSlot>();
+
     public GameObject packagePrefab;
     public Sprite redPackageSprite;
     public Sprite greenPackageSprite;
     public Sprite blackPackageSprite;
+
     public float packagingDelay = 4f;
+
+    [HideInInspector]
     public GameObject currentPackage;
-
-
 
     void Start()
     {
@@ -82,7 +84,6 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-
     public void RemoveSelectedItem(ItemSlot slot)
     {
         if (selectedItems.Contains(slot))
@@ -91,50 +92,34 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-
     public int addItem(string itemName, int quantity, Sprite itemSprite)
     {
-        for (int i = 0; i < itemSlot.Length; i++)
+        foreach (var slot in itemSlot)
         {
-            var slot = itemSlot[i];
-
-            // Add to existing stack
             if (!slot.isFull && slot.itemName == itemName && !slot.isSpawn && !slot.isLocked)
             {
-
-                int leftOver = slot.addItem(itemName, quantity, itemSprite);
-                return leftOver;
+                return slot.addItem(itemName, quantity, itemSprite);
             }
         }
 
-        for (int i = 0; i < itemSlot.Length; i++)
+        foreach (var slot in itemSlot)
         {
-            var slot = itemSlot[i];
-
-            // Add to truly empty slot
             if (string.IsNullOrEmpty(slot.itemName) && !slot.isLocked && !slot.isSpawn)
             {
-
-                int leftOver = slot.addItem(itemName, quantity, itemSprite);
-                return leftOver;
+                return slot.addItem(itemName, quantity, itemSprite);
             }
         }
 
         return quantity;
     }
 
-
-
-
     public int addOrderItem(string itemName, int quantity, Sprite itemSprite)
     {
         foreach (var slot in OrderItemSlot)
         {
-            bool slotCanAccept = (!slot.isFull && slot.itemName == itemName) || (slot.quantity == 0 && !slot.isLocked && !slot.isSpawn);
-            if (slotCanAccept)
+            if ((!slot.isFull && slot.itemName == itemName) || (slot.quantity == 0 && !slot.isLocked && !slot.isSpawn))
             {
-                int leftOver = slot.addItem(itemName, quantity, itemSprite);
-                return leftOver;
+                return slot.addItem(itemName, quantity, itemSprite);
             }
         }
         return quantity;
@@ -144,11 +129,9 @@ public class InventoryManager : MonoBehaviour
     {
         foreach (var slot in SpawnItemSlot)
         {
-            bool slotCanAccept = (!slot.isFull && slot.itemName == itemName) || (slot.quantity == 0 && !slot.isLocked && !slot.isSpawn);
-            if (slotCanAccept)
+            if ((!slot.isFull && slot.itemName == itemName) || (slot.quantity == 0 && !slot.isLocked && !slot.isSpawn))
             {
-                int leftOver = slot.addItem(itemName, quantity, itemSprite);
-                return leftOver;
+                return slot.addItem(itemName, quantity, itemSprite);
             }
         }
         return quantity;
@@ -179,14 +162,15 @@ public class InventoryManager : MonoBehaviour
     {
         if (selectedItems.Count == 2)
         {
-            Debug.Log($"✅ Packaging started with: {selectedItems[0].itemName} and {selectedItems[1].itemName} using paint: {playerControl.currentPackagingColour}");
             StartCoroutine(SpawnPackageAfterDelay());
         }
     }
 
     private IEnumerator SpawnPackageAfterDelay()
     {
-        Debug.Log($"✅ Packaging started with: {selectedItems[0].itemName} and {selectedItems[1].itemName} using paint: {playerControl.currentPackagingColour}");
+        string item1Name = selectedItems[0].itemName;
+        string item2Name = selectedItems[1].itemName;
+        string paintColor = playerControl.currentPackagingColour;
 
         yield return new WaitForSeconds(packagingDelay);
 
@@ -197,11 +181,17 @@ public class InventoryManager : MonoBehaviour
         selectedItems.Clear();
 
         GameObject package = Instantiate(packagePrefab, playerControl.transform.position, Quaternion.identity);
-        SpriteRenderer sr = package.GetComponent<SpriteRenderer>();
+        currentPackage = package;
 
+        var deliveryInfo = package.AddComponent<DeliveryPackage>();
+        deliveryInfo.item1 = item1Name;
+        deliveryInfo.item2 = item2Name;
+        deliveryInfo.paintColor = paintColor;
+
+        SpriteRenderer sr = package.GetComponent<SpriteRenderer>();
         if (sr != null)
         {
-            switch (playerControl.currentPackagingColour)
+            switch (paintColor)
             {
                 case "Red": sr.sprite = redPackageSprite; break;
                 case "Green": sr.sprite = greenPackageSprite; break;
@@ -216,8 +206,6 @@ public class InventoryManager : MonoBehaviour
             pf.target = playerControl.transform;
         }
 
-        currentPackage = package;
         playerControl.hasPackage = true;
     }
-
 }
