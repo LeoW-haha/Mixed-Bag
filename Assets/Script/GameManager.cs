@@ -62,10 +62,15 @@ public class GameManager : MonoBehaviour
     public Transform wayPoint2;
     public Transform wayPoint3;
     public Transform wayPoint4;
+    [SerializeField] private Image[] orderIcons2; // Bottom canvas
+
+
 
     void Start()
     {
         InitializeGame();
+
+        Invoke(nameof(CreateSecondOrder), 15f);
     }
 
     [Header("Delivery Conveyor Setup")]
@@ -83,44 +88,75 @@ public class GameManager : MonoBehaviour
     public Transform tickSlotContainer; // Parent object that holds TickSlots
     private int currentTickSlotIndex = 0;
 
+    private void CreateSecondOrder()
+    {
+        if (orders.Length > 1 && orders[1] == null)
+        {
+            orders[1] = new Order(orderTime, basePenaltyPoints) { orderItems = new GameObject[orderIcons.Length] };
+            orderTimer.addTimer(1, orders[1].orderTime);
+            randomizeOrder(orders[1], 1); // Pass correct index
+            notifier.Notify("Order 2 has arrived!");
+
+            Debug.Log("🟢 Order 2 created and randomized.");
+            Debug.Log($"Order 2 item1: {orders[1].orderItems[0]?.GetComponent<Item>()?.itemName}");
+            Debug.Log($"Order 2 item2: {orders[1].orderItems[1]?.GetComponent<Item>()?.itemName}");
+        }
+    }
+
+
 
     public void VerifyDelivery(DeliveryPackage delivered)
     {
-        string orderColor = selectedOrder.requiredPackagingColour;
-        var requiredItems = selectedOrder.orderItems;
+        bool matched = false;
+        int matchedOrderIndex = -1;
 
-        string required1 = requiredItems[0].GetComponent<Item>().itemName;
-        string required2 = requiredItems[1].GetComponent<Item>().itemName;
+        for (int i = 0; i < orders.Length; i++)
+        {
+            if (orders[i] == null) continue;
 
-        bool colorMatch = delivered.paintColor == orderColor;
-        bool item1Match = delivered.item1 == required1 || delivered.item1 == required2;
-        bool item2Match = delivered.item2 == required1 || delivered.item2 == required2;
-        bool distinct = delivered.item1 != delivered.item2;
+            var requiredItems = orders[i].orderItems;
+            string required1 = requiredItems[0].GetComponent<Item>().itemName;
+            string required2 = requiredItems[1].GetComponent<Item>().itemName;
+            string orderColor = orders[i].requiredPackagingColour;
 
-        bool itemsMatch = item1Match && item2Match && distinct;
-        bool success = colorMatch && itemsMatch;
+            bool colorMatch = delivered.paintColor == orderColor;
+            bool item1Match = delivered.item1 == required1 || delivered.item1 == required2;
+            bool item2Match = delivered.item2 == required1 || delivered.item2 == required2;
+            bool distinct = delivered.item1 != delivered.item2;
 
-        // ✅ Floating feedback on top of delivery location
+            bool itemsMatch = item1Match && item2Match && distinct;
+
+            if (colorMatch && itemsMatch)
+            {
+                matched = true;
+                matchedOrderIndex = i;
+                break;
+            }
+        }
+
+        // Floating tick/cross
         GameObject feedback = new GameObject("DeliveryFeedback");
         SpriteRenderer sr = feedback.AddComponent<SpriteRenderer>();
-        sr.sprite = success ? tickSprite : xSprite;
+        sr.sprite = matched ? tickSprite : xSprite;
         sr.sortingOrder = 10;
         feedback.transform.position = deliveryZone1.position + Vector3.up * 2;
         Destroy(feedback, 2f);
 
-        // ✅ Add to tick slot container
+        // Record tick/cross in the tickSlotContainer
         if (tickSlotContainer != null && currentTickSlotIndex < tickSlotContainer.childCount)
         {
             Transform slot = tickSlotContainer.GetChild(currentTickSlotIndex);
             Image img = slot.GetComponent<Image>();
             if (img != null)
             {
-                img.sprite = success ? tickSprite : xSprite;
+                img.sprite = matched ? tickSprite : xSprite;
                 img.enabled = true;
             }
             currentTickSlotIndex++;
         }
     }
+
+
 
 
     public void ShowDeliveryFeedback(bool success)
@@ -204,38 +240,42 @@ public class GameManager : MonoBehaviour
             orderTimer.timers[i] = -1;
 
         orders = new Order[maxOrderAmount];
+
+        // ✅ Create both orders immediately, for now
         orders[0] = new Order(orderTime, basePenaltyPoints) { orderItems = new GameObject[orderIcons.Length] };
+        orders[1] = new Order(orderTime, basePenaltyPoints) { orderItems = new GameObject[orderIcons.Length] };
+
         selectedOrder = orders[0];
         currentOrderIndex = 0;
-        orderTimer.addTimer(0, selectedOrder.orderTime);
 
-        randomizeOrders();
+        // ✅ Set timers and display for both orders
+        orderTimer.addTimer(0, orders[0].orderTime);
+        orderTimer.addTimer(1, orders[1].orderTime);
+
+        randomizeOrder(orders[0], 0); // Show in first top box
+        randomizeOrder(orders[1], 1); // Show in second top box
+
         topText.text = "Order: 1";
         updateTopBar(selectedOrder);
         UpdateScoreUI();
     }
 
-    public void randomizeOrder(Order order)
+
+    public void randomizeOrder(Order order, int orderIndex = 0)
     {
         List<GameObject> chosenItems = new List<GameObject>();
 
         while (chosenItems.Count < orderIcons.Length - 1)
         {
             GameObject candidate = Items[Random.Range(0, Items.Length)];
-
-            // Check if this item hasn't been picked yet
             if (!chosenItems.Contains(candidate))
-            {
                 chosenItems.Add(candidate);
-            }
         }
 
-        // Assign unique items to the order
         for (int i = 0; i < chosenItems.Count; i++)
         {
             order.orderItems[i] = chosenItems[i];
         }
-
 
         string[] colours = { "Green", "Black", "Red" };
         order.requiredPackagingColour = colours[Random.Range(0, colours.Length)];
@@ -246,9 +286,23 @@ public class GameManager : MonoBehaviour
         item.sprite = Resources.Load<Sprite>($"Sprites/{order.requiredPackagingColour}Icon");
         order.orderItems[orderIcons.Length - 1] = colourDummy;
 
+        Image[] icons = orderIndex == 0 ? orderIcons : orderIcons2;
+
+
+        for (int i = 0; i < icons.Length; i++)
+        {
+            var entry = order.orderItems[i];
+            icons[i].sprite = entry != null ? entry.GetComponent<Item>().sprite : emptySprite;
+        }
+
+        Debug.Log($"🎲 Order {orderIndex} randomized: {order.orderItems[0]?.GetComponent<Item>()?.itemName}, {order.orderItems[1]?.GetComponent<Item>()?.itemName}, {order.requiredPackagingColour}");
+
         SpawnConveyorItem(order.orderItems[0], spawnLocation1.position, wayPoint1, wayPoint2);
         SpawnConveyorItem(order.orderItems[1], spawnLocation2.position, wayPoint3, wayPoint4);
     }
+
+
+
 
     private void SpawnConveyorItem(GameObject prefab, Vector3 spawnPos, Transform wp1, Transform wp2)
     {
