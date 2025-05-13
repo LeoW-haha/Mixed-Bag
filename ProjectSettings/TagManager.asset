@@ -9,6 +9,12 @@ TagManager:
   - BigDoor
   - item
   - Enemy
+  - Black
+  - Green
+  - Delivery
+  - Red
+  - FuelStation
+  - White
   layers:
   - Default
   - TransparentFX

@@ -20,6 +20,15 @@ public class GameUIManager : MonoBehaviour
     private Coroutine gameTimerFlashCoroutine;
     private bool isGameTimerFlashing = false;
 
+    [Header("Fuel Info")]
+    public Image equippedFuelImage;
+    public Sprite redFuelSprite;
+    public Sprite greenFuelSprite;
+    public Sprite blackFuelSprite;
+    public Sprite whiteFuelSprite;
+
+
+
     void Start()
     {
         gameManager = GameManagerJasper.Instance;
@@ -77,6 +86,9 @@ public class GameUIManager : MonoBehaviour
             }
         }
 
+
+
+
         // Update order info
         if (orderSystem != null)
         {
@@ -107,6 +119,31 @@ public class GameUIManager : MonoBehaviour
             }
         }
     }
+
+public void SetEquippedFuel(string fuelTag)
+    {
+        if (equippedFuelImage == null) return; // Skip if fuel UI not set
+
+        Sprite fuelSprite = GetFuelSpriteByTag(fuelTag);
+        if (fuelSprite != null)
+            equippedFuelImage.sprite = fuelSprite;
+    }
+
+
+    private Sprite GetFuelSpriteByTag(string tag)
+    {
+        // You must assign these in the Inspector or load via Resources
+        switch (tag)
+        {
+            case "Red": return redFuelSprite;
+            case "Green": return greenFuelSprite;
+            case "Black": return blackFuelSprite;
+            case "White": return whiteFuelSprite;
+            default: return null;
+        }
+    }
+
+
 
     // Call this from your game logic to show feedback
     public void ShowFeedback(string message, float duration = 2f)

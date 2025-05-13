@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class startMenuController : MonoBehaviour
+public class startMenuControllerAsh : MonoBehaviour
 {
     public GameObject levelSelectMenu;
     public void OnStartClick() {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SpawnTrigger : MonoBehaviour, IInteractable
+public class SpawnTriggerAsh : MonoBehaviour, IInteractable
 {
     private Notifier notifier;
     public bool CanInteract() {
