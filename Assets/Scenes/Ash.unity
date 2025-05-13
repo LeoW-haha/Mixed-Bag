@@ -2467,8 +2467,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5839820706974066888, guid: 4e277fbca159889479d0057ef50a077f, type: 3}
     - target: {fileID: 271931189290838057, guid: 8ccf37443067f5a4bb1ff39d5fe17887, type: 3}
+      propertyPath: orderBox1
+      value: 
+      objectReference: {fileID: 980936127}
+    - target: {fileID: 271931189290838057, guid: 8ccf37443067f5a4bb1ff39d5fe17887, type: 3}
+      propertyPath: orderBox2
+      value: 
+      objectReference: {fileID: 307470298}
+    - target: {fileID: 271931189290838057, guid: 8ccf37443067f5a4bb1ff39d5fe17887, type: 3}
       propertyPath: orderTime
-      value: 45
+      value: 37
       objectReference: {fileID: 0}
     - target: {fileID: 271931189290838057, guid: 8ccf37443067f5a4bb1ff39d5fe17887, type: 3}
       propertyPath: pauseMenu
@@ -2496,7 +2504,7 @@ PrefabInstance:
       objectReference: {fileID: 2061143155}
     - target: {fileID: 271931189290838057, guid: 8ccf37443067f5a4bb1ff39d5fe17887, type: 3}
       propertyPath: arriveTime
-      value: 10
+      value: 37
       objectReference: {fileID: 0}
     - target: {fileID: 271931189290838057, guid: 8ccf37443067f5a4bb1ff39d5fe17887, type: 3}
       propertyPath: tickSprite
@@ -2518,6 +2526,10 @@ PrefabInstance:
       propertyPath: playerControl
       value: 
       objectReference: {fileID: 1551777655}
+    - target: {fileID: 271931189290838057, guid: 8ccf37443067f5a4bb1ff39d5fe17887, type: 3}
+      propertyPath: spawnInterval
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 271931189290838057, guid: 8ccf37443067f5a4bb1ff39d5fe17887, type: 3}
       propertyPath: spawnLocation
       value: 
@@ -2654,6 +2666,18 @@ PrefabInstance:
       propertyPath: timerText
       value: 
       objectReference: {fileID: 1044888273}
+    - target: {fileID: 5568634820696379809, guid: 8ccf37443067f5a4bb1ff39d5fe17887, type: 3}
+      propertyPath: isOrderCome
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5568634820696379809, guid: 8ccf37443067f5a4bb1ff39d5fe17887, type: 3}
+      propertyPath: timers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5568634820696379809, guid: 8ccf37443067f5a4bb1ff39d5fe17887, type: 3}
+      propertyPath: 'timers.Array.data[0]'
+      value: 115
+      objectReference: {fileID: 0}
     - target: {fileID: 5688796165350602896, guid: 8ccf37443067f5a4bb1ff39d5fe17887, type: 3}
       propertyPath: m_Name
       value: GameManager
@@ -4299,6 +4323,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b9a44dd6a63de54db99db3405e9676e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &980936127 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7526364814547320532, guid: 35d104d2da91a504299b3bb7e7ebd134, type: 3}
+  m_PrefabInstance: {fileID: 231743719}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1029662188 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4867652548295358751, guid: 35d104d2da91a504299b3bb7e7ebd134, type: 3}
@@ -5159,7 +5188,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3825605709927294011, guid: 751eb3e7ea2f2e34badf226192927e80, type: 3}
       propertyPath: RunCost
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3825605709927294011, guid: 751eb3e7ea2f2e34badf226192927e80, type: 3}
       propertyPath: Stamina
@@ -5195,7 +5224,7 @@ PrefabInstance:
       objectReference: {fileID: -4987337320017983735, guid: 769423e40117fd04f9232c4b9125e07d, type: 3}
     - target: {fileID: 3825605709927294011, guid: 751eb3e7ea2f2e34badf226192927e80, type: 3}
       propertyPath: staminaDrain
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4893419586214683176, guid: 751eb3e7ea2f2e34badf226192927e80, type: 3}
       propertyPath: m_Name
@@ -5486,10 +5515,14 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 1.8932629, y: 0.7557068}
+    - - {x: 3.1094904, y: -21.211971}
+      - {x: 2.5649624, y: -2.1312008}
+      - {x: 1.8932629, y: 0.7557068}
       - {x: -0.46247202, y: 0.8586738}
       - {x: -0.5877852, y: -0.80901706}
       - {x: 1.7206799, y: -0.80901694}
+      - {x: 2.2857113, y: -2.8879967}
+      - {x: 2.477477, y: -20.865698}
       - {x: 1.7052908, y: -23.228622}
       - {x: -0.417634, y: -23.355074}
       - {x: -0.48474598, y: -24.860023}
@@ -6807,11 +6840,12 @@ PolygonCollider2D:
     - - {x: 0, y: 1}
       - {x: -1.1637249, y: 0.98246694}
       - {x: -1.173964, y: -2.6003163}
-      - {x: 0.8893204, y: -2.74349}
-      - {x: 0.9104166, y: -5.0111856}
+      - {x: 1.5379953, y: -2.5386455}
+      - {x: 1.763936, y: -5.0453253}
       - {x: -1.1383104, y: -5.0041656}
       - {x: -1.2705994, y: -8.732523}
       - {x: 0.9723164, y: -8.756086}
+      - {x: 2.811839, y: -4.6499376}
       - {x: 1.0573902, y: 0.9824671}
   m_UseDelaunayMesh: 0
 --- !u!114 &2133950359

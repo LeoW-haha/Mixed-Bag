@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerCtrl : MonoBehaviour
@@ -97,12 +97,12 @@ public class PlayerCtrl : MonoBehaviour
             rb.linearVelocity = Vector2.zero;
         }
     }
-
     public void ApplyPaint(string colour)
     {
+        Debug.Log($"🧪 Paint applied: {colour}");
         currentPackagingColour = colour;
-
     }
+
 
 
     private void Flip()

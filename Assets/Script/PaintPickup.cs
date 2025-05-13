@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PaintPickup : MonoBehaviour
 {
@@ -13,6 +13,8 @@ public class PaintPickup : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            Debug.Log($"🎨 Paint barrel touched: {paintColor}");
+
             PlayerCtrl player = collision.GetComponent<PlayerCtrl>();
             if (player != null)
             {
@@ -23,13 +25,10 @@ public class PaintPickup : MonoBehaviour
                 {
                     paintUI.UpdatePaintIcon(paintColor);
                 }
-                else
-                {
-                    Debug.LogWarning("PaintDisplayUI not found in scene.");
-                }
 
-                Destroy(gameObject); // Optional
+                //Destroy(gameObject); // or disable if you want to respawn later
             }
         }
     }
+
 }
