@@ -2676,7 +2676,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5568634820696379809, guid: 8ccf37443067f5a4bb1ff39d5fe17887, type: 3}
       propertyPath: 'timers.Array.data[0]'
-      value: 115
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 5688796165350602896, guid: 8ccf37443067f5a4bb1ff39d5fe17887, type: 3}
       propertyPath: m_Name
