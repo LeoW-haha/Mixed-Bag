@@ -27,16 +27,6 @@ public class PlayerFuel : MonoBehaviour
         }
     }
 
-    public void ClearFuel()
-    {
-        currentFuelTag = "";
-
-        if (uiManager != null)
-        {
-            uiManager.SetEquippedFuel(""); // Clear or hide UI fuel icon
-        }
-    }
-
     public bool HasFuel()
     {
         return !string.IsNullOrEmpty(currentFuelTag);

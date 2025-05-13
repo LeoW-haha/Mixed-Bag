@@ -20,7 +20,9 @@ public class GameManagerJasper : MonoBehaviour
     [Header("Score Settings")]
     [SerializeField] private int comboBonus = 50; // Additional points for quick successive deliveries
     [SerializeField] private float comboTimeWindow = 5f; // Time window for combo bonus
-    
+    private bool endedDueToFuelFailure = false;
+
+
     private static GameManagerJasper instance;
     public static GameManagerJasper Instance
     {
@@ -247,21 +249,38 @@ public class GameManagerJasper : MonoBehaviour
         levelTimer = levelTimeLimit;
         UpdateTimerDisplay();
     }
+    public void MarkFuelFailure()
+    {
+        endedDueToFuelFailure = true;
+    }
+
 
     public void EndLevel()
     {
         isLevelActive = false;
         Time.timeScale = 0.0f;
-        ShowFeedback($"Level Complete!\nFinal Score: {currentScore}\nStars Earned: {currentStars}");
+
+        if (endedDueToFuelFailure)
+        {
+            ShowFeedback("REFUEL USING BARRELS!");
+        }
+        else
+        {
+            ShowFeedback($"Level Complete!\nFinal Score: {currentScore}\nStars Earned: {currentStars}");
+        }
+
         // Stop music and play times up sound
         var musicManager = FindObjectOfType<GameMusicManager>();
         if (musicManager != null)
         {
             musicManager.OnTimeUp();
         }
+
         if (starsPopup != null)
             starsPopup.SetActive(true);
-            starText.text = formatStarText();
+
+        starText.text = formatStarText();
+
 
     }
 

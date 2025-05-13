@@ -39,7 +39,6 @@ public class FuelStationTrigger : MonoBehaviour
             {
                 Debug.Log("[FuelStationTrigger] Correct fuel delivered!");
                 fuelRequest.DeliverFuel(playerFuelTag);
-                playerFuel.ClearFuel();
             }
             else
             {

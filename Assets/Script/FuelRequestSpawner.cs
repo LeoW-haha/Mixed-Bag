@@ -2,19 +2,14 @@ using UnityEngine;
 using System.Collections;
 using TMPro;
 
-
 public class FuelRequestSpawner : MonoBehaviour
 {
-    
-    // Update is called once per frame
-    private void Update()
-    {
-        
-    }
     [Header("Countdown Display")]
     public TextMeshProUGUI timerText;
+
     [Header("Fuel Request Timing")]
-    [SerializeField] private float requestCooldown = 5f; // how long it disappears after success
+    [SerializeField] private float requestCooldown = 5f; // Time before next request appears
+    [SerializeField] private float fuelTimeLimit = 7f;   // Time allowed to deliver fuel
 
     [Header("Fuel Barrel Sprites")]
     public Sprite redBarrel;
@@ -22,132 +17,112 @@ public class FuelRequestSpawner : MonoBehaviour
     public Sprite blackBarrel;
     public Sprite whiteBarrel;
 
-    [Header("Fuel Timer")]
-    [SerializeField] private float fuelTimeLimit = 7f; // customizable in inspector
-
     private SpriteRenderer spriteRenderer;
     private string selectedFuelTag;
     private bool fuelDelivered = false;
+    private GameUIManager uiManager;
 
-    void Start()
+    private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        uiManager = FindObjectOfType<GameUIManager>();
+
+        if (spriteRenderer == null)
+            Debug.LogError("[FuelRequestSpawner] Missing SpriteRenderer!");
+
+        if (timerText == null)
+            Debug.LogWarning("[FuelRequestSpawner] Timer Text not assigned.");
+
         SpawnRandomFuelRequest();
         StartCoroutine(FuelTimer());
     }
 
-    public void SpawnRandomFuelRequest()
-    {
-        string[] fuelTags = { "Red", "Green", "Black", "White" };
-        selectedFuelTag = fuelTags[Random.Range(0, fuelTags.Length)];
-
-        Sprite fuelSprite = GetSpriteByTag(selectedFuelTag);
-        spriteRenderer.sprite = fuelSprite;
-
-        GameUIManager uiManager = FindObjectOfType<GameUIManager>();
-        if (uiManager != null)
-        {
-            uiManager.ShowFeedback($"Refuel Needed: {selectedFuelTag} Barrel", 3f);
-        }
-    }
-
-    private Sprite GetSpriteByTag(string tag)
-    {
-        switch (tag)
-        {
-            case "Red": return redBarrel;
-            case "Green": return greenBarrel;
-            case "Black": return blackBarrel;
-            case "White": return whiteBarrel;
-            default: return null;
-        }
-    }
-
-    public string GetRequiredFuelTag()
-    {
-        return selectedFuelTag;
-    }
+    public string GetRequiredFuelTag() => selectedFuelTag;
 
     public void DeliverFuel(string deliveredTag)
     {
-        if (deliveredTag == selectedFuelTag && !fuelDelivered)
+        if (fuelDelivered) return;
+
+        if (deliveredTag == selectedFuelTag)
         {
             fuelDelivered = true;
-
-            // Disable sprite + timer temporarily
             spriteRenderer.enabled = false;
             if (timerText != null) timerText.text = "";
 
-            GameUIManager uiManager = FindObjectOfType<GameUIManager>();
-            if (uiManager != null)
-            {
-                uiManager.ShowFeedback("Correct Fuel Delivered!", 2f);
-            }
+            uiManager?.ShowFeedback("Correct Fuel Delivered!", 2f);
 
-            StopAllCoroutines(); // stop the fail timer
+            StopAllCoroutines();
             StartCoroutine(RespawnRequestAfterDelay());
         }
         else
         {
-            GameUIManager uiManager = FindObjectOfType<GameUIManager>();
-            if (uiManager != null)
-            {
-                uiManager.ShowFeedback("Wrong Fuel! Try again!", 2f);
-            }
+            uiManager?.ShowFeedback("Wrong Fuel! Try again!", 2f);
         }
     }
 
-    private IEnumerator RespawnRequestAfterDelay()
+    private void SpawnRandomFuelRequest()
     {
-        yield return new WaitForSeconds(requestCooldown);
+        string[] fuelTags = { "Red", "Green", "Black", "White" };
+        selectedFuelTag = fuelTags[Random.Range(0, fuelTags.Length)];
 
-        fuelDelivered = false;
+        spriteRenderer.sprite = GetSpriteByTag(selectedFuelTag);
         spriteRenderer.enabled = true;
+        if (timerText != null) timerText.gameObject.SetActive(true);
 
-        SpawnRandomFuelRequest(); // respawn a new random request
-        StartCoroutine(FuelTimer());
+        uiManager?.ShowFeedback($"Refuel Needed: {selectedFuelTag} Barrel", 3f);
     }
 
+    private Sprite GetSpriteByTag(string tag)
+    {
+        return tag switch
+        {
+            "Red" => redBarrel,
+            "Green" => greenBarrel,
+            "Black" => blackBarrel,
+            "White" => whiteBarrel,
+            _ => null,
+        };
+    }
 
     private IEnumerator FuelTimer()
     {
         float timer = fuelTimeLimit;
 
-        while (timer > 0 && !fuelDelivered)
+        while (timer > 0f && !fuelDelivered)
         {
             timer -= Time.deltaTime;
-
             if (timerText != null)
-            {
                 timerText.text = Mathf.CeilToInt(timer).ToString();
-            }
 
             yield return null;
         }
 
         if (!fuelDelivered)
         {
-            if (timerText != null)
-                timerText.text = "0";
+            if (timerText != null) timerText.text = "0";
 
-            GameUIManager uiManager = FindObjectOfType<GameUIManager>();
-            if (uiManager != null)
-            {
-                uiManager.ShowFeedback("You failed to refuel in time!", 3f);
-            }
+            uiManager?.ShowFeedback("REFUEL USING BARRELS!", 3f);
+            yield return new WaitForSeconds(0.1f); // Ensures feedback displays
+            GameManagerJasper.Instance.MarkFuelFailure();
+            GameManagerJasper.Instance.EndLevel();
 
             GameManagerJasper.Instance.EndLevel();
         }
-        else
+        else if (timerText != null)
         {
-            if (timerText != null)
-                timerText.text = "";
+            timerText.text = "";
         }
     }
 
+    private IEnumerator RespawnRequestAfterDelay()
+    {
+        if (timerText != null)
+            timerText.gameObject.SetActive(false);
 
+        yield return new WaitForSeconds(requestCooldown);
+
+        fuelDelivered = false;
+        SpawnRandomFuelRequest();
+        StartCoroutine(FuelTimer());
+    }
 }
-
-
-
-
