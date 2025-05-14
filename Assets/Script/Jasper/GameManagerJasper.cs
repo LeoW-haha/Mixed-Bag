@@ -47,6 +47,8 @@ public class GameManagerJasper : MonoBehaviour
     [Header("End of Game Popup")]
     public GameObject starsPopup;
     [SerializeField] private TextMeshProUGUI starText;
+    public GameObject failMenu;
+    [SerializeField] private TextMeshProUGUI failText;
     private bool pauseOn;
 
     private void Awake()
@@ -68,6 +70,9 @@ public class GameManagerJasper : MonoBehaviour
         pauseOn = false;
         if (pauseMenu != null) {
             pauseMenu.SetActive(false);
+        }
+        if (failMenu != null) {
+            failMenu.SetActive(false);
         }
         if (starsPopup != null) {
             starsPopup.SetActive(false);
@@ -227,6 +232,14 @@ public class GameManagerJasper : MonoBehaviour
         }
     }
 
+    public void ShowFail(string message)
+    {
+        if (failText != null)
+        {
+            failText.text = message;
+        }
+    }
+
     private void HideFeedback()
     {
         if (feedbackText != null)
@@ -260,14 +273,7 @@ public class GameManagerJasper : MonoBehaviour
         isLevelActive = false;
         Time.timeScale = 0.0f;
 
-        if (endedDueToFuelFailure)
-        {
-            ShowFeedback("REFUEL USING BARRELS!");
-        }
-        else
-        {
-            ShowFeedback($"Level Complete!\nFinal Score: {currentScore}\nStars Earned: {currentStars}");
-        }
+        ShowFeedback($"Level Complete!\nFinal Score: {currentScore}\nStars Earned: {currentStars}");
 
         // Stop music and play times up sound
         var musicManager = FindObjectOfType<GameMusicManager>();
@@ -280,8 +286,22 @@ public class GameManagerJasper : MonoBehaviour
             starsPopup.SetActive(true);
 
         starText.text = formatStarText();
+    }
 
+    public void FailLevel(string reason) {
+        isLevelActive = false;
+        Time.timeScale = 0.0f;
 
+        ShowFail(reason);
+
+        var musicManager = FindObjectOfType<GameMusicManager>();
+        if (musicManager != null)
+        {
+            musicManager.OnTimeUp();
+        }
+
+        if (failMenu != null)
+            failMenu.SetActive(true);
     }
 
     public void ResetLevel()

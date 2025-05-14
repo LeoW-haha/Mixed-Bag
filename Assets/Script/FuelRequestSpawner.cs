@@ -104,9 +104,7 @@ public class FuelRequestSpawner : MonoBehaviour
             uiManager?.ShowFeedback("REFUEL USING BARRELS!", 3f);
             yield return new WaitForSeconds(0.1f); // Ensures feedback displays
             GameManagerJasper.Instance.MarkFuelFailure();
-            GameManagerJasper.Instance.EndLevel();
-
-            GameManagerJasper.Instance.EndLevel();
+            GameManagerJasper.Instance.FailLevel("REFUEL USING BARRELS!");
         }
         else if (timerText != null)
         {
